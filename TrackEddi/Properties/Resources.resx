@@ -1,0 +1,467 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="configdummy" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;config xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="config.xsd"&gt;
+
+	&lt;minimaltrackpointdistance x="14" y="14"/&gt;
+
+	&lt;proxy&gt;
+		&lt;!-- falls Internet nur über Proxy erreichbar ist --&gt;
+		&lt;proxyname&gt;&lt;/proxyname&gt;
+		&lt;proxyport&gt;&lt;/proxyport&gt;
+		&lt;proxyuser&gt;&lt;/proxyuser&gt;
+		&lt;proxypassword&gt;&lt;/proxypassword&gt;
+	&lt;/proxy&gt;
+
+	&lt;map&gt;
+		&lt;cachelocation&gt;.&lt;/cachelocation&gt;
+		&lt;!-- bei false zusätzlich Cache in cachelocation --&gt;
+		&lt;serveronly&gt;false&lt;/serveronly&gt;
+		&lt;!-- Index des Providers beim Start --&gt;
+		&lt;startprovider&gt;0&lt;/startprovider&gt;
+		&lt;!-- Mittelpunkt der Karte beim Start --&gt;
+		&lt;startlatitude&gt;51.25&lt;/startlatitude&gt;
+		&lt;startlongitude&gt;12.33&lt;/startlongitude&gt;
+		&lt;!--Zoom beim Start--&gt;
+		&lt;startzoom&gt;14&lt;/startzoom&gt;
+		&lt;zoom4display&gt;2.5&lt;/zoom4display&gt;
+		&lt;symbolzoomfactor&gt;3.0&lt;/symbolzoomfactor&gt;
+      &lt;deltapercent4search&gt;10&lt;/deltapercent4search&gt;
+
+		&lt;dem chachesize="16"
+			 cachepath="./demcachepath"
+			 minzoom="13"
+			 hillshadingazimut="315.0"
+			 hillshadingaltitude="45.0"
+			 hillshadingscale="20.0"&gt;./srtm_zip&lt;/dem&gt;
+
+		&lt;!-- provider mapname="Garmin-Test"
+					dbiddelta="1"
+					tdb="./Garmintest/gmtool.tdb"
+					typ="./Garmintest/fsoft3b.typ"
+					maxsubdiv="1000000"
+					textfactor="2.0"
+					symbolfactor="1.0"
+					linefactor="1.0"&gt;Garmin&lt;/provider --&gt;
+		&lt;provider mapname="online: OpenStreetMap"&gt;OpenStreetMap&lt;/provider&gt;
+		&lt;provider mapname="online: OpenStreetMap Fahrradkarte"&gt;OpenCycleLandscapeMap&lt;/provider&gt;
+		&lt;provider mapname="online: MS Bing"&gt;BingMap&lt;/provider&gt;
+		&lt;provider mapname="online: MS Bing Hybrid"&gt;BingHybridMap&lt;/provider&gt;
+		&lt;provider mapname="online: MS Bing Satellit"&gt;BingSatelliteMap&lt;/provider&gt;
+		&lt;provider mapname="online: Google"&gt;GoogleMap&lt;/provider&gt;
+		&lt;provider mapname="online: Google Oberfläche"&gt;GoogleTerrainMap&lt;/provider&gt;
+		&lt;provider mapname="online: Google Satellit"&gt;GoogleSatelliteMap&lt;/provider&gt;
+	&lt;/map&gt;
+
+	&lt;tracks&gt;
+		&lt;!-- Farben für Tracks --&gt;
+		&lt;standard a="150" r="0" g="0" b="255" width="9.0"/&gt;
+		&lt;standard2 a="150" r="0" g="255" b="255" width="9.0"/&gt;
+		&lt;standard3 a="150" r="255" g="0" b="0" width="9.0"/&gt;
+		&lt;standard4 a="150" r="0" g="255" b="0" width="9.0"/&gt;
+		&lt;standard5 a="150" r="255" g="0" b="255" width="9.0"/&gt;
+		&lt;marked a="255" r="0" g="255" b="255" width="10.5"/&gt;
+		&lt;editable a="220" r="169" g="169" b="169" width="9.0"/&gt;
+		&lt;inedit a="220" r="0" g="180" b="180" width="12.0"/&gt;
+		&lt;selectedpart a="120" r="255" g="210" b="0" width="18.0"/&gt;
+		&lt;helperline a="200" r="200" g="0" b="0" width="5.0"/&gt;
+	&lt;/tracks&gt;
+
+	&lt;garminsymbols&gt;
+		&lt;group name="Marker"&gt;
+			&lt;symbol text="Waypoint"         name="Waypoint"        &gt;./GarminSymbols/Waypoint.png&lt;/symbol&gt;
+			&lt;symbol text="Flag, Red"        name="Flag, Red"       &gt;./GarminSymbols/Flag, Red.png&lt;/symbol&gt;
+			&lt;symbol text="Pin, Red"         name="Pin, Red"        &gt;./GarminSymbols/Pin, Red.png&lt;/symbol&gt;
+			&lt;symbol text="Diamond, Red"     name="Diamond, Red"    &gt;./GarminSymbols/Diamond, Red.png&lt;/symbol&gt;
+			&lt;symbol text="Triangle, Red"    name="Triangle, Red"   &gt;./GarminSymbols/Triangle, Red.png&lt;/symbol&gt;
+			&lt;symbol text="Square, Red"      name="Square, Red"     &gt;./GarminSymbols/Square, Red.png&lt;/symbol&gt;
+			&lt;symbol text="Rectangle, Red"   name="Rectangle, Red"  &gt;./GarminSymbols/Rectangle, Red.png&lt;/symbol&gt;
+			&lt;symbol text="Block, Red"       name="Block, Red"      &gt;./GarminSymbols/Block, Red.png&lt;/symbol&gt;
+			&lt;symbol text="Circle, Red"      name="Circle, Red"     &gt;./GarminSymbols/Circle, Red.png&lt;/symbol&gt;
+			&lt;symbol text="Oval, Red"        name="Oval, Red"       &gt;./GarminSymbols/Oval, Red.png&lt;/symbol&gt;
+			&lt;symbol text="Flag, Green"      name="Flag, Green"     &gt;./GarminSymbols/Flag, Green.png&lt;/symbol&gt;
+			&lt;symbol text="Pin, Green"       name="Pin, Green"      &gt;./GarminSymbols/Pin, Green.png&lt;/symbol&gt;
+			&lt;symbol text="Diamond, Green"   name="Diamond, Green"  &gt;./GarminSymbols/Diamond, Green.png&lt;/symbol&gt;
+			&lt;symbol text="Triangle, Green"  name="Triangle, Green" &gt;./GarminSymbols/Triangle, Green.png&lt;/symbol&gt;
+			&lt;symbol text="Square, Green"    name="Square, Green"   &gt;./GarminSymbols/Square, Green.png&lt;/symbol&gt;
+			&lt;symbol text="Rectangle, Green" name="Rectangle, Green"&gt;./GarminSymbols/Rectangle, Green.png&lt;/symbol&gt;
+			&lt;symbol text="Block, Blue"      name="Block, Blue"     &gt;./GarminSymbols/Block, Blue.png&lt;/symbol&gt;
+			&lt;symbol text="Circle, Green"    name="Circle, Green"   &gt;./GarminSymbols/Circle, Green.png&lt;/symbol&gt;
+			&lt;symbol text="Oval, Green"      name="Oval, Green"     &gt;./GarminSymbols/Oval, Green.png&lt;/symbol&gt;
+			&lt;symbol text="Flag, Blue"       name="Flag, Blue"      &gt;./GarminSymbols/Flag, Blue.png&lt;/symbol&gt;
+			&lt;symbol text="Pin, Blue"        name="Pin, Blue"       &gt;./GarminSymbols/Pin, Blue.png&lt;/symbol&gt;
+			&lt;symbol text="Diamond, Blue"    name="Diamond, Blue"   &gt;./GarminSymbols/Diamond, Blue.png&lt;/symbol&gt;
+			&lt;symbol text="Triangle, Blue"   name="Triangle, Blue"  &gt;./GarminSymbols/Triangle, Blue.png&lt;/symbol&gt;
+			&lt;symbol text="Square, Blue"     name="Square, Blue"    &gt;./GarminSymbols/Square, Blue.png&lt;/symbol&gt;
+			&lt;symbol text="Rectangle, Blue"  name="Rectangle, Blue" &gt;./GarminSymbols/Rectangle, Blue.png&lt;/symbol&gt;
+			&lt;symbol text="Block, Green"     name="Block, Green"    &gt;./GarminSymbols/Block, Green.png&lt;/symbol&gt;
+			&lt;symbol text="Circle, Blue"     name="Circle, Blue"    &gt;./GarminSymbols/Circle, Blue.png&lt;/symbol&gt;
+			&lt;symbol text="Oval, Blue"       name="Oval, Blue"      &gt;./GarminSymbols/Oval, Blue.png&lt;/symbol&gt;
+			&lt;symbol text="Dot, White"       name="Dot, White"      &gt;./GarminSymbols/Dot, White.png&lt;/symbol&gt;
+			&lt;symbol text="Circle with X"    name="Circle with X"   &gt;./GarminSymbols/Circle with X.png&lt;/symbol&gt;
+		&lt;/group&gt;
+		&lt;group name="Outdoor"&gt;
+			&lt;symbol text="Trail-Start"       name="Trail Head"     &gt;./GarminSymbols/Trail Head.png&lt;/symbol&gt;
+			&lt;symbol text="Bike Trail"        name="Bike Trail"     &gt;./GarminSymbols/Bike Trail.png&lt;/symbol&gt;
+			&lt;symbol text="Skiarena"          name="Skiing Area"    &gt;./GarminSymbols/Skiing Area.png&lt;/symbol&gt;
+			&lt;symbol text="Scwimmareana"      name="Swimming Area"  &gt;./GarminSymbols/Swimming Area.png&lt;/symbol&gt;
+			&lt;symbol text="Ski Resort"        name="Ski Resort"     &gt;./GarminSymbols/Ski Resort.png&lt;/symbol&gt;
+			&lt;symbol text="Schlitschuh"       name="Ice Skating"    &gt;./GarminSymbols/Ice Skating.png&lt;/symbol&gt;
+			&lt;symbol text="Golf"              name="Golf Course"    &gt;./GarminSymbols/Golf Course.png&lt;/symbol&gt;
+			&lt;symbol text="Ball"              name="Ball Park"      &gt;./GarminSymbols/Ball Park.png&lt;/symbol&gt;
+			&lt;symbol text="Scenic Area"       name="Scenic Area"    &gt;./GarminSymbols/Scenic Area.png&lt;/symbol&gt;
+			&lt;symbol text="Piknikgelände"     name="Picnic Area"    &gt;./GarminSymbols/Picnic Area.png&lt;/symbol&gt;
+			&lt;symbol text="Park"              name="Park"           &gt;./GarminSymbols/Park.png&lt;/symbol&gt;
+			&lt;symbol text="Wald"              name="Forest"         &gt;./GarminSymbols/Forest.png&lt;/symbol&gt;
+			&lt;symbol text="Gipfel"            name="Summit"         &gt;./GarminSymbols/Summit.png&lt;/symbol&gt;
+			&lt;symbol text="Campingplatz"      name="Campground"     &gt;./GarminSymbols/Campground.png&lt;/symbol&gt;
+			&lt;symbol text="Lodge"             name="Lodge"          &gt;./GarminSymbols/Lodge.png&lt;/symbol&gt;
+			&lt;symbol text="RV Park"           name="RV Park"        &gt;./GarminSymbols/RV Park.png&lt;/symbol&gt;
+			&lt;symbol text="Dusche"            name="Shower"         &gt;./GarminSymbols/Shower.png&lt;/symbol&gt;
+			&lt;symbol text="Trinkwasser"       name="Drinking Water" &gt;./GarminSymbols/Drinking Water.png&lt;/symbol&gt;
+			&lt;symbol text="Geocache"          name="Geocache"       &gt;./GarminSymbols/Geocache.png&lt;/symbol&gt;
+			&lt;symbol text="Multi-Cache"       name="Multi-Cache"    &gt;./GarminSymbols/Multi-Cache.png&lt;/symbol&gt;
+			&lt;symbol text="Letterbox Cache"   name="Letterbox Cache"&gt;./GarminSymbols/Letterbox Cache.png&lt;/symbol&gt;
+			&lt;symbol text="Puzzle Cache"      name="Puzzle Cache"   &gt;./GarminSymbols/Puzzle Cache.png&lt;/symbol&gt;
+			&lt;symbol text="Geocache gefunden" name="Geocache Found" &gt;./GarminSymbols/Geocache Found.png&lt;/symbol&gt;
+			&lt;symbol text="Truck"             name="Truck"          &gt;./GarminSymbols/Truck.png&lt;/symbol&gt;
+			&lt;symbol text="ATV"               name="ATV"            &gt;./GarminSymbols/ATV.png&lt;/symbol&gt;
+			&lt;symbol text="Friedhof"          name="Cemetery"       &gt;./GarminSymbols/Cemetery.png&lt;/symbol&gt;
+			&lt;symbol text="Geisterstadt"      name="Ghost Town"     &gt;./GarminSymbols/Ghost Town.png&lt;/symbol&gt;
+			&lt;symbol text="Umkehrpunkt"       name="TracBack Point" &gt;./GarminSymbols/TracBack Point.png&lt;/symbol&gt;
+		&lt;/group&gt;
+		&lt;group name="Beförderungsmittel"&gt;
+			&lt;symbol text="Gas Station"           name="Gas Station"          &gt;./GarminSymbols/Gas Station.png&lt;/symbol&gt;
+			&lt;symbol text="Convenience Store"     name="Convenience Store"    &gt;./GarminSymbols/Convenience Store.png&lt;/symbol&gt;
+			&lt;symbol text="Restroom"              name="Restroom"             &gt;./GarminSymbols/Restroom.png&lt;/symbol&gt;
+			&lt;symbol text="Telephone"             name="Telephone"            &gt;./GarminSymbols/Telephone.png&lt;/symbol&gt;
+			&lt;symbol text="Information"           name="Information"          &gt;./GarminSymbols/Information.png&lt;/symbol&gt;
+			&lt;symbol text="Parking Area"          name="Parking Area"         &gt;./GarminSymbols/Parking Area.png&lt;/symbol&gt;
+			&lt;symbol text="Ground Transportation" name="Ground Transportation"&gt;./GarminSymbols/Ground Transportation.png&lt;/symbol&gt;
+			&lt;symbol text="Truck Stop"            name="Truck Stop"           &gt;./GarminSymbols/Truck Stop.png&lt;/symbol&gt;
+			&lt;symbol text="Car Rental"            name="Car Rental"           &gt;./GarminSymbols/Car Rental.png&lt;/symbol&gt;
+			&lt;symbol text="Car Repair"            name="Car Repair"           &gt;./GarminSymbols/Car Repair.png&lt;/symbol&gt;
+			&lt;symbol text="Wrecker"               name="Wrecker"              &gt;./GarminSymbols/Wrecker.png&lt;/symbol&gt;
+			&lt;symbol text="Scales"                name="Scales"               &gt;./GarminSymbols/Scales.png&lt;/symbol&gt;
+			&lt;symbol text="Toll Booth"            name="Toll Booth"           &gt;./GarminSymbols/Toll Booth.png&lt;/symbol&gt;
+			&lt;symbol text="Crossing"              name="Crossing"             &gt;./GarminSymbols/Crossing.png&lt;/symbol&gt;
+			&lt;symbol text="Tunnel"                name="Tunnel"               &gt;./GarminSymbols/Tunnel.png&lt;/symbol&gt;
+			&lt;symbol text="Exit"                  name="Exit"                 &gt;./GarminSymbols/Exit.png&lt;/symbol&gt;
+			&lt;symbol text="Mile Marker"           name="Mile Marker"          &gt;./GarminSymbols/Mile Marker.png&lt;/symbol&gt;
+		&lt;/group&gt;
+		&lt;group name="Unternehmen"&gt;
+			&lt;symbol text="Bank"             name="Bank"            &gt;./GarminSymbols/Bank.png&lt;/symbol&gt;
+			&lt;symbol text="Restaurant"       name="Restaurant"      &gt;./GarminSymbols/Restaurant.png&lt;/symbol&gt;
+			&lt;symbol text="Bar"              name="Bar"             &gt;./GarminSymbols/Bar.png&lt;/symbol&gt;
+			&lt;symbol text="Winery"           name="Winery"          &gt;./GarminSymbols/Winery.png&lt;/symbol&gt;
+			&lt;symbol text="Fast Food"        name="Fast Food"       &gt;./GarminSymbols/Fast Food.png&lt;/symbol&gt;
+			&lt;symbol text="Pizza"            name="Pizza"           &gt;./GarminSymbols/Pizza.png&lt;/symbol&gt;
+			&lt;symbol text="Shopping Center"  name="Shopping Center" &gt;./GarminSymbols/Shopping Center.png&lt;/symbol&gt;
+			&lt;symbol text="Department Store" name="Department Store"&gt;./GarminSymbols/Department Store.png&lt;/symbol&gt;
+			&lt;symbol text="Lodging"          name="Lodging"         &gt;./GarminSymbols/Lodging.png&lt;/symbol&gt;
+			&lt;symbol text="Bowling"          name="Bowling"         &gt;./GarminSymbols/Bowling.png&lt;/symbol&gt;
+			&lt;symbol text="Fitness Center"   name="Fitness Center"  &gt;./GarminSymbols/Fitness Center.png&lt;/symbol&gt;
+			&lt;symbol text="Movie Theater"    name="Movie Theater"   &gt;./GarminSymbols/Movie Theater.png&lt;/symbol&gt;
+			&lt;symbol text="Live Theater"     name="Live Theater"    &gt;./GarminSymbols/Live Theater.png&lt;/symbol&gt;
+			&lt;symbol text="Museum"           name="Museum"          &gt;./GarminSymbols/Museum.png&lt;/symbol&gt;
+			&lt;symbol text="Stadium"          name="Stadium"         &gt;./GarminSymbols/Stadium.png&lt;/symbol&gt;
+			&lt;symbol text="Amusement Park"   name="Amusement Park"  &gt;./GarminSymbols/Amusement Park.png&lt;/symbol&gt;
+			&lt;symbol text="Pharmacy"         name="Pharmacy"        &gt;./GarminSymbols/Pharmacy.png&lt;/symbol&gt;
+			&lt;symbol text="Zoo"              name="Zoo"             &gt;./GarminSymbols/Zoo.png&lt;/symbol&gt;
+		&lt;/group&gt;
+		&lt;group name="Zivil"&gt;
+			&lt;symbol text="Medical Facility" name="Medical Facility"&gt;./GarminSymbols/Medical Facility.png&lt;/symbol&gt;
+			&lt;symbol text="Police Station"   name="Police Station"  &gt;./GarminSymbols/Police Station.png&lt;/symbol&gt;
+			&lt;symbol text="Water Hydrant"    name="Water Hydrant"   &gt;./GarminSymbols/Water Hydrant.png&lt;/symbol&gt;
+			&lt;symbol text="Post Office"      name="Post Office"     &gt;./GarminSymbols/Post Office.png&lt;/symbol&gt;
+			&lt;symbol text="Residence"        name="Residence"       &gt;./GarminSymbols/Residence.png&lt;/symbol&gt;
+			&lt;symbol text="School"           name="School"          &gt;./GarminSymbols/School.png&lt;/symbol&gt;
+			&lt;symbol text="Library"          name="Library"         &gt;./GarminSymbols/Library.png&lt;/symbol&gt;
+			&lt;symbol text="City Hall"        name="City Hall"       &gt;./GarminSymbols/City Hall.png&lt;/symbol&gt;
+			&lt;symbol text="Building"         name="Building"        &gt;./GarminSymbols/Building.png&lt;/symbol&gt;
+			&lt;symbol text="Church"           name="Church"          &gt;./GarminSymbols/Church.png&lt;/symbol&gt;
+			&lt;symbol text="Bell"             name="Bell"            &gt;./GarminSymbols/Bell.png&lt;/symbol&gt;
+			&lt;symbol text="City (Small)"     name="City (Small)"    &gt;./GarminSymbols/City (Small).png&lt;/symbol&gt;
+			&lt;symbol text="City (Medium)"    name="City (Medium)"   &gt;./GarminSymbols/City (Medium).png&lt;/symbol&gt;
+			&lt;symbol text="City (Large)"     name="City (Large)"    &gt;./GarminSymbols/City (Large).png&lt;/symbol&gt;
+			&lt;symbol text="City (Capitol)"   name="City (Capitol)"  &gt;./GarminSymbols/City (Capitol).png&lt;/symbol&gt;
+			&lt;symbol text="Flag"             name="Flag"            &gt;./GarminSymbols/Flag.png&lt;/symbol&gt;
+			&lt;symbol text="Car"              name="Car"             &gt;./GarminSymbols/Car.png&lt;/symbol&gt;
+			&lt;symbol text="Civil"            name="Civil"           &gt;./GarminSymbols/Civil.png&lt;/symbol&gt;
+			&lt;symbol text="Military"         name="Military"        &gt;./GarminSymbols/Military.png&lt;/symbol&gt;
+			&lt;symbol text="Oil Field"        name="Oil Field"       &gt;./GarminSymbols/Oil Field.png&lt;/symbol&gt;
+			&lt;symbol text="Mine"             name="Mine"            &gt;./GarminSymbols/Mine.png&lt;/symbol&gt;
+			&lt;symbol text="Tall Tower"       name="Tall Tower"      &gt;./GarminSymbols/Tall Tower.png&lt;/symbol&gt;
+			&lt;symbol text="Short Tower"      name="Short Tower"     &gt;./GarminSymbols/Short Tower.png&lt;/symbol&gt;
+		&lt;/group&gt;
+		&lt;group name="Marine"&gt;
+			&lt;symbol text="Anchor"                    name="Anchor"                   &gt;./GarminSymbols/Anchor.png&lt;/symbol&gt;
+			&lt;symbol text="Anchor Prohibited"         name="Anchor Prohibited"        &gt;./GarminSymbols/Anchor Prohibited.png&lt;/symbol&gt;
+			&lt;symbol text="Dock"                      name="Dock"                     &gt;./GarminSymbols/Dock.png&lt;/symbol&gt;
+			&lt;symbol text="Marina"                    name="Marina"                   &gt;./GarminSymbols/Marina.png&lt;/symbol&gt;
+			&lt;symbol text="Boat Ramp"                 name="Boat Ramp"                &gt;./GarminSymbols/Boat Ramp.png&lt;/symbol&gt;
+			&lt;symbol text="Bait and Tackle"           name="Bait and Tackle"          &gt;./GarminSymbols/Bait and Tackle.png&lt;/symbol&gt;
+			&lt;symbol text="Coast Guard"               name="Coast Guard"              &gt;./GarminSymbols/Coast Guard.png&lt;/symbol&gt;
+			&lt;symbol text="Fishing Area"              name="Fishing Area"             &gt;./GarminSymbols/Fishing Area.png&lt;/symbol&gt;
+			&lt;symbol text="Fishing Hot Spot Facility" name="Fishing Hot Spot Facility"&gt;./GarminSymbols/Fishing Hot Spot Facility.png&lt;/symbol&gt;
+			&lt;symbol text="Diver Down Flag 1"         name="Diver Down Flag 1"        &gt;./GarminSymbols/Diver Down Flag 1.png&lt;/symbol&gt;
+			&lt;symbol text="Diver Down Flag 2"         name="Diver Down Flag 2"        &gt;./GarminSymbols/Diver Down Flag 2.png&lt;/symbol&gt;
+			&lt;symbol text="Man Overboard"             name="Man Overboard"            &gt;./GarminSymbols/Man Overboard.png&lt;/symbol&gt;
+			&lt;symbol text="Dam"                       name="Dam"                      &gt;./GarminSymbols/Dam.png&lt;/symbol&gt;
+			&lt;symbol text="Levee"                     name="Levee"                    &gt;./GarminSymbols/Levee.png&lt;/symbol&gt;
+			&lt;symbol text="Beach"                     name="Beach"                    &gt;./GarminSymbols/Beach.png&lt;/symbol&gt;
+			&lt;symbol text="Reef"                      name="Reef"                     &gt;./GarminSymbols/Reef.png&lt;/symbol&gt;
+			&lt;symbol text="Weed Bed"                  name="Weed Bed"                 &gt;./GarminSymbols/Weed Bed.png&lt;/symbol&gt;
+			&lt;symbol text="Dropoff"                   name="Dropoff"                  &gt;./GarminSymbols/Dropoff.png&lt;/symbol&gt;
+			&lt;symbol text="Stump"                     name="Stump"                    &gt;./GarminSymbols/Stump.png&lt;/symbol&gt;
+			&lt;symbol text="Skull and Crossbones"      name="Skull and Crossbones"     &gt;./GarminSymbols/Skull and Crossbones.png&lt;/symbol&gt;
+			&lt;symbol text="Shipwreck"                 name="Shipwreck"                &gt;./GarminSymbols/Shipwreck.png&lt;/symbol&gt;
+			&lt;symbol text="Controlled Area"           name="Controlled Area"          &gt;./GarminSymbols/Controlled Area.png&lt;/symbol&gt;
+			&lt;symbol text="Danger Area"               name="Danger Area"              &gt;./GarminSymbols/Danger Area.png&lt;/symbol&gt;
+			&lt;symbol text="Restricted Area"           name="Restricted Area"          &gt;./GarminSymbols/Restricted Area.png&lt;/symbol&gt;
+			&lt;symbol text="Bridge"                    name="Bridge"                   &gt;./GarminSymbols/Bridge.png&lt;/symbol&gt;
+		&lt;/group&gt;
+		&lt;group name="Seezeichen"&gt;
+			&lt;symbol text="Navaid, Amber"       name="Navaid, Amber"      &gt;./GarminSymbols/Navaid, Amber.png&lt;/symbol&gt;
+			&lt;symbol text="Navaid, Black"       name="Navaid, Black"      &gt;./GarminSymbols/Navaid, Black.png&lt;/symbol&gt;
+			&lt;symbol text="Navaid, Blue"        name="Navaid, Blue"       &gt;./GarminSymbols/Navaid, Blue.png&lt;/symbol&gt;
+			&lt;symbol text="Navaid, Green"       name="Navaid, Green"      &gt;./GarminSymbols/Navaid, Green.png&lt;/symbol&gt;
+			&lt;symbol text="Navaid, Green/Red"   name="Navaid, Green/Red"  &gt;./GarminSymbols/Navaid, Green#Red.png&lt;/symbol&gt;
+			&lt;symbol text="Navaid, Green/White" name="Navaid, Green/White"&gt;./GarminSymbols/Navaid, Green#White.png&lt;/symbol&gt;
+			&lt;symbol text="Navaid, Orange"      name="Navaid, Orange"     &gt;./GarminSymbols/Navaid, Orange.png&lt;/symbol&gt;
+			&lt;symbol text="Navaid, Red"         name="Navaid, Red"        &gt;./GarminSymbols/Navaid, Red.png&lt;/symbol&gt;
+			&lt;symbol text="Navaid, Red/Green"   name="Navaid, Red/Green"  &gt;./GarminSymbols/Navaid, Red#Green.png&lt;/symbol&gt;
+			&lt;symbol text="Navaid, Red/White"   name="Navaid, Red/White"  &gt;./GarminSymbols/Navaid, Red#White.png&lt;/symbol&gt;
+			&lt;symbol text="Navaid, Violet"      name="Navaid, Violet"     &gt;./GarminSymbols/Navaid, Violet.png&lt;/symbol&gt;
+			&lt;symbol text="Navaid, White"       name="Navaid, White"      &gt;./GarminSymbols/Navaid, White.png&lt;/symbol&gt;
+			&lt;symbol text="Navaid, White/Green" name="Navaid, White/Green"&gt;./GarminSymbols/Navaid, White#Green.png&lt;/symbol&gt;
+			&lt;symbol text="Navaid, White/Red"   name="Navaid, White/Red"  &gt;./GarminSymbols/Navaid, White#Red.png&lt;/symbol&gt;
+			&lt;symbol text="Buoy, White"         name="Buoy, White"        &gt;./GarminSymbols/Buoy, White.png&lt;/symbol&gt;
+			&lt;symbol text="Radio Beacon"        name="Radio Beacon"       &gt;./GarminSymbols/Radio Beacon.png&lt;/symbol&gt;
+			&lt;symbol text="Beacon"              name="Beacon"             &gt;./GarminSymbols/Beacon.png&lt;/symbol&gt;
+			&lt;symbol text="Horn"                name="Horn"               &gt;./GarminSymbols/Horn.png&lt;/symbol&gt;
+			&lt;symbol text="Light"               name="Light"              &gt;./GarminSymbols/Light.png&lt;/symbol&gt;
+		&lt;/group&gt;
+		&lt;group name="Luftfahrt"&gt;
+			&lt;symbol text="Airport"         name="Airport"        &gt;./GarminSymbols/Airport.png&lt;/symbol&gt;
+			&lt;symbol text="Heliport"        name="Heliport"       &gt;./GarminSymbols/Heliport.png&lt;/symbol&gt;
+			&lt;symbol text="Private Field"   name="Private Field"  &gt;./GarminSymbols/Private Field.png&lt;/symbol&gt;
+			&lt;symbol text="Soft Field"      name="Soft Field"     &gt;./GarminSymbols/Soft Field.png&lt;/symbol&gt;
+			&lt;symbol text="Glider Area"     name="Glider Area"    &gt;./GarminSymbols/Glider Area.png&lt;/symbol&gt;
+			&lt;symbol text="Ultralight Area" name="Ultralight Area"&gt;./GarminSymbols/Ultralight Area.png&lt;/symbol&gt;
+			&lt;symbol text="Parachute Area"  name="Parachute Area" &gt;./GarminSymbols/Parachute Area.png&lt;/symbol&gt;
+			&lt;symbol text="Seaplane Base"   name="Seaplane Base"  &gt;./GarminSymbols/Seaplane Base.png&lt;/symbol&gt;
+		&lt;/group&gt;
+		&lt;group name="Buchstaben"&gt;
+			&lt;symbol text="A, rot"  name="Letter A, Red"  &gt;./GarminSymbols/Letter A, Red.png&lt;/symbol&gt;
+			&lt;symbol text="A, grün" name="Letter A, Green"&gt;./GarminSymbols/Letter A, Green.png&lt;/symbol&gt;
+			&lt;symbol text="A, blau" name="Letter A, Blue" &gt;./GarminSymbols/Letter A, Blue.png&lt;/symbol&gt;
+			&lt;symbol text="B, rot"  name="Letter B, Red"  &gt;./GarminSymbols/Letter B, Red.png&lt;/symbol&gt;
+			&lt;symbol text="B, grün" name="Letter B, Green"&gt;./GarminSymbols/Letter B, Green.png&lt;/symbol&gt;
+			&lt;symbol text="B, blau" name="Letter B, Blue" &gt;./GarminSymbols/Letter B, Blue.png&lt;/symbol&gt;
+			&lt;symbol text="C, rot"  name="Letter C, Red"  &gt;./GarminSymbols/Letter C, Red.png&lt;/symbol&gt;
+			&lt;symbol text="C, grün" name="Letter C, Green"&gt;./GarminSymbols/Letter C, Green.png&lt;/symbol&gt;
+			&lt;symbol text="C, blau" name="Letter C, Blue" &gt;./GarminSymbols/Letter C, Blue.png&lt;/symbol&gt;
+			&lt;symbol text="D, rot"  name="Letter D, Red"  &gt;./GarminSymbols/Letter D, Red.png&lt;/symbol&gt;
+			&lt;symbol text="D, grün" name="Letter D, Green"&gt;./GarminSymbols/Letter D, Green.png&lt;/symbol&gt;
+			&lt;symbol text="D, blau" name="Letter D, Blue" &gt;./GarminSymbols/Letter D, Blue.png&lt;/symbol&gt;
+		&lt;/group&gt;
+		&lt;group name="Ziffern"&gt;
+			&lt;symbol text="0, rot"  name="Number 0, Red"  &gt;./GarminSymbols/Number 0, Red.png&lt;/symbol&gt;
+			&lt;symbol text="0, grün" name="Number 0, Green"&gt;./GarminSymbols/Number 0, Green.png&lt;/symbol&gt;
+			&lt;symbol text="0, blau" name="Number 0, Blue" &gt;./GarminSymbols/Number 0, Blue.png&lt;/symbol&gt;
+			&lt;symbol text="1, rot"  name="Number 1, Red"  &gt;./GarminSymbols/Number 1, Red.png&lt;/symbol&gt;
+			&lt;symbol text="1, grün" name="Number 1, Green"&gt;./GarminSymbols/Number 1, Green.png&lt;/symbol&gt;
+			&lt;symbol text="1, blau" name="Number 1, Blue" &gt;./GarminSymbols/Number 1, Blue.png&lt;/symbol&gt;
+			&lt;symbol text="2, rot"  name="Number 2, Red"  &gt;./GarminSymbols/Number 2, Red.png&lt;/symbol&gt;
+			&lt;symbol text="2, grün" name="Number 2, Green"&gt;./GarminSymbols/Number 2, Green.png&lt;/symbol&gt;
+			&lt;symbol text="2, blau" name="Number 2, Blue" &gt;./GarminSymbols/Number 2, Blue.png&lt;/symbol&gt;
+			&lt;symbol text="3, rot"  name="Number 3, Red"  &gt;./GarminSymbols/Number 3, Red.png&lt;/symbol&gt;
+			&lt;symbol text="3, grün" name="Number 3, Green"&gt;./GarminSymbols/Number 3, Green.png&lt;/symbol&gt;
+			&lt;symbol text="3, blau" name="Number 3, Blue" &gt;./GarminSymbols/Number 3, Blue.png&lt;/symbol&gt;
+			&lt;symbol text="4, rot"  name="Number 4, Red"  &gt;./GarminSymbols/Number 4, Red.png&lt;/symbol&gt;
+			&lt;symbol text="4, grün" name="Number 4, Green"&gt;./GarminSymbols/Number 4, Green.png&lt;/symbol&gt;
+			&lt;symbol text="4, blau" name="Number 4, Blue" &gt;./GarminSymbols/Number 4, Blue.png&lt;/symbol&gt;
+			&lt;symbol text="5, rot"  name="Number 5, Red"  &gt;./GarminSymbols/Number 5, Red.png&lt;/symbol&gt;
+			&lt;symbol text="5, grün" name="Number 5, Green"&gt;./GarminSymbols/Number 5, Green.png&lt;/symbol&gt;
+			&lt;symbol text="5, blau" name="Number 5, Blue" &gt;./GarminSymbols/Number 5, Blue.png&lt;/symbol&gt;
+			&lt;symbol text="6, rot"  name="Number 6, Red"  &gt;./GarminSymbols/Number 6, Red.png&lt;/symbol&gt;
+			&lt;symbol text="6, grün" name="Number 6, Green"&gt;./GarminSymbols/Number 6, Green.png&lt;/symbol&gt;
+			&lt;symbol text="6, blau" name="Number 6, Blue" &gt;./GarminSymbols/Number 6, Blue.png&lt;/symbol&gt;
+			&lt;symbol text="7, rot"  name="Number 7, Red"  &gt;./GarminSymbols/Number 7, Red.png&lt;/symbol&gt;
+			&lt;symbol text="7, grün" name="Number 7, Green"&gt;./GarminSymbols/Number 7, Green.png&lt;/symbol&gt;
+			&lt;symbol text="7, blau" name="Number 7, Blue" &gt;./GarminSymbols/Number 7, Blue.png&lt;/symbol&gt;
+			&lt;symbol text="8, rot"  name="Number 8, Red"  &gt;./GarminSymbols/Number 8, Red.png&lt;/symbol&gt;
+			&lt;symbol text="8, grün" name="Number 8, Green"&gt;./GarminSymbols/Number 8, Green.png&lt;/symbol&gt;
+			&lt;symbol text="8, blau" name="Number 8, Blue" &gt;./GarminSymbols/Number 8, Blue.png&lt;/symbol&gt;
+			&lt;symbol text="9, rot"  name="Number 9, Red"  &gt;./GarminSymbols/Number 9, Red.png&lt;/symbol&gt;
+			&lt;symbol text="9, grün" name="Number 9, Green"&gt;./GarminSymbols/Number 9, Green.png&lt;/symbol&gt;
+			&lt;symbol text="9, blau" name="Number 9, Blue" &gt;./GarminSymbols/Number 9, Blue.png&lt;/symbol&gt;
+		&lt;/group&gt;
+		&lt;group name="Jagd"&gt;
+			&lt;symbol text="Jagdgebiet"    name="Hunting Area" &gt;./GarminSymbols/Hunting Area.png&lt;/symbol&gt;
+			&lt;symbol text="Cover"         name="Cover"        &gt;./GarminSymbols/Cover.png&lt;/symbol&gt;
+			&lt;symbol text="Treed Quarry"  name="Treed Quarry" &gt;./GarminSymbols/Treed Quarry.png&lt;/symbol&gt;
+			&lt;symbol text="Blind"         name="Blind"        &gt;./GarminSymbols/Blind.png&lt;/symbol&gt;
+			&lt;symbol text="Food Source"   name="Food Source"  &gt;./GarminSymbols/Food Source.png&lt;/symbol&gt;
+			&lt;symbol text="Water Source"  name="Water Source" &gt;./GarminSymbols/Water Source.png&lt;/symbol&gt;
+			&lt;symbol text="Animal Tracks" name="Animal Tracks"&gt;./GarminSymbols/Animal Tracks.png&lt;/symbol&gt;
+			&lt;symbol text="Blood Trail"   name="Blood Trail"  &gt;./GarminSymbols/Blood Trail.png&lt;/symbol&gt;
+			&lt;symbol text="Tree Stand"    name="Tree Stand"   &gt;./GarminSymbols/Tree Stand.png&lt;/symbol&gt;
+			&lt;symbol text="Covey"         name="Covey"        &gt;./GarminSymbols/Covey.png&lt;/symbol&gt;
+			&lt;symbol text="Big Game"      name="Big Game"     &gt;./GarminSymbols/Big Game.png&lt;/symbol&gt;
+			&lt;symbol text="Small Game"    name="Small Game"   &gt;./GarminSymbols/Small Game.png&lt;/symbol&gt;
+			&lt;symbol text="Upland Game"   name="Upland Game"  &gt;./GarminSymbols/Upland Game.png&lt;/symbol&gt;
+			&lt;symbol text="Furbearer"     name="Furbearer"    &gt;./GarminSymbols/Furbearer.png&lt;/symbol&gt;
+			&lt;symbol text="Waterfowl"     name="Waterfowl"    &gt;./GarminSymbols/Waterfowl.png&lt;/symbol&gt;
+		&lt;/group&gt;
+		&lt;group name="Kontaktpersonen"&gt;
+			&lt;symbol text="Afro"        name="Contact, Afro"      &gt;./GarminSymbols/Contact, Afro.png&lt;/symbol&gt;
+			&lt;symbol text="Alien"       name="Contact, Alien"     &gt;./GarminSymbols/Contact, Alien.png&lt;/symbol&gt;
+			&lt;symbol text="Kappe"       name="Contact, Ball Cap"  &gt;./GarminSymbols/Contact, Ball Cap.png&lt;/symbol&gt;
+			&lt;symbol text="Biker"       name="Contact, Biker"     &gt;./GarminSymbols/Contact, Biker.png&lt;/symbol&gt;
+			&lt;symbol text="Käfer"       name="Contact, Bug"       &gt;./GarminSymbols/Contact, Bug.png&lt;/symbol&gt;
+			&lt;symbol text="Katze"       name="Contact, Cat"       &gt;./GarminSymbols/Contact, Cat.png&lt;/symbol&gt;
+			&lt;symbol text="Hund"        name="Contact, Dog"       &gt;./GarminSymbols/Contact, Dog.png&lt;/symbol&gt;
+			&lt;symbol text="Dreadlocks"  name="Contact, Dreadlocks"&gt;./GarminSymbols/Contact, Dreadlocks.png&lt;/symbol&gt;
+			&lt;symbol text="Frau 1"      name="Contact, Female1"   &gt;./GarminSymbols/Contact, Female1.png&lt;/symbol&gt;
+			&lt;symbol text="Frau 2"      name="Contact, Female2"   &gt;./GarminSymbols/Contact, Female2.png&lt;/symbol&gt;
+			&lt;symbol text="Frau 3"      name="Contact, Female3"   &gt;./GarminSymbols/Contact, Female3.png&lt;/symbol&gt;
+			&lt;symbol text="große Ohren" name="Contact, Big Ears"  &gt;./GarminSymbols/Contact, Big Ears.png&lt;/symbol&gt;
+			&lt;symbol text="Goatee"      name="Contact, Goatee"    &gt;./GarminSymbols/Contact, Goatee.png&lt;/symbol&gt;
+			&lt;symbol text="Kung-Fu"     name="Contact, Kung-Fu"   &gt;./GarminSymbols/Contact, Kung-Fu.png&lt;/symbol&gt;
+			&lt;symbol text="Schwein"     name="Contact, Pig"       &gt;./GarminSymbols/Contact, Pig.png&lt;/symbol&gt;
+			&lt;symbol text="Pirat"       name="Contact, Pirate"    &gt;./GarminSymbols/Contact, Pirate.png&lt;/symbol&gt;
+			&lt;symbol text="Ranger"      name="Contact, Ranger"    &gt;./GarminSymbols/Contact, Ranger.png&lt;/symbol&gt;
+			&lt;symbol text="Smiley"      name="Contact, Smiley"    &gt;./GarminSymbols/Contact, Smiley.png&lt;/symbol&gt;
+			&lt;symbol text="Spike"       name="Contact, Spike"     &gt;./GarminSymbols/Contact, Spike.png&lt;/symbol&gt;
+			&lt;symbol text="Sumo"        name="Contact, Sumo"      &gt;./GarminSymbols/Contact, Sumo.png&lt;/symbol&gt;
+			&lt;symbol text="Blond"       name="Contact, Blonde"    &gt;./GarminSymbols/Contact, Blonde.png&lt;/symbol&gt;
+			&lt;symbol text="Clown"       name="Contact, Clown"     &gt;./GarminSymbols/Contact, Clown.png&lt;/symbol&gt;
+			&lt;symbol text="Brille"      name="Contact, Glasses"   &gt;./GarminSymbols/Contact, Glasses.png&lt;/symbol&gt;
+			&lt;symbol text="Panda"       name="Contact, Panda"     &gt;./GarminSymbols/Contact, Panda.png&lt;/symbol&gt;
+		&lt;/group&gt;
+
+	&lt;/garminsymbols&gt;
+
+&lt;/config&gt;</value>
+  </data>
+</root>

@@ -1,0 +1,353 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TrackEddi;assembly=TrackEddi"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             xmlns:smap="clr-namespace:SpecialMapCtrl;assembly=SpecialMapCtrl.Skia"
+             xmlns:tt="clr-namespace:FSofTUtils.Xamarin.Touch;assembly=FSofTUtils.Xamarin"
+             x:Class="TrackEddi.MainPage"
+             Title="TrackEddi">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="MyButton" TargetType="Frame">
+                <Setter Property="WidthRequest" Value="25"/>
+                <Setter Property="HeightRequest" Value="25"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="BorderColor" Value="DarkGray"/>
+                <Setter Property="BackgroundColor" Value="LightGray"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="Padding" Value="4"/>
+                <Setter Property="HasShadow" Value="True"/>
+            </Style>
+            <Style x:Key="MyButtonImage" TargetType="Image">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="Aspect" Value="AspectFit"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Karte auswählen"
+            Order="Secondary"
+            Priority="1"
+            Clicked="ToolbarItem_ChooseMap_Clicked" />
+        <ToolbarItem 
+            Text="Karte neu laden"
+            Order="Secondary"
+            Priority="2"
+            Clicked="ToolbarItem_ReloadMap_Clicked" />
+        
+        <ToolbarItem 
+            Text="-----"
+            Order="Secondary"
+            Priority="3"/>
+        
+        <ToolbarItem 
+            Text="Datei öffnen"
+            Order="Secondary"
+            Priority="4"
+            Clicked="ToolbarItem_GPXOpen_Clicked" />
+        <ToolbarItem 
+            Text="Datei hinzufügen"
+            Order="Secondary"
+            Priority="5"
+            Clicked="ToolbarItem_GPXAppendClicked" />
+        <ToolbarItem 
+            Text="Daten speichern als ..."
+            Order="Secondary"
+            Priority="6"
+            Clicked="ToolbarItem_SaveAsClicked" />
+        <ToolbarItem 
+            Text="Daten in Einzeldateien speichern ..."
+            Order="Secondary"
+            Priority="7"
+            Clicked="ToolbarItem_SaveAsMultiClicked" />
+
+        <ToolbarItem 
+            Text="-----"
+            Order="Secondary"
+            Priority="8"/>
+        
+        <ToolbarItem 
+            Text="OSM-Suche"
+            Order="Secondary"
+            Priority="9"
+            Clicked="ToolbarItem_OsmSearchClicked" />
+        <ToolbarItem 
+            Text="Ortsliste"
+            Order="Secondary"
+            Priority="10"
+            Clicked="ToolbarItem_GoToClicked" />
+        <ToolbarItem 
+            Text="Track-/Markerliste"
+            Order="Secondary"
+            Priority="11"
+            Clicked="ToolbarItem_GpxContent_Clicked" />
+        <ToolbarItem 
+            Text="konfigurieren"
+            Order="Secondary"
+            Priority="12"
+            Clicked="ToolbarItem_Config_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <StackLayout>
+        <StackLayout 
+            Orientation="Horizontal"
+            x:Name="Ctrls4Debug">
+            <Button 
+                x:Name="buttonTestA"
+                Text="A"
+                WidthRequest="50"
+                Clicked="buttonTestA_Clicked"/>
+
+            <Button 
+                x:Name="buttonTestB"
+                Text="B"
+                WidthRequest="50"
+                Clicked="buttonTestB_Clicked"/>
+
+            <Button 
+                x:Name="buttonTestC"
+                Text="C"
+                WidthRequest="50"
+                Clicked="buttonTestC_Clicked"/>
+
+
+            <BoxView 
+                x:Name="statusLed"
+                BackgroundColor="BlanchedAlmond"></BoxView>
+
+            <StackLayout 
+                Orientation="Vertical">
+                <Label 
+                    x:Name="labelPos"
+                    BackgroundColor="Wheat"
+                    LineBreakMode="NoWrap"
+                    HorizontalOptions="StartAndExpand"/>
+
+                <Label 
+                    x:Name="labelX" 
+                    LineBreakMode="NoWrap"
+                    HorizontalOptions="StartAndExpand" BackgroundColor="#FFC800"/>
+
+                <Label 
+                    x:Name="labelInfo"
+                    BackgroundColor="#86FF00" 
+                    LineBreakMode="NoWrap"
+                    HorizontalOptions="StartAndExpand"/>
+            </StackLayout>
+        </StackLayout>
+
+        <StackLayout 
+            Orientation="Vertical"
+            VerticalOptions="FillAndExpand">
+
+            <smap:SpecialMapCtrl
+                 x:Name="map"
+                 HorizontalOptions="FillAndExpand"
+                 VerticalOptions="FillAndExpand"
+                 EnableTouchEvents="False" >
+                <skia:SKCanvasView.Effects>
+                    <tt:TouchEffect 
+                        Capture="True"
+                        TouchAction="mapTouchAction"/>
+                </skia:SKCanvasView.Effects>
+            </smap:SpecialMapCtrl>
+
+            <ScrollView
+                x:Name="MainMenu" 
+                Orientation="Horizontal"
+                >
+                <StackLayout 
+                    x:Name="MainMenuButtonContainer"
+                    Orientation="Horizontal">
+
+                    <Frame 
+                        Style="{StaticResource MyButton}">
+                        <Image 
+                            Style="{StaticResource MyButtonImage}"
+                            Source="{local:ImageResource TrackEddi.Images.map.png}"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ChooseMap_Clicked"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                    <Frame 
+                        Style="{StaticResource MyButton}">
+                        <Image 
+                            Style="{StaticResource MyButtonImage}"
+                            Source="{local:ImageResource TrackEddi.Images.zoom_in.png}"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ZoomIn_Clicked"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                    <Frame 
+                        Style="{StaticResource MyButton}">
+                        <Image 
+                            Style="{StaticResource MyButtonImage}"
+                            Source="{local:ImageResource TrackEddi.Images.zoom_out.png}"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ZoomOut_Clicked"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                    <Frame 
+                        Style="{StaticResource MyButton}">
+                        <Image 
+                            Style="{StaticResource MyButtonImage}"
+                            Source="{local:ImageResource TrackEddi.Images.list.png}"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TrackMarkerList_Clicked"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+
+                    <!-- Start Buttons Editiermodus -->
+
+                    <Frame 
+                        x:Name="EditButtonsGroup"
+                        BorderColor="DarkGray"
+                        BackgroundColor="#FFFFB0B0"
+                        HasShadow="True"
+                        CornerRadius="5"
+                        Padding="5"
+                        Margin="0">
+                        <StackLayout Orientation="Horizontal">
+                            <StackLayout Orientation="Vertical">
+                                <Label 
+                                    x:Name="EditModeText"
+                                    HorizontalOptions="Center"
+                                    TextColor="Blue"/>
+                                <StackLayout 
+                                    Orientation="Horizontal"
+                                    Padding="0"
+                                    Margin="0">
+                                    <Frame 
+                                        x:Name="EditModeNothing"
+                                        Style="{StaticResource MyButton}">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="EditModeNothing_Clicked"/>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                                    <Frame 
+                                        x:Name="EditModeMarkerSet"
+                                        Style="{StaticResource MyButton}">
+                                        <Image 
+                                            Style="{StaticResource MyButtonImage}"
+                                            Source="{local:ImageResource TrackEddi.Images.MarkerSet.png}"/>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="EditModeMarkerSet_Clicked"/>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                                    <Frame 
+                                        x:Name="EditModeTrackDraw"
+                                        Style="{StaticResource MyButton}">
+                                        <Image 
+                                            Style="{StaticResource MyButtonImage}"
+                                            Source="{local:ImageResource TrackEddi.Images.TrackDraw.png}"/>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="EditModeTrackDraw_Clicked"/>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                                    <Frame 
+                                        x:Name="EditModeTrackSplit"
+                                        Style="{StaticResource MyButton}">
+                                        <Image 
+                                            Style="{StaticResource MyButtonImage}"
+                                            Source="{local:ImageResource TrackEddi.Images.TrackSplit.png}"/>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="EditModeTrackSplit_Clicked"/>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                                    <Frame 
+                                        x:Name="EditModeTrackConcat"
+                                        Style="{StaticResource MyButton}">
+                                        <Image 
+                                            Style="{StaticResource MyButtonImage}"
+                                            Source="{local:ImageResource TrackEddi.Images.TrackConcat.png}"/>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="EditModeTrackConcat_Clicked"/>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+                                </StackLayout>
+                            </StackLayout>
+                            <Frame 
+                                x:Name="ExtEditButtons"
+                                BorderColor="DarkGray"
+                                BackgroundColor="#80FFFFFF"
+                                HasShadow="True"
+                                CornerRadius="5"
+                                Padding="5"
+                                Margin="0">
+                                <StackLayout Orientation="Horizontal">
+                                    <Frame 
+                                        x:Name="ButtonEditTarget"
+                                        Style="{StaticResource MyButton}">
+                                        <Image 
+                                            Style="{StaticResource MyButtonImage}"
+                                            Source="{local:ImageResource TrackEddi.Images.Target.png}"/>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="ButtonEditTarget_Clicked"/>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+
+                                    <Frame 
+                                        x:Name="ButtonEditMinus"
+                                        Style="{StaticResource MyButton}">
+                                        <Image 
+                                            Style="{StaticResource MyButtonImage}"
+                                            Source="{local:ImageResource TrackEddi.Images.Minus.png}"/>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="ButtonEditMinus_Clicked"/>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+
+                                    <Frame 
+                                        x:Name="ButtonEditEnd"
+                                        Style="{StaticResource MyButton}">
+                                        <Image 
+                                            Style="{StaticResource MyButtonImage}"
+                                            Source="{local:ImageResource TrackEddi.Images.ok.png}"/>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="ButtonEditEnd_Clicked"/>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+
+                                    <Frame 
+                                        x:Name="ButtonEditCancel"
+                                        Style="{StaticResource MyButton}">
+                                        <Image 
+                                            Style="{StaticResource MyButtonImage}"
+                                            Source="{local:ImageResource TrackEddi.Images.cancel.png}"/>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="ButtonEditCancel_Clicked"/>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+
+                                </StackLayout>
+                            </Frame>
+
+                            <Label 
+                                x:Name="EditInfoText"
+                                VerticalOptions="Center"
+                                HorizontalOptions="StartAndExpand"
+                                TextColor="Blue"
+                                BackgroundColor="White"
+                                Padding="5"/>
+                        </StackLayout>
+                    </Frame>
+
+                    <!-- Ende Buttons Editiermodus -->
+
+                </StackLayout>
+            </ScrollView>
+
+        </StackLayout>
+
+
+    </StackLayout>
+
+</ContentPage>

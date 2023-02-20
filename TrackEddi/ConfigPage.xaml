@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TrackEddi;assembly=TrackEddi"
+             x:Class="TrackEddi.ConfigPage"
+             Title="Konfiguration"
+             x:Name="mypage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="HLine" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="Black"/>
+                <Setter Property="HeightRequest" Value="1"/>
+                <Setter Property="Margin" Value="0,0,0,0"/>
+            </Style>
+            <Style x:Key="MyLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Grid.Column" Value="0"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+            <Style x:Key="MyEntryLinewidth" TargetType="Entry">
+                <Setter Property="TextColor" Value="Blue"/>
+                <Setter Property="Keyboard" Value="Numeric"/>
+                <Setter Property="Grid.Column" Value="2"/>
+            </Style>
+            <Style x:Key="MyButton" TargetType="Frame">
+                <Setter Property="WidthRequest" Value="20"/>
+                <Setter Property="HeightRequest" Value="20"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="BorderColor" Value="DarkGray"/>
+                <Setter Property="BackgroundColor" Value="LightGray"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="Padding" Value="3"/>
+                <Setter Property="HasShadow" Value="True"/>
+            </Style>
+            <Style x:Key="MyButtonImage" TargetType="Image">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="Aspect" Value="AspectFit"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+
+                <Label Text="Cache für Kartenteile löschen" TextColor="Black" FontSize="Medium"/>
+
+                <Button x:Name="btnCacheDelete"
+                        Text="für aktuelle Karte löschen"
+                        BackgroundColor="#FF9090"
+                        TextColor="DarkRed"
+                        Clicked="btnCacheDelete_Clicked"/>
+
+                <Button x:Name="btnCacheDeleteAll"
+                        Text="für ALLE Karten löschen"
+                        BackgroundColor="#FF3030"
+                        TextColor="DarkRed"
+                        Clicked="btnCacheDeleteAll_Clicked"/>
+
+                <BoxView Style="{StaticResource HLine}"/>
+
+                <Label Text="Vergrößerungsfaktoren" TextColor="Black" FontSize="Medium"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*" />
+                        <ColumnDefinition Width="50*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Label 
+                        Grid.Row="0" 
+                        Style="{StaticResource MyLabel}"
+                        Text="für Display:"/>
+                    <Entry 
+                        Grid.Row="0" 
+                        Style="{StaticResource MyEntryLinewidth}"
+                        Text="{Binding Zoom4Display}"/>
+
+                    <Label 
+                        Grid.Row="1" 
+                        Style="{StaticResource MyLabel}"
+                        Text="für Marker:"/>
+                    <Entry 
+                        Grid.Row="1" 
+                        Style="{StaticResource MyEntryLinewidth}"
+                        Text="{Binding SymbolZoomfactor}"/>
+
+                </Grid>
+
+                <BoxView Style="{StaticResource HLine}"/>
+
+                <Label Text="DEM-Daten" TextColor="Black" FontSize="Medium"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*" />
+                        <ColumnDefinition Width="50*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Label 
+                        Grid.Row="0" 
+                        Style="{StaticResource MyLabel}"
+                        Text="Verzeichnis der DEM-Daten:"/>
+                    <ScrollView 
+                        Grid.Row="0" 
+                        Grid.Column="1" 
+                        Orientation="Horizontal">
+                        <Entry
+                            TextColor="Blue"
+                            Keyboard="Url"
+                            Text="{Binding Path4DEM}"/>
+                    </ScrollView>
+
+                    <Label 
+                        Grid.Row="1" 
+                        Style="{StaticResource MyLabel}"
+                        Text="Minimalzoom für die Anzeige der DEM-Daten (1..24):"/>
+                    <Entry
+                        Grid.Row="1" 
+                        Grid.Column="1" 
+                        TextColor="Blue"
+                        Keyboard="Numeric"
+                        MaxLength="2"
+                        Text="{Binding MinZoom4DEM}"/>
+
+                </Grid>
+
+                <BoxView Style="{StaticResource HLine}"/>
+
+                <Label Text="Linienfarben und -breiten" TextColor="Black" FontSize="Medium"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50*" />
+                        <ColumnDefinition Width="25*" />
+                        <ColumnDefinition Width="25*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Label
+                        Grid.Row="0" 
+                        Style="{StaticResource MyLabel}"
+                        Text="Standard 1:"/>
+                    <Frame 
+                        Grid.Row="0" Grid.Column="1" 
+                        Style="{StaticResource MyButton}"
+                        BackgroundColor="{Binding Standard1Color}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizerStandard1_Tapped"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Entry 
+                        Grid.Row="0" 
+                        Style="{StaticResource MyEntryLinewidth}"
+                        Text="{Binding Standard1Width}"/>
+
+                    <Label 
+                        Grid.Row="1" 
+                        Style="{StaticResource MyLabel}"
+                        Text="Standard 2:"/>
+                    <Frame 
+                        Grid.Row="1" Grid.Column="1" 
+                        Style="{StaticResource MyButton}"
+                        BackgroundColor="{Binding Standard2Color}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizerStandard2_Tapped"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Entry 
+                        Grid.Row="1" 
+                        Style="{StaticResource MyEntryLinewidth}"
+                        Text="{Binding Standard2Width}"/>
+
+                    <Label 
+                        Grid.Row="2" 
+                        Style="{StaticResource MyLabel}"
+                        Text="Standard 3:"/>
+                    <Frame 
+                        Grid.Row="2" Grid.Column="1" 
+                        Style="{StaticResource MyButton}"
+                        BackgroundColor="{Binding Standard3Color}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizerStandard3_Tapped"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Entry 
+                        Grid.Row="2" 
+                        Style="{StaticResource MyEntryLinewidth}"
+                        Text="{Binding Standard3Width}"/>
+
+                    <Label 
+                        Grid.Row="3" 
+                        Style="{StaticResource MyLabel}"
+                        Text="Standard 4:"/>
+                    <Frame 
+                        Grid.Row="3" Grid.Column="1" 
+                        Style="{StaticResource MyButton}"
+                        BackgroundColor="{Binding Standard4Color}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizerStandard4_Tapped"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Entry 
+                        Grid.Row="3" 
+                        Style="{StaticResource MyEntryLinewidth}"
+                        Text="{Binding Standard4Width}"/>
+
+                    <Label 
+                        Grid.Row="4" 
+                        Style="{StaticResource MyLabel}"
+                        Text="Standard 5:"/>
+                    <Frame 
+                        Grid.Row="4" Grid.Column="1" 
+                        Style="{StaticResource MyButton}"
+                        BackgroundColor="{Binding Standard5Color}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizerStandard5_Tapped"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Entry 
+                        Grid.Row="4" 
+                        Style="{StaticResource MyEntryLinewidth}"
+                        Text="{Binding Standard5Width}"/>
+
+                    <Label 
+                        Grid.Row="5" 
+                        Style="{StaticResource MyLabel}"
+                        Text="Markiert:"/>
+                    <Frame 
+                        Grid.Row="5" Grid.Column="1" 
+                        Style="{StaticResource MyButton}"
+                        BackgroundColor="{Binding MarkedColor}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizerMarked"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Entry 
+                        Grid.Row="5" 
+                        Style="{StaticResource MyEntryLinewidth}"
+                        Text="{Binding MarkedWidth}"/>
+
+                    <Label 
+                        Grid.Row="6" 
+                        Style="{StaticResource MyLabel}"
+                        Text="Editierbar:"/>
+                    <Frame 
+                        Grid.Row="6" Grid.Column="1" 
+                        Style="{StaticResource MyButton}"
+                        BackgroundColor="{Binding EditableColor}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizerEditable_Tapped"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Entry 
+                        Grid.Row="6" 
+                        Style="{StaticResource MyEntryLinewidth}"
+                        Text="{Binding EditableWidth}"/>
+
+                    <Label 
+                        Grid.Row="7" 
+                        Style="{StaticResource MyLabel}"
+                        Text="in Bearbeitung:"/>
+                    <Frame 
+                        Grid.Row="7" Grid.Column="1" 
+                        Style="{StaticResource MyButton}"
+                        BackgroundColor="{Binding InEditColor}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizerInEdit_Tapped"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Entry 
+                        Grid.Row="7" 
+                        Style="{StaticResource MyEntryLinewidth}"
+                        Text="{Binding InEditWidth}"/>
+
+                    <Label 
+                        Grid.Row="8" 
+                        Style="{StaticResource MyLabel}"
+                        Text="ausgewählter Teil:"/>
+                    <Frame 
+                        Grid.Row="8" Grid.Column="1" 
+                        Style="{StaticResource MyButton}"
+                        BackgroundColor="{Binding SelectedPartColor}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizerSelectedPart_Tapped"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Entry 
+                        Grid.Row="8" 
+                        Style="{StaticResource MyEntryLinewidth}"
+                        Text="{Binding SelectedPartWidth}"/>
+
+                    <Label 
+                        Grid.Row="9" 
+                        Style="{StaticResource MyLabel}"
+                        Text="Hilfslinie:"/>
+                    <Frame 
+                        Grid.Row="9" Grid.Column="1" 
+                        Style="{StaticResource MyButton}"
+                        BackgroundColor="{Binding HelperLineColor}">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizerHelperLine_Tapped"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                    <Entry 
+                        Grid.Row="9" 
+                        Style="{StaticResource MyEntryLinewidth}"
+                        Text="{Binding HelperLineWidth}"/>
+
+                </Grid>
+
+                <BoxView Style="{StaticResource HLine}"/>
+
+                <!--<ListView 
+                    x:Name="ListViewMaps"
+                    SelectionMode="Single"
+                    VerticalScrollBarVisibility="Always"
+                    HasUnevenRows="True"
+                    SeparatorColor="Black"
+                    BackgroundColor="LightBlue">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ScrollView Orientation="Horizontal">
+                                    <StackLayout
+                                        Orientation="Horizontal"
+                                        Padding="5">
+
+                                        <StackLayout Orientation="Vertical">
+                                            <Frame 
+                                                Style="{StaticResource MyButton}">
+                                                <Image 
+                                                    Style="{StaticResource MyButtonImage}"
+                                                    Source="{local:ImageResource TrackEddi.Images.arrow_up.png}" />
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=MapMoveUp}" CommandParameter="{Binding .}"/>
+                                                </Frame.GestureRecognizers>
+                                            </Frame>
+                                            <Frame 
+                                            Style="{StaticResource MyButton}">
+                                                <Image 
+                                                Style="{StaticResource MyButtonImage}"
+                                                Source="{local:ImageResource TrackEddi.Images.arrow_down.png}" />
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=MapMoveDown}" CommandParameter="{Binding .}"/>
+                                                </Frame.GestureRecognizers>
+                                            </Frame>
+                                        </StackLayout>
+
+                                        <Frame 
+                                            Style="{StaticResource MyButton}">
+                                            <Image 
+                                                Style="{StaticResource MyButtonImage}"
+                                                Source="{local:ImageResource TrackEddi.Images.delete.png}"/>
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=MapDelete}" CommandParameter="{Binding .}"/>
+                                            </Frame.GestureRecognizers>
+                                        </Frame>
+
+                                        <Label Text="{Binding Name}" FontSize="Medium" FontAttributes="Bold"/>
+
+                                    </StackLayout>
+                                </ScrollView>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>-->
+
+                
+                
+                
+                <BoxView Style="{StaticResource HLine}"/>
+
+                <Button x:Name="btnSave"
+                        Text="Einstellungen speichern"
+                        IsEnabled="False"
+                        BackgroundColor="LightGreen"
+                        Clicked="btnSave_Clicked"
+                    />
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

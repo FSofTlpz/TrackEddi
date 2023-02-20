@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrackEddi.SymbolChoosingPage"
+             Title="Symbolauswahl"
+             x:Name="mypage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="MyButton" TargetType="Frame">
+                <Setter Property="WidthRequest" Value="20"/>
+                <Setter Property="HeightRequest" Value="20"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="BorderColor" Value="DarkGray"/>
+                <Setter Property="BackgroundColor" Value="LightGray"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="Padding" Value="3"/>
+                <Setter Property="HasShadow" Value="True"/>
+            </Style>
+            <Style x:Key="MyButtonImage" TargetType="Image">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="Aspect" Value="AspectFit"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView 
+                x:Name="ListViewSymbols"
+                Margin="0"
+                SelectionMode="Single"
+                VerticalScrollBarVisibility="Always"
+                HasUnevenRows="True"
+                SeparatorColor="Black"
+                IsGroupingEnabled="true"
+                GroupDisplayBinding="{Binding Heading}">
+
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame
+                                HorizontalOptions="CenterAndExpand"
+                                BackgroundColor="LightGreen"
+                                CornerRadius="5"
+                                BorderColor="Blue"
+                                Padding="5"
+                                Margin="5">
+                            <Label 
+                                Text="{Binding Heading}" 
+                                FontSize="Medium" 
+                                FontAttributes="Bold" 
+                                TextColor="Blue" 
+                                HorizontalOptions="CenterAndExpand"
+                                Padding="10,5,10,5"/>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ScrollView 
+                                Orientation="Horizontal">
+                                <StackLayout
+                                    Orientation="Horizontal"
+                                    HorizontalOptions="FillAndExpand"
+                                    Margin="5"
+                                    Padding="5"
+                                    BackgroundColor="Cornsilk">
+
+                                    <Frame 
+                                        Style="{StaticResource MyButton}">
+                                        <Image 
+                                            Style="{StaticResource MyButtonImage}"
+                                            Source="{Binding Picture}"/>
+                                    </Frame>
+
+                                    <StackLayout 
+                                        Orientation="Vertical"
+                                        HorizontalOptions="FillAndExpand"
+                                        Padding="10,5,10,5"
+                                        BackgroundColor="AliceBlue">
+                                        <Label Text="{Binding Name}" FontSize="Medium" FontAttributes="Bold"/>
+                                        <!--<Label Text="{Binding Group}" FontSize="Small" FontAttributes="None"/>-->
+                                    </StackLayout>
+
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=ChooseSymbol}" CommandParameter="{Binding .}"/>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                            </ScrollView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrackEddi.OsmSearchPage"
+             Title="OSM-Suche"
+             x:Name="mypage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="HLine" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="Black"/>
+                <Setter Property="HeightRequest" Value="1"/>
+                <Setter Property="Margin" Value="0,0,0,0"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView
+            Orientation="Vertical"
+            BackgroundColor="LightGreen">
+            
+            <StackLayout>
+
+                <StackLayout
+                    Orientation="Vertical">
+
+                    <Label
+                        Text="Online-Suche mit Hilfe der OpenStreetMap"
+                        FontSize="Medium"
+                        TextColor="Black"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Margin="0,5,0,5"/>
+
+                    <BoxView Style="{StaticResource HLine}"/>
+
+                    <StackLayout
+                        Orientation="Horizontal">
+                        <Label
+                            Text="Suche nach Text:"
+                            FontSize="Medium"
+                            TextColor="Black"
+                            VerticalOptions="Center"
+                        />
+
+                        <Entry
+                            Text="{Binding OsmPlacePattern}"
+                            Placeholder="Suchtext"
+                            HorizontalOptions="FillAndExpand"
+                        />
+                    </StackLayout>
+
+                    <Button
+                        Text="suchen"
+                        Clicked="buttonOsm_Clicked"
+                        />
+
+                    <Label
+                        Text="Ergebnis:"
+                        FontSize="Medium"
+                        TextColor="Black"
+                        />
+
+                    <ListView 
+                        x:Name="ListViewOsm"
+                        SelectionMode="Single"
+                        VerticalScrollBarVisibility="Always"
+                        VerticalOptions="StartAndExpand"
+                        SeparatorColor="Black"
+                        SeparatorVisibility="None"
+                        HeightRequest="350"
+                        >
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <ScrollView 
+                                        Orientation="Horizontal" 
+                                        Margin="5,3,0,3"
+                                        Padding="0">
+                                        <StackLayout 
+                                            Orientation="Vertical"
+                                            HorizontalOptions="StartAndExpand"
+                                            Padding="3,5,3,5">
+                                            <Frame
+                                                CornerRadius="5"
+                                                BackgroundColor="LightGoldenrodYellow"
+                                                BorderColor="DarkGray"
+                                                Padding="3,3,3,3"
+                                                HasShadow="True">
+                                                <Label Text="{Binding Name}" FontSize="Medium"/>
+                                            </Frame>
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=OsmPlaceCmd}" 
+                                                                      CommandParameter="{Binding .}"/>
+                                            </StackLayout.GestureRecognizers>
+                                        </StackLayout>
+                                    </ScrollView>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+
+                <BoxView Style="{StaticResource HLine}"/>
+
+                <StackLayout
+                    Orientation="Vertical">
+
+                    <Label
+                        Text="Objektsuche für den Kartenmittelpunkt"
+                        FontSize="Medium"
+                        TextColor="Black"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"/>
+
+                    <Button
+                        Text="suchen"
+                        Clicked="buttonOsmBack_Clicked"/>
+
+                    <ListView 
+                        x:Name="ListViewOsmBack"
+                        SelectionMode="Single"
+                        VerticalScrollBarVisibility="Always"
+                        SeparatorColor="Black"
+                        HeightRequest="100">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <ScrollView 
+                                        Orientation="Horizontal" 
+                                        Margin="5,3,0,3"
+                                        Padding="0">
+
+                                        <StackLayout 
+                                            Orientation="Vertical"
+                                            HorizontalOptions="StartAndExpand"
+                                            Padding="3,5,3,5">
+                                            <Frame
+                                                CornerRadius="5"
+                                                BackgroundColor="#FAFAA2"
+                                                BorderColor="DarkGray"
+                                                Padding="3,3,3,3"
+                                                HasShadow="True">
+                                                <Label Text="{Binding Name}" FontSize="Medium"/>
+                                            </Frame>
+                                        </StackLayout>
+                                    </ScrollView>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TrackEddi;assembly=TrackEddi"
+             x:Class="TrackEddi.SimplifyTrackPage"
+             Title="Track vereinfachen"
+             x:Name="mypage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="MyButton" TargetType="Frame">
+                <Setter Property="WidthRequest" Value="20"/>
+                <Setter Property="HeightRequest" Value="20"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="BorderColor" Value="DarkGray"/>
+                <Setter Property="BackgroundColor" Value="LightGray"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="Padding" Value="3"/>
+                <Setter Property="HasShadow" Value="True"/>
+            </Style>
+            <Style x:Key="MyButtonImage" TargetType="Image">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="Aspect" Value="AspectFit"/>
+            </Style>
+            <Style x:Key="MyNumericEntry" TargetType="Entry">
+                <Setter Property="Keyboard" Value="Numeric"/>
+                <Setter Property="WidthRequest" Value="70"/>
+                <Setter Property="IsEnabled" Value="False"/>
+                <Setter Property="TextColor" Value="Blue"/>
+                <Setter Property="FontSize" Value="Default"/>
+            </Style>
+            <Style x:Key="MyLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="FontSize" Value="Default"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+            </Style>
+            <Style x:Key="MyHRadioButton" TargetType="RadioButton">
+                <Setter Property="FontSize" Value="Default"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="GroupName" Value="HSIMPL"/>
+            </Style>
+            <Style x:Key="MyVRadioButton" TargetType="RadioButton">
+                <Setter Property="FontSize" Value="Default"/>
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="GroupName" Value="VSIMPL"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView Orientation="Vertical">
+            <StackLayout BackgroundColor="#FCD287">
+                <Label Text="Voreinstellungen:" FontSize="Medium" TextColor="Black" HorizontalOptions="Center"/>
+
+                <ListView 
+                    x:Name="ListViewSimplificationData"
+                    SelectionMode="Single"
+                    VerticalScrollBarVisibility="Always"
+                    HasUnevenRows="True"
+                    SeparatorColor="Black"
+                    BackgroundColor="#FDE6BD"
+                    HeightRequest="150">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ScrollView 
+                                    Orientation="Horizontal" 
+                                    BackgroundColor="LightGoldenrodYellow"
+                                    Margin="0,0,0,0"
+                                    Padding="5,3,5,3">
+                                    <StackLayout
+                                        Orientation="Horizontal">
+                                        <StackLayout Orientation="Vertical">
+                                            <Frame 
+                                                Style="{StaticResource MyButton}">
+                                                <Image 
+                                                    Style="{StaticResource MyButtonImage}"
+                                                    Source="{local:ImageResource TrackEddi.Images.arrow_up.png}" />
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=SimplificationDataMoveUp}" CommandParameter="{Binding .}"/>
+                                                </Frame.GestureRecognizers>
+                                            </Frame>
+                                            <Frame 
+                                                Style="{StaticResource MyButton}">
+                                                <Image 
+                                                    Style="{StaticResource MyButtonImage}"
+                                                    Source="{local:ImageResource TrackEddi.Images.arrow_down.png}" />
+                                                <Frame.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=SimplificationDataMoveDown}" CommandParameter="{Binding .}"/>
+                                                </Frame.GestureRecognizers>
+                                            </Frame>
+                                        </StackLayout>
+
+                                        <Frame 
+                                            Style="{StaticResource MyButton}">
+                                            <Image 
+                                                Style="{StaticResource MyButtonImage}"
+                                                Source="{local:ImageResource TrackEddi.Images.delete.png}"/>
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=SimplificationDataDelete}" CommandParameter="{Binding .}"/>
+                                            </Frame.GestureRecognizers>
+                                        </Frame>
+
+                                        <Label 
+                                            Text="{Binding Name}" 
+                                            VerticalOptions="Center"
+                                            FontSize="Medium"
+                                            TextColor="Black"
+                                            >
+                                            <Label.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=SimplificationDataUse}" CommandParameter="{Binding .}"/>
+                                            </Label.GestureRecognizers>
+                                        </Label>
+                                    </StackLayout>
+                                </ScrollView>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <ScrollView Orientation="Horizontal">
+                    <StackLayout
+                         Orientation="Horizontal">
+                        <Button 
+                            x:Name="btnSave"
+                            Text="akt. Einstellungen speichern"
+                            Clicked="btnSave_Clicked"
+                            IsEnabled="False"/>
+                        <Entry 
+                            x:Name="entryDatasetName" 
+                            Placeholder="Name der Einstellungen"
+                            HorizontalOptions="StartAndExpand"
+                            TextColor="Black"
+                            TextChanged="entryDatasetName_TextChanged"/>
+                    </StackLayout>
+                </ScrollView>
+
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="cbDeleteTimestamps"/>
+                    <Label Text="alle Zeitstempel entfernen" Style="{StaticResource MyLabel}"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="cbDeleteHeights"/>
+                    <Label Text="alle Höhenangaben entfernen" Style="{StaticResource MyLabel}"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="cbMinHeight" CheckedChanged="cbMinHeight_CheckedChanged"/>
+                    <Label Text="auf Minimalhöhe begrenzen:" Style="{StaticResource MyLabel}"/>
+                    <Entry x:Name="entryMinHeight" Placeholder="m" Style="{StaticResource MyNumericEntry}"/>
+                    <Label Text="m" Style="{StaticResource MyLabel}"/>
+                </StackLayout>
+
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox x:Name="cbMaxHeight" CheckedChanged="cbMaxHeight_CheckedChanged"/>
+                    <Label Text="auf Maximalhöhe begrenzen:" Style="{StaticResource MyLabel}"/>
+                    <Entry x:Name="entryMaxHeight" Placeholder="m" Style="{StaticResource MyNumericEntry}"/>
+                    <Label Text="m" Style="{StaticResource MyLabel}"/>
+                </StackLayout>
+
+                <ScrollView Orientation="Horizontal">
+                    <StackLayout Orientation="Horizontal">
+                        <CheckBox x:Name="cbPointRangeHeight" CheckedChanged="cbPointRangeHeight_CheckedChanged"/>
+                        <Label Text="Punktbereich auf eine Höhe setzen:" Style="{StaticResource MyLabel}"/>
+                        <Entry x:Name="entryPointRangeHeight" Placeholder="m" Style="{StaticResource MyNumericEntry}"/>
+                        <Label Text="m, Nummer des 1. Punktes (1..):" Style="{StaticResource MyLabel}"/>
+                        <Entry x:Name="entryPointRangeStart" Placeholder="1.." Style="{StaticResource MyNumericEntry}"/>
+                        <Label Text=", Anzahl der Punkte:" Style="{StaticResource MyLabel}"/>
+                        <Entry x:Name="entryPointRangeCount" Placeholder="1.." Style="{StaticResource MyNumericEntry}"/>
+                    </StackLayout>
+                </ScrollView>
+
+                <ScrollView Orientation="Horizontal">
+                    <StackLayout Orientation="Horizontal">
+                        <CheckBox x:Name="cbSpeedOulier" CheckedChanged="cbSpeedOulier_CheckedChanged"/>
+                        <Label Text="Geschwindigkeits-'Außreißer' beseitigen: Maximalgeschwindigkeit" Style="{StaticResource MyLabel}"/>
+                        <Entry x:Name="entrySpeedOulier" Placeholder="km/h" Style="{StaticResource MyNumericEntry}"/>
+                        <Label Text="km/h" Style="{StaticResource MyLabel}"/>
+                    </StackLayout>
+                </ScrollView>
+
+                <ScrollView Orientation="Horizontal">
+                    <StackLayout Orientation="Horizontal">
+                        <CheckBox x:Name="cbAscentOulier" CheckedChanged="cbAscentOulier_CheckedChanged"/>
+                        <Label Text="An-/Abstiegs-'Außreißer' beseitigen: Maximalanstieg" Style="{StaticResource MyLabel}"/>
+                        <Entry x:Name="entryAscentOulier" Placeholder="%" Style="{StaticResource MyNumericEntry}"/>
+                        <Label Text="% auf Weglänge" Style="{StaticResource MyLabel}"/>
+                        <Entry x:Name="entryAscentOulierLength" Placeholder="m" Style="{StaticResource MyNumericEntry}"/>
+                        <Label Text="m" Style="{StaticResource MyLabel}"/>
+                    </StackLayout>
+                </ScrollView>
+
+                <ScrollView Orientation="Horizontal">
+                    <StackLayout Orientation="Horizontal">
+                        <CheckBox x:Name="cbRemoveGaps"/>
+                        <Label Text="fehlende Höhen- und Zeitangaben möglichst interpolieren (linear)" Style="{StaticResource MyLabel}"/>
+                    </StackLayout>
+                </ScrollView>
+
+                <Frame 
+                    HasShadow="True" 
+                    BorderColor="Black" 
+                    BackgroundColor="#FDE6BD"
+                    Margin="5" >
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Track vereinfachen:" Style="{StaticResource MyLabel}"/>
+                        <RadioButton x:Name="HSimpNo" Style="{StaticResource MyHRadioButton}" CheckedChanged="HSimpNo_CheckedChanged" Content="keine" IsChecked="True"/>
+                        <RadioButton x:Name="HSimpDP" Style="{StaticResource MyHRadioButton}" Content="Douglas-Peucker"/>
+                        <RadioButton x:Name="HSimpRW" Style="{StaticResource MyHRadioButton}" Content="Reumann-Witkam"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Breite in m:" Style="{StaticResource MyLabel}"/>
+                            <Entry x:Name="entryHSimplWidth" Placeholder="%" Style="{StaticResource MyNumericEntry}"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame 
+                    HasShadow="True" 
+                    BorderColor="Black" 
+                    BackgroundColor="#FDE6BD"
+                    Margin="5" >
+                    <StackLayout Orientation="Vertical">
+                        <Label Text="Höhenprofil vereinfachen:" Style="{StaticResource MyLabel}"/>
+                        <RadioButton x:Name="VSimpNo" Style="{StaticResource MyVRadioButton}" CheckedChanged="VSimpNo_CheckedChanged" Content="keine" IsChecked="True"/>
+                        <RadioButton x:Name="VSimpSM" Style="{StaticResource MyVRadioButton}" Content="gleitender Mittelwert"/>
+                        <RadioButton x:Name="VSimpSI" Style="{StaticResource MyVRadioButton}" Content="gleitendes Integral"/>
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="Breite in m:" Style="{StaticResource MyLabel}"/>
+                            <Entry x:Name="entryVSimplWidth" Placeholder="%" Style="{StaticResource MyNumericEntry}"/>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Button x:Name="btnDoIt" Text="erzeuge vereinfachten Track" Clicked="Button_Clicked"/>
+            </StackLayout>
+
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

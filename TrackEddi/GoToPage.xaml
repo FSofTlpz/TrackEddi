@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TrackEddi;assembly=TrackEddi"
+             x:Class="TrackEddi.GoToPage"
+             Title="Geo-Position"
+             x:Name="mypage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="HLine" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="Black"/>
+                <Setter Property="HeightRequest" Value="1"/>
+                <Setter Property="Margin" Value="0,0,0,0"/>
+            </Style>
+            <Style x:Key="MyButton" TargetType="Frame">
+                <Setter Property="WidthRequest" Value="20"/>
+                <Setter Property="HeightRequest" Value="20"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="BorderColor" Value="DarkGray"/>
+                <Setter Property="BackgroundColor" Value="LightGray"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="Padding" Value="3"/>
+                <Setter Property="HasShadow" Value="True"/>
+            </Style>
+            <Style x:Key="MyButtonImage" TargetType="Image">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="Aspect" Value="AspectFit"/>
+            </Style>
+            <Style x:Key="MyEntryEW" TargetType="Entry">
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="WidthRequest" Value="20"/>
+                <Setter Property="Keyboard" Value="Plain"/>
+                <Setter Property="Placeholder" Value="O/W"/>
+                <Setter Property="MaxLength" Value="1"/>
+                <Setter Property="TextTransform" Value="Uppercase"/>
+            </Style>
+            <Style x:Key="MyEntryNS" TargetType="Entry">
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="WidthRequest" Value="20"/>
+                <Setter Property="Keyboard" Value="Plain"/>
+                <Setter Property="Placeholder" Value="N/S"/>
+                <Setter Property="MaxLength" Value="1"/>
+                <Setter Property="TextTransform" Value="Uppercase"/>
+                <Setter Property="IsSpellCheckEnabled" Value="False"/>
+                <Setter Property="IsTextPredictionEnabled" Value="False"/>
+            </Style>
+            <Style x:Key="MyEntryDecDigits" TargetType="Entry">
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="WidthRequest" Value="120"/>
+                <Setter Property="Keyboard" Value="Numeric"/>
+                <Setter Property="MaxLength" Value="11"/>
+                <Setter Property="IsSpellCheckEnabled" Value="False"/>
+                <Setter Property="IsTextPredictionEnabled" Value="False"/>
+            </Style>
+            <Style x:Key="MyEntry2Digits" TargetType="Entry">
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="WidthRequest" Value="27"/>
+                <Setter Property="Keyboard" Value="Numeric"/>
+                <Setter Property="MaxLength" Value="2"/>
+                <Setter Property="IsSpellCheckEnabled" Value="False"/>
+                <Setter Property="IsTextPredictionEnabled" Value="False"/>
+            </Style>
+            <Style x:Key="MyEntry3Digits" TargetType="Entry">
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="WidthRequest" Value="40"/>
+                <Setter Property="Keyboard" Value="Numeric"/>
+                <Setter Property="MaxLength" Value="3"/>
+                <Setter Property="IsSpellCheckEnabled" Value="False"/>
+                <Setter Property="IsTextPredictionEnabled" Value="False"/>
+            </Style>
+            <Style x:Key="MyEntrySecDigits" TargetType="Entry">
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="WidthRequest" Value="50"/>
+                <Setter Property="Keyboard" Value="Numeric"/>
+                <Setter Property="MaxLength" Value="5"/>
+                <Setter Property="IsSpellCheckEnabled" Value="False"/>
+                <Setter Property="IsTextPredictionEnabled" Value="False"/>
+            </Style>
+
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView
+            Orientation="Vertical"
+            BackgroundColor="#FFE0E0FF">
+            <StackLayout>
+
+                <StackLayout
+                    Orientation="Vertical">
+
+                    <Label
+                        Text="gespeicherte Positionen"
+                        FontSize="Medium"
+                        TextColor="Black"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        />
+
+                    <StackLayout
+                        Orientation="Horizontal">
+                        <Label
+                            Text="Name der akt. Pos.:"
+                            FontSize="Medium"
+                            TextColor="Black"
+                            VerticalOptions="Center"
+                        />
+
+                        <Entry
+                            Text="{Binding PosName}"
+                            Placeholder="Name der aktuellen Position"
+                            HorizontalOptions="FillAndExpand"
+                        />
+                    </StackLayout>
+
+                    <Button
+                        Text="akt. Position speichern"
+                        Clicked="buttonPos_Clicked"
+                        />
+
+                    <ListView 
+                        x:Name="ListViewPos"
+                        SelectionMode="Single"
+                        VerticalScrollBarVisibility="Always"
+                        SeparatorVisibility="None"
+                        HeightRequest="250">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <ScrollView 
+                                        Orientation="Horizontal" 
+                                        Margin="5,3,0,3"
+                                        Padding="0">
+                                        <Frame 
+                                            CornerRadius="5"
+                                            BackgroundColor="LightGoldenrodYellow"
+                                            BorderColor="DarkGray"
+                                            Padding="3,3,3,3"
+                                            HasShadow="True">
+                                            <StackLayout
+                                                Orientation="Horizontal"
+                                                Padding="5,0,0,0">
+                                                <Frame 
+                                                    Style="{StaticResource MyButton}">
+                                                    <Image 
+                                                        Style="{StaticResource MyButtonImage}"
+                                                        Source="{local:ImageResource TrackEddi.Images.delete.png}"/>
+                                                    <Frame.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=PosDeleteCmd}" CommandParameter="{Binding .}"/>
+                                                    </Frame.GestureRecognizers>
+                                                </Frame>
+
+                                                <StackLayout 
+                                                    Orientation="Vertical"
+                                                    HorizontalOptions="StartAndExpand"
+                                                    Padding="3,5,3,5">
+                                                    <Label Text="{Binding Name}" FontSize="Medium"/>
+                                                    <StackLayout.GestureRecognizers>
+                                                        <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=PosCmd}" 
+                                                                              CommandParameter="{Binding .}"/>
+                                                    </StackLayout.GestureRecognizers>
+                                                </StackLayout>
+
+                                                <StackLayout 
+                                                    Orientation="Vertical">
+                                                    <Frame 
+                                                        CornerRadius="5"
+                                                        BackgroundColor="LightBlue"
+                                                        VerticalOptions="FillAndExpand"
+                                                        Margin="0"
+                                                        Padding="2">
+                                                        <Image 
+                                                            Style="{StaticResource MyButtonImage}"
+                                                            Source="{local:ImageResource TrackEddi.Images.arrow_up.png}"/>
+                                                        <Frame.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=MoveUpPlaceCommand}" 
+                                                                                  CommandParameter="{Binding .}"/>
+                                                        </Frame.GestureRecognizers>
+                                                    </Frame>
+                                                    <Frame 
+                                                        CornerRadius="5"
+                                                        BackgroundColor="LightBlue"
+                                                        VerticalOptions="FillAndExpand"
+                                                        Margin="0"
+                                                        Padding="2">
+                                                        <Image 
+                                                            Style="{StaticResource MyButtonImage}"
+                                                            Source="{local:ImageResource TrackEddi.Images.arrow_down.png}"/>
+                                                        <Frame.GestureRecognizers>
+                                                            <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=MoveDownPlaceCommand}" 
+                                                                                  CommandParameter="{Binding .}"/>
+                                                        </Frame.GestureRecognizers>
+                                                    </Frame>
+                                                </StackLayout>
+                                            </StackLayout>
+                                        </Frame>
+                                    </ScrollView>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+
+                <BoxView Style="{StaticResource HLine}"/>
+
+                <StackLayout
+                    Orientation="Vertical">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*" />
+                            <ColumnDefinition Width="50*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Label 
+                            Grid.Row="0" 
+                            Grid.Column="0" 
+                            TextColor="Black"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Text="Länge"
+                            FontSize="Medium"/>
+
+                        <Label 
+                            Grid.Row="0" 
+                            Grid.Column="1" 
+                            TextColor="Black"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Text="Breite"
+                            FontSize="Medium"/>
+
+                        <Frame
+                            Grid.Row="1" 
+                            Grid.Column="0"
+                            Padding="0"
+                            Margin="1,0,1,0"
+                            BorderColor="DarkGray"
+                            BackgroundColor="Transparent"
+                            >
+                            <StackLayout
+                                Orientation="Horizontal"
+                                HorizontalOptions="CenterAndExpand"
+                                Margin="5">
+
+                                <Entry
+                                    x:Name="EntryDecLon"
+                                    Style="{StaticResource MyEntryDecDigits}"
+                                    Text="{Binding DecLon}"
+                                    Placeholder="Länge in Dezimalgrad"
+                                    Completed="EntryLocation_Completed"
+                                    Unfocused="EntryLocation_Completed"/>
+
+                                <Label
+                                    Text="°"
+                                    TextColor="Black"
+                                    FontSize="Medium"/>
+
+                                <Entry
+                                    x:Name="EntryDecLonEW1"
+                                    Style="{StaticResource MyEntryEW}"
+                                    Text="{Binding DecLonEW}"
+                                    Completed="EntryLocation_Completed"
+                                    Unfocused="EntryLocation_Completed"/>
+                            </StackLayout>
+                        </Frame>
+
+                        <Frame
+                            Grid.Row="1" 
+                            Grid.Column="1"
+                            Padding="0"
+                            Margin="1,0,1,0"
+                            BorderColor="DarkGray"
+                            BackgroundColor="Transparent"
+                            >
+                            <StackLayout
+                                Orientation="Horizontal"
+                                HorizontalOptions="CenterAndExpand"
+                                Margin="5">
+
+                                <Entry
+                                    x:Name="EntryDecLat"
+                                    Style="{StaticResource MyEntryDecDigits}"
+                                    Text="{Binding DecLat}"
+                                    Placeholder="Breite in Dezimalgrad"
+                                    Completed="EntryLocation_Completed"
+                                    Unfocused="EntryLocation_Completed"/>
+
+                                <Label
+                                    Text="°"
+                                    TextColor="Black"
+                                    FontSize="Medium"/>
+
+                                <Entry
+                                    x:Name="EntryDecLatNS1"
+                                    Style="{StaticResource MyEntryNS}"
+                                    Text="{Binding DecLatNS}"
+                                    Completed="EntryLocation_Completed"
+                                    Unfocused="EntryLocation_Completed"/>
+
+                            </StackLayout>
+                        </Frame>
+
+                        <Frame
+                            Grid.Row="2" 
+                            Grid.Column="0" 
+                            Padding="0"
+                            Margin="1,0,1,0"
+                            BorderColor="DarkGray"
+                            BackgroundColor="Transparent"
+                            >
+                            <StackLayout
+                                Orientation="Horizontal"
+                                HorizontalOptions="CenterAndExpand"
+                                Margin="5">
+
+                                <Entry
+                                    x:Name="EntryDegreeLon"
+                                    Style="{StaticResource MyEntry3Digits}"
+                                    Text="{Binding DegreeLon}"
+                                
+                                    Completed="EntryLocation_Completed"
+                                    Unfocused="EntryLocation_Completed"/>
+
+                                <Label
+                                    Text="°"
+                                    TextColor="Black"
+                                    FontSize="Medium"
+                                />
+
+                                <Entry
+                                    x:Name="EntryMinuteLon"
+                                    Style="{StaticResource MyEntry2Digits}"
+                                    Text="{Binding MinuteLon}"
+                                    Completed="EntryLocation_Completed"
+                                    Unfocused="EntryLocation_Completed"/>
+
+                                <Label
+                                    Text="'"
+                                    TextColor="Black"
+                                    FontSize="Medium"
+                                />
+
+                                <Entry
+                                    x:Name="EntrySecondeLon"
+                                    Style="{StaticResource MyEntrySecDigits}"
+                                    Text="{Binding SecondeLon}"
+                                    Completed="EntryLocation_Completed"
+                                    Unfocused="EntryLocation_Completed"/>
+
+                                <Label
+                                    Text='"'
+                                    TextColor="Black"
+                                    FontSize="Medium"
+                                />
+
+                                <Entry
+                                    x:Name="EntryDecLonEW2"
+                                    Style="{StaticResource MyEntryEW}"
+                                    Text="{Binding DecLonEW}"
+                                    Completed="EntryLocation_Completed"
+                                    Unfocused="EntryLocation_Completed"/>
+
+                            </StackLayout>
+                        </Frame>
+
+                        <Frame
+                            Grid.Row="2" 
+                            Grid.Column="1" 
+                            Padding="0"
+                            Margin="1,0,1,0"
+                            BorderColor="DarkGray"
+                            BackgroundColor="Transparent"
+                            >
+                            <StackLayout
+                                Orientation="Horizontal"
+                                Grid.Row="2" 
+                                Grid.Column="1" 
+                                Margin="5">
+
+                                <Entry
+                                    x:Name="EntryDegreeLat"
+                                    Style="{StaticResource MyEntry3Digits}"
+                                    Text="{Binding DegreeLat}"
+                                    Completed="EntryLocation_Completed"
+                                    Unfocused="EntryLocation_Completed"/>
+
+                                <Label
+                                    Text="°"
+                                    TextColor="Black"
+                                    FontSize="Medium"
+                                />
+
+                                <Entry
+                                    x:Name="EntryMinuteLat"
+                                    Style="{StaticResource MyEntry2Digits}"
+                                    Text="{Binding MinuteLat}"
+                                    Completed="EntryLocation_Completed"
+                                    Unfocused="EntryLocation_Completed"/>
+
+                                <Label
+                                    Text="'"
+                                    TextColor="Black"
+                                    FontSize="Medium"
+                                />
+
+                                <Entry
+                                    x:Name="EntrySecondeLat"
+                                    Style="{StaticResource MyEntrySecDigits}"
+                                    Text="{Binding SecondeLat}"
+                                    Completed="EntryLocation_Completed"
+                                    Unfocused="EntryLocation_Completed"/>
+
+                                <Label
+                                    Text='"'
+                                    TextColor="Black"
+                                    FontSize="Medium"
+                                />
+
+                                <Entry
+                                    x:Name="EntryDecLatNS2"
+                                    Style="{StaticResource MyEntryNS}"
+                                    Text="{Binding DecLatNS}"
+                                    Completed="EntryLocation_Completed"
+                                    Unfocused="EntryLocation_Completed"/>
+
+                            </StackLayout>
+                        </Frame>
+
+                    </Grid>
+
+                    <Button
+                        Text="zur Position gehen"
+                        Clicked="buttonLocation_Clicked"
+                        />
+
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

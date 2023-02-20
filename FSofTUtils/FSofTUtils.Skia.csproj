@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;GMAP4SKIA</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Properties\**" />
+    <Compile Remove="Resource\**" />
+    <EmbeddedResource Remove="Properties\**" />
+    <EmbeddedResource Remove="Resource\**" />
+    <None Remove="Properties\**" />
+    <None Remove="Resource\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Win2Skia\Win2Skia.csproj" />
+  </ItemGroup>
+
+</Project>

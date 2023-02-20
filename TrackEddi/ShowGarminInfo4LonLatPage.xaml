@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrackEddi.ShowGarminInfo4LonLat"
+             Title="Infos aus der Garminkarte"
+             BackgroundColor="LightGreen"
+             x:Name="mypage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="MyButton" TargetType="Frame">
+                <Setter Property="WidthRequest" Value="30"/>
+                <Setter Property="HeightRequest" Value="30"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="BorderColor" Value="DarkGray"/>
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="Padding" Value="3"/>
+                <Setter Property="HasShadow" Value="True"/>
+            </Style>
+            <Style x:Key="MyButtonImage" TargetType="Image">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="Aspect" Value="AspectFit"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView 
+                x:Name="ListViewResults"
+                Margin="0"
+                SelectionMode="None"
+                VerticalScrollBarVisibility="Always"
+                HasUnevenRows="True"
+                SeparatorColor="Black">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ScrollView 
+                                Orientation="Horizontal">
+                                <StackLayout
+                                    Orientation="Horizontal"
+                                    HorizontalOptions="FillAndExpand"
+                                    Margin="5"
+                                    Padding="5"
+                                    BackgroundColor="#FFb0FFb0">
+
+                                    <Frame 
+                                        Style="{StaticResource MyButton}">
+                                        <Image 
+                                            Style="{StaticResource MyButtonImage}"
+                                            Source="{Binding Picture}"/>
+                                    </Frame>
+
+                                    <StackLayout 
+                                        Orientation="Vertical"
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="FillAndExpand"
+                                        Padding="10,5,10,5">
+                                        <Label Text="{Binding TypeName}" FontSize="Medium" TextColor="Blue"/>
+                                        <Label Text="{Binding Name}" IsVisible="{Binding NameIsSet}" FontSize="Medium"/>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ScrollView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

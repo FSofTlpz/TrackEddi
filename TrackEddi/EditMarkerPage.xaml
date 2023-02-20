@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrackEddi.EditMarkerPage"
+             Title="Markereigenschaften"
+             x:Name="mypage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="MyButton" TargetType="Frame">
+                <Setter Property="WidthRequest" Value="20"/>
+                <Setter Property="HeightRequest" Value="20"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="BorderColor" Value="DarkGray"/>
+                <Setter Property="BackgroundColor" Value="LightGray"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="Padding" Value="3"/>
+                <Setter Property="HasShadow" Value="True"/>
+            </Style>
+            <Style x:Key="MyButtonImage" TargetType="Image">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="Aspect" Value="AspectFit"/>
+            </Style>
+            <Style x:Key="MyLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Grid.Column" Value="0"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+            <Style x:Key="MyEntry" TargetType="Entry">
+                <Setter Property="TextColor" Value="Blue"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="Grid.Column" Value="1"/>
+            </Style>
+            <Style x:Key="MyEntryRO" TargetType="Entry">
+                <Setter Property="TextColor" Value="Violet"/>
+                <Setter Property="Grid.Column" Value="1"/>
+                <Setter Property="IsReadOnly" Value="True"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView 
+            Orientation="Vertical">
+            <StackLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30*" />
+                        <ColumnDefinition Width="70*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Label 
+                        Grid.Row="0" 
+                        Style="{StaticResource MyLabel}"
+                        Text="Symbol:"/>
+                    <Frame 
+                        x:Name="Symbol"
+                        Grid.Row="0" Grid.Column="1" 
+                        Style="{StaticResource MyButton}">
+                        <Image 
+                            Style="{StaticResource MyButtonImage}"
+                            Source="{Binding Picture}"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TapGestureRecognizerSymbol_Tapped"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                    <Label 
+                        Grid.Row="1" 
+                        Style="{StaticResource MyLabel}"
+                        Text="Name:"/>
+                    <StackLayout
+                        Orientation="Horizontal"
+                        Grid.Row="1" 
+                        Grid.Column="1">
+                        <Entry 
+                            x:Name="EntryName"
+                            Placeholder="Name"
+                            Style="{StaticResource MyEntry}"
+                            Text="{Binding Name}"
+                            IsSpellCheckEnabled="False"
+                            IsTextPredictionEnabled="False"/>
+                        <Picker x:Name="PickerProposals" 
+                                Title="abc"
+                                BackgroundColor="LightGray"
+                                SelectedIndexChanged="PickerProposals_SelectedIndexChanged"/>
+                    </StackLayout>
+
+                    <Label 
+                        Grid.Row="2"
+                        Style="{StaticResource MyLabel}"
+                        Text="Beschreibung:"/>
+                    <Entry 
+                        Grid.Row="2" 
+                        Placeholder="Beschreibung"
+                        Style="{StaticResource MyEntry}"
+                        Text="{Binding Description}"/>
+
+                    <Label 
+                        Grid.Row="3" 
+                        Style="{StaticResource MyLabel}"
+                        Text="Kommentar:"/>
+                    <Entry 
+                        Grid.Row="3" 
+                        Placeholder="Kommentar"
+                        Style="{StaticResource MyEntry}"
+                        Text="{Binding Comment}"/>
+
+                    <Label 
+                        Grid.Row="4" 
+                        Style="{StaticResource MyLabel}"
+                        Text="UTC:"/>
+                    <Entry 
+                        Grid.Row="4"
+                        Style="{StaticResource MyEntryRO}"
+                        Text="{Binding UTC}"/>
+
+                    <Label 
+                        Grid.Row="5" 
+                        Style="{StaticResource MyLabel}"
+                        Text="Höhe in m:"/>
+                    <Entry 
+                        Grid.Row="5" Grid.Column="1" 
+                        Style="{StaticResource MyEntryRO}"
+                        Text="{Binding Elevation}"/>
+
+                    <Label 
+                        Grid.Row="6" 
+                        Style="{StaticResource MyLabel}"
+                        Text="geografische Länge in °:"/>
+                    <Entry 
+                        Grid.Row="6" Grid.Column="1" 
+                        Style="{StaticResource MyEntryRO}"
+                        Text="{Binding Longitude}"/>
+
+                    <Label 
+                        Grid.Row="7"
+                        Style="{StaticResource MyLabel}"
+                        Text="geografische Breite in °:"/>
+                    <Entry 
+                        Grid.Row="7" Grid.Column="1" 
+                        Style="{StaticResource MyEntryRO}"
+                        Text="{Binding Latitude}"/>
+
+                </Grid>
+
+                <Button Text="speichern" HorizontalOptions="CenterAndExpand" Clicked="ButtonSave_Clicked"/>
+
+            </StackLayout>
+
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fux="clr-namespace:FSofTUtils.Xamarin.Control;assembly=FSofTUtils.Xamarin"
+             x:Class="TrackEddi.ColorChoosingPage"
+             Title="Trackfarbe auswählen"
+             x:Name="this">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="MyButton" TargetType="Frame">
+                <Setter Property="WidthRequest" Value="20"/>
+                <Setter Property="HeightRequest" Value="20"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="BorderColor" Value="DarkGray"/>
+                <Setter Property="BackgroundColor" Value="LightGray"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="Padding" Value="3"/>
+                <Setter Property="HasShadow" Value="True"/>
+            </Style>
+            <Style x:Key="MyButton2" TargetType="Button">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="WidthRequest" Value="30"/>
+                <Setter Property="BorderColor" Value="DarkGray"/>
+                <Setter Property="BorderWidth" Value="1"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <StackLayout
+                    Orientation="Vertical">
+                    <Label Text="Garminfarben:" FontSize="Medium" TextColor="Black" Margin="5"/>
+                    <StackLayout
+                        Orientation="Horizontal"
+                        Margin="5">
+                        <Button BackgroundColor="#000000" Clicked="GarminButton_Clicked" Style="{StaticResource MyButton2}"/>
+                        <Button BackgroundColor="#8b0000" Clicked="GarminButton_Clicked" Style="{StaticResource MyButton2}"/>
+                        <Button BackgroundColor="#006400" Clicked="GarminButton_Clicked" Style="{StaticResource MyButton2}"/>
+                        <Button BackgroundColor="#7f7f00" Clicked="GarminButton_Clicked" Style="{StaticResource MyButton2}"/>
+                        <Button BackgroundColor="#00008b" Clicked="GarminButton_Clicked" Style="{StaticResource MyButton2}"/>
+                        <Button BackgroundColor="#8b008b" Clicked="GarminButton_Clicked" Style="{StaticResource MyButton2}"/>
+                        <Button BackgroundColor="#008b8b" Clicked="GarminButton_Clicked" Style="{StaticResource MyButton2}"/>
+                        <Button BackgroundColor="#d3d3d3" Clicked="GarminButton_Clicked" Style="{StaticResource MyButton2}"/>
+                    </StackLayout>
+
+                    <StackLayout
+                        Orientation="Horizontal"
+                        Margin="5">
+                        <Button BackgroundColor="#a9a9a9" Clicked="GarminButton_Clicked" Style="{StaticResource MyButton2}"/>
+                        <Button BackgroundColor="#ff0000" Clicked="GarminButton_Clicked" Style="{StaticResource MyButton2}"/>
+                        <Button BackgroundColor="#008000" Clicked="GarminButton_Clicked" Style="{StaticResource MyButton2}"/>
+                        <Button BackgroundColor="#ffff00" Clicked="GarminButton_Clicked" Style="{StaticResource MyButton2}"/>
+                        <Button BackgroundColor="#0000ff" Clicked="GarminButton_Clicked" Style="{StaticResource MyButton2}"/>
+                        <Button BackgroundColor="#ff00ff" Clicked="GarminButton_Clicked" Style="{StaticResource MyButton2}"/>
+                        <Button BackgroundColor="#00ffff" Clicked="GarminButton_Clicked" Style="{StaticResource MyButton2}"/>
+                        <Button BackgroundColor="#ffffff" Clicked="GarminButton_Clicked" Style="{StaticResource MyButton2}"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <Label Text="beliebige Farbe (NICHT als GPX-Datei speicherbar!):" FontSize="Medium" TextColor="Black" Margin="5"/>
+
+                <fux:ChooseColor 
+                    x:Name="chooseColor"
+                    BorderSize="20"
+                    Color="{Binding ActualColor, Source={x:Reference this}, Mode=TwoWay}"
+                    SliderMargin="0,5,0,5"
+                    ColorChanged="ChooseColor_ColorChanged"/>
+
+                <Button Text="speichern" HorizontalOptions="CenterAndExpand" Clicked="Button_Clicked"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

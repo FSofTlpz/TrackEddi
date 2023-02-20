@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>sn.snk</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;IDE1006</NoWarn>
+    <DefineConstants>$(DefineConstants);GMAP4SKIA</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>$(DefineConstants);GMAP4SKIA</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="SKBaseControl.cs" />
+    <Compile Remove="SKMapView.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="GMap.NET.Skia.zip" />
+    <None Remove="GMap.NET.Skia2.zip" />
+    <None Remove="GMap.NET.Skia3.zip" />
+    <None Remove="GMapControl" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="2.88.3" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2545" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GMap.NET.Ext\GMap.NET.Ext.Skia.csproj" />
+    <ProjectReference Include="..\GMap.NET\GMap.NET.Core\GMap.NET.Core.Android.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,177 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>$(DefineConstants)TRACE;Android</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>$(DefineConstants)TRACE;Android</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Images\arrow_down.png" />
+    <None Remove="Images\arrow_refresh.png" />
+    <None Remove="Images\arrow_undo.png" />
+    <None Remove="Images\arrow_up.png" />
+    <None Remove="Images\cancel.png" />
+    <None Remove="Images\database_delete.png" />
+    <None Remove="Images\delete.png" />
+    <None Remove="Images\FlagBlue.png" />
+    <None Remove="Images\FlagGreen.png" />
+    <None Remove="Images\FlagRed.png" />
+    <None Remove="Images\Foto.png" />
+    <None Remove="Images\garmin1.png" />
+    <None Remove="Images\garmin2.png" />
+    <None Remove="Images\goto.png" />
+    <None Remove="Images\goto2.png" />
+    <None Remove="Images\Hand.png" />
+    <None Remove="Images\Images.zip" />
+    <None Remove="Images\list.png" />
+    <None Remove="Images\map.png" />
+    <None Remove="Images\map_go.png" />
+    <None Remove="Images\MarkersDelete.png" />
+    <None Remove="Images\MarkerSet.png" />
+    <None Remove="Images\Minus.png" />
+    <None Remove="Images\ok.png" />
+    <None Remove="Images\Open.png" />
+    <None Remove="Images\Plus.png" />
+    <None Remove="Images\Point1.png" />
+    <None Remove="Images\Prog.png" />
+    <None Remove="Images\props.png" />
+    <None Remove="Images\reload.png" />
+    <None Remove="Images\Search.png" />
+    <None Remove="Images\Search2.png" />
+    <None Remove="Images\speichern.png" />
+    <None Remove="Images\speicherngpx.png" />
+    <None Remove="Images\speichernu.png" />
+    <None Remove="Images\Target.png" />
+    <None Remove="Images\TargetPlus.png" />
+    <None Remove="Images\TrackConcat.png" />
+    <None Remove="Images\TrackDraw.png" />
+    <None Remove="Images\TracksDelete.png" />
+    <None Remove="Images\TrackSimpl.png" />
+    <None Remove="Images\TrackSplit.png" />
+    <None Remove="Images\zoom1.png" />
+    <None Remove="Images\zoom_in.png" />
+    <None Remove="Images\zoom_out.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Images\arrow_down.png" />
+    <EmbeddedResource Include="Images\arrow_refresh.png" />
+    <EmbeddedResource Include="Images\arrow_undo.png" />
+    <EmbeddedResource Include="Images\arrow_up.png" />
+    <EmbeddedResource Include="Images\cancel.png" />
+    <EmbeddedResource Include="Images\database_delete.png" />
+    <EmbeddedResource Include="Images\delete.png" />
+    <EmbeddedResource Include="Images\FlagBlue.png" />
+    <EmbeddedResource Include="Images\FlagGreen.png" />
+    <EmbeddedResource Include="Images\FlagRed.png" />
+    <EmbeddedResource Include="Images\Foto.png" />
+    <EmbeddedResource Include="Images\garmin1.png" />
+    <EmbeddedResource Include="Images\garmin2.png" />
+    <EmbeddedResource Include="Images\goto.png" />
+    <EmbeddedResource Include="Images\goto2.png" />
+    <EmbeddedResource Include="Images\Hand.png" />
+    <EmbeddedResource Include="Images\list.png" />
+    <EmbeddedResource Include="Images\map.png" />
+    <EmbeddedResource Include="Images\map_go.png" />
+    <EmbeddedResource Include="Images\MarkersDelete.png" />
+    <EmbeddedResource Include="Images\MarkerSet.png" />
+    <EmbeddedResource Include="Images\Minus.png" />
+    <EmbeddedResource Include="Images\ok.png" />
+    <EmbeddedResource Include="Images\Open.png" />
+    <EmbeddedResource Include="Images\Plus.png" />
+    <EmbeddedResource Include="Images\Point1.png" />
+    <EmbeddedResource Include="Images\Prog.png" />
+    <EmbeddedResource Include="Images\props.png" />
+    <EmbeddedResource Include="Images\reload.png" />
+    <EmbeddedResource Include="Images\Search.png" />
+    <EmbeddedResource Include="Images\Search2.png" />
+    <EmbeddedResource Include="Images\speichern.png" />
+    <EmbeddedResource Include="Images\speicherngpx.png" />
+    <EmbeddedResource Include="Images\speichernu.png" />
+    <EmbeddedResource Include="Images\Target.png" />
+    <EmbeddedResource Include="Images\TargetPlus.png" />
+    <EmbeddedResource Include="Images\TrackConcat.png" />
+    <EmbeddedResource Include="Images\TrackDraw.png" />
+    <EmbeddedResource Include="Images\TracksDelete.png" />
+    <EmbeddedResource Include="Images\TrackSimpl.png" />
+    <EmbeddedResource Include="Images\TrackSplit.png" />
+    <EmbeddedResource Include="Images\zoom1.png" />
+    <EmbeddedResource Include="Images\zoom_in.png" />
+    <EmbeddedResource Include="Images\zoom_out.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2545" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FSofTUtils.Xamarin\FSofTUtils.Xamarin.csproj" />
+    <ProjectReference Include="..\FSofTUtils\FSofTUtils.Skia.csproj" />
+    <ProjectReference Include="..\SpecialMapCtrl\SpecialMapCtrl.Skia.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="OsmSearchPage.xaml.cs">
+      <DependentUpon>OsmSearchPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="MapChoosingPage.xaml.cs">
+      <DependentUpon>MapChoosingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="ShowGarminInfo4LonLatPage.xaml.cs">
+      <DependentUpon>ShowGarminInfo4LonLatPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="ColorChoosingPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ConfigfilePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ConfigPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="EditMarkerPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="EditTrackPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="GoToPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="GpxContentPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ShowGarminInfo4LonLatPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="SimplifyTrackPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="SymbolChoosingPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

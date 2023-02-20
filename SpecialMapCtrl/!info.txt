@@ -1,0 +1,48 @@
+﻿Die Behandlung der Ressourcen erfolgt unter Xamarin etwas anders als unter Windows.
+
+Die Datei .\Properties\Resources.resx ist identisch.
+
+Die Datei .\Properties\Resources.Designer.cs wird unter Xamarin aber etwas anders erzeugt.
+
+Statt
+	namespace SpecialMapCtrl.Properties
+ist der Namespace in diesem Fall
+	namespace SpecialMapCtrl.Skia.Properties
+
+Der ResourceManager
+	global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SpecialMapCtrl.Properties.Resources", typeof(Resources).Assembly);
+wird mit
+	global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SpecialMapCtrl.Skia.Properties.Resources", typeof(Resources).Assembly);
+erzeugt.
+
+Ein Bitmap nicht mehr mit 
+
+    /// <summary>
+    ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+    /// </summary>
+    internal static System.Drawing.Bitmap FlagBlue {
+        get {
+            object obj = ResourceManager.GetObject("FlagBlue", resourceCulture);
+            return ((System.Drawing.Bitmap)(obj));
+        }
+    }
+
+gespeichert, sondern als byte-Array mit
+
+    /// <summary>
+    ///   Sucht eine lokalisierte Ressource vom Typ System.Byte[].
+    /// </summary>
+    internal static byte[] FlagBlue {
+        get {
+            object obj = ResourceManager.GetObject("FlagBlue", resourceCulture);
+            return ((byte[])(obj));
+        }
+    }
+ 
+Der Einsatz einer Ressource erfolgt nicht mit
+    Properties.Resources.FlagBlue
+sonder in diesem Fall mit
+    Skia.Properties.Resources.FlagBlue
+
+Unter Windows wird damit ein System.Drawing.Bitmap geliefert, unter Xamarin ein byte[], das erst noch z.B. mit new Bitmap(new System.IO.MemoryStream(bmdata))
+umgewandelt werden muss.

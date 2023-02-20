@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TrackEddi;assembly=TrackEddi"
+             x:Class="TrackEddi.GpxContentPage"
+             Title="Tracks und Marker"
+             x:Name="mypage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="MyButton" TargetType="Frame">
+                <Setter Property="WidthRequest" Value="20"/>
+                <Setter Property="HeightRequest" Value="20"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="BorderColor" Value="DarkGray"/>
+                <Setter Property="BackgroundColor" Value="LightGray"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="Padding" Value="3"/>
+                <Setter Property="HasShadow" Value="True"/>
+            </Style>
+            <Style x:Key="MyButtonImage" TargetType="Image">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="Aspect" Value="AspectFit"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="alle Tracks anzeigen"
+            Order="Secondary"
+            Priority="1"
+            Clicked="ToolbarItem_ShowAllTracks_Clicked" />
+        <ToolbarItem 
+            Text="alle Tracks verbergen"
+            Order="Secondary"
+            Priority="2"
+            Clicked="ToolbarItem_HideAllTracks_Clicked" />
+        <ToolbarItem 
+            Text="alle angezeigten (!) Tracks löschen"
+            Order="Secondary"
+            Priority="3"
+            Clicked="ToolbarItem_DeleteAllVisibleTracks_Clicked" />
+
+        <ToolbarItem 
+            Text="---"
+            Order="Secondary"
+            Priority="4"/>
+
+        <ToolbarItem 
+            Text="alle Marker anzeigen"
+            Order="Secondary"
+            Priority="5"
+            Clicked="ToolbarItem_ShowAllMarker_Clicked" />
+        <ToolbarItem 
+            Text="alle Marker verbergen"
+            Order="Secondary"
+            Priority="6"
+            Clicked="ToolbarItem_HideAllMarker_Clicked" />
+        <ToolbarItem 
+            Text="alle angezeigten (!) Marker löschen"
+            Order="Secondary"
+            Priority="7"
+            Clicked="ToolbarItem_DeleteAllVisibleMarker_Clicked" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Tracks:" FontSize="Medium" TextColor="Black" HorizontalOptions="Center"/>
+
+            <ListView 
+                x:Name="ListViewTracks"
+                SelectionMode="Single"
+                VerticalScrollBarVisibility="Always"
+                HasUnevenRows="True"
+                SeparatorColor="Black"
+                BackgroundColor="LightYellow">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ScrollView 
+                                Orientation="Horizontal" 
+                                BackgroundColor="LightGoldenrodYellow"
+                                Margin="5,3,0,3"
+                                Padding="0">
+                                <StackLayout
+                                    Orientation="Horizontal">
+
+                                    <CheckBox 
+                                        IsChecked="{Binding IsVisible}"/>
+
+                                    <StackLayout Orientation="Vertical">
+                                        <Frame 
+                                            Style="{StaticResource MyButton}">
+                                            <Image 
+                                                Style="{StaticResource MyButtonImage}"
+                                                Source="{local:ImageResource TrackEddi.Images.arrow_up.png}" />
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=TrackMoveUp}" CommandParameter="{Binding .}"/>
+                                            </Frame.GestureRecognizers>
+                                        </Frame>
+                                        <Frame 
+                                            Style="{StaticResource MyButton}">
+                                            <Image 
+                                                Style="{StaticResource MyButtonImage}"
+                                                Source="{local:ImageResource TrackEddi.Images.arrow_down.png}" />
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=TrackMoveDown}" CommandParameter="{Binding .}"/>
+                                            </Frame.GestureRecognizers>
+                                        </Frame>
+                                    </StackLayout>
+
+                                    <Frame 
+                                        Style="{StaticResource MyButton}">
+                                        <Image 
+                                            Style="{StaticResource MyButtonImage}"
+                                            Source="{local:ImageResource TrackEddi.Images.zoom1.png}" />
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=TrackZoom}" CommandParameter="{Binding .}"/>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+
+                                    <StackLayout Orientation="Vertical">
+                                        <Frame 
+                                            Style="{StaticResource MyButton}"
+                                            BackgroundColor="{Binding TrackColor}">
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=TrackColor}" CommandParameter="{Binding .}"/>
+                                            </Frame.GestureRecognizers>
+                                        </Frame>
+
+                                        <Frame 
+                                            Style="{StaticResource MyButton}">
+                                            <Image 
+                                                Style="{StaticResource MyButtonImage}"
+                                                Source="{local:ImageResource TrackEddi.Images.arrow_undo.png}" />
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=TrackTurnBack}" CommandParameter="{Binding .}"/>
+                                            </Frame.GestureRecognizers>
+                                        </Frame>
+                                    </StackLayout>
+
+                                    <StackLayout Orientation="Vertical">
+                                        <Frame 
+                                            Style="{StaticResource MyButton}">
+                                            <Image 
+                                                Style="{StaticResource MyButtonImage}"
+                                                Source="{local:ImageResource TrackEddi.Images.TrackSimpl.png}" />
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=TrackSimpl}" CommandParameter="{Binding .}"/>
+                                            </Frame.GestureRecognizers>
+                                        </Frame>
+
+                                        <Frame 
+                                            Style="{StaticResource MyButton}">
+                                            <Image 
+                                                Style="{StaticResource MyButtonImage}"
+                                                Source="{local:ImageResource TrackEddi.Images.delete.png}"/>
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=TrackDelete}" CommandParameter="{Binding .}"/>
+                                            </Frame.GestureRecognizers>
+                                        </Frame>
+                                    </StackLayout>
+
+                                    <StackLayout 
+                                        Orientation="Vertical"
+                                        HorizontalOptions="StartAndExpand"
+                                        Padding="3,5,3,5">
+                                        <Label Text="{Binding Text1}" FontSize="Medium" FontAttributes="Bold"/>
+                                        <Label Text="{Binding Text2}" FontSize="Small" FontAttributes="None"/>
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=TrackProps}" CommandParameter="{Binding .}"/>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ScrollView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Label Text="Marker:" FontSize="Medium" TextColor="Black" HorizontalOptions="Center"/>
+
+            <ListView 
+                x:Name="ListViewMarker"
+                SelectionMode="Single"
+                VerticalScrollBarVisibility="Always"
+                HasUnevenRows="True"
+                SeparatorColor="Black"
+                BackgroundColor="Bisque">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ScrollView Orientation="Horizontal">
+                                <StackLayout
+                                    Orientation="Horizontal"
+                                    Padding="5">
+
+                                    <CheckBox 
+                                        IsChecked="{Binding IsVisible}"/>
+
+                                    <StackLayout Orientation="Vertical">
+                                        <Frame 
+                                            Style="{StaticResource MyButton}">
+                                            <Image 
+                                                Style="{StaticResource MyButtonImage}"
+                                                Source="{local:ImageResource TrackEddi.Images.arrow_up.png}" />
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=MarkerMoveUp}" CommandParameter="{Binding .}"/>
+                                            </Frame.GestureRecognizers>
+                                        </Frame>
+                                        <Frame 
+                                            Style="{StaticResource MyButton}">
+                                            <Image 
+                                                Style="{StaticResource MyButtonImage}"
+                                                Source="{local:ImageResource TrackEddi.Images.arrow_down.png}" />
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=MarkerMoveDown}" CommandParameter="{Binding .}"/>
+                                            </Frame.GestureRecognizers>
+                                        </Frame>
+                                    </StackLayout>
+
+                                    <Frame 
+                                        Style="{StaticResource MyButton}">
+                                        <Image 
+                                            Style="{StaticResource MyButtonImage}"
+                                            Source="{local:ImageResource TrackEddi.Images.zoom1.png}"/>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=MarkerZoom}" CommandParameter="{Binding .}"/>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+
+                                    <Frame 
+                                        Style="{StaticResource MyButton}">
+                                        <Image 
+                                            Style="{StaticResource MyButtonImage}"
+                                            Source="{Binding Picture}"/>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=MarkerSymbol}" CommandParameter="{Binding .}"/>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+
+                                    <Frame 
+                                        Style="{StaticResource MyButton}">
+                                        <Image 
+                                            Style="{StaticResource MyButtonImage}"
+                                            Source="{local:ImageResource TrackEddi.Images.delete.png}"/>
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=MarkerDelete}" CommandParameter="{Binding .}"/>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
+
+                                    <StackLayout 
+                                        Orientation="Vertical"
+                                        HorizontalOptions="StartAndExpand"
+                                        Padding="3,5,3,5">
+                                        <Label Text="{Binding Text1}" FontSize="Medium" FontAttributes="Bold"/>
+                                        <!--<Label Text="{Binding Text2}" FontSize="Small" FontAttributes="None"/>-->
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={x:Reference mypage}, Path=MarkerProps}" CommandParameter="{Binding .}"/>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </StackLayout>
+                            </ScrollView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
