@@ -16,6 +16,26 @@ namespace System.Drawing.Drawing2D {
          SKMatrix = matrix;
       }
 
+      void concate(SKMatrix m, MatrixOrder order) {
+         switch (order) {
+            case MatrixOrder.Append:
+               SKMatrix = SKMatrix.PostConcat(m);
+               break;
+
+            case MatrixOrder.Prepend:
+               SKMatrix = SKMatrix.PreConcat(m);
+               break;
+         }
+      }
+
+      public void Translate(float deltax, float deltay, MatrixOrder order = MatrixOrder.Prepend) {
+         concate(SKMatrix.CreateTranslation(deltax, deltay), order);
+      }
+
+      public void Scale(float scalex, float scaley, MatrixOrder order = MatrixOrder.Prepend) {
+         concate(SKMatrix.CreateScale(scalex, scaley), order);
+      }
+
       /// <summary>
       /// Weist dieser Matrix eine Drehung im Uhrzeigersinn um den angegebenen Punkt zu, wobei die Drehung vorangestellt wird.
       /// </summary>
@@ -23,15 +43,7 @@ namespace System.Drawing.Drawing2D {
       /// <param name="referencePoint"></param>
       /// <param name="order"></param>
       public void RotateAt(float angle, PointF referencePoint, MatrixOrder order = MatrixOrder.Prepend) {
-         switch (order) {
-            case MatrixOrder.Append:
-               SKMatrix = SKMatrix.PostConcat(SKMatrix.CreateRotation(angle / 180 * (float)Math.PI, referencePoint.X, referencePoint.Y));
-               break;
-
-            case MatrixOrder.Prepend:
-               SKMatrix = SKMatrix.PreConcat(SKMatrix.CreateRotation(angle / 180 * (float)Math.PI, referencePoint.X, referencePoint.Y));
-               break;
-         }
+         concate(SKMatrix.CreateRotation(angle / 180 * (float)Math.PI, referencePoint.X, referencePoint.Y), order);
       }
 
       /// <summary>

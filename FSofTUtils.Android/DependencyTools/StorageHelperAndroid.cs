@@ -206,13 +206,14 @@ namespace FSofTUtils.Android.DependencyTools {
       /// liefert eine Liste <see cref="StorageItem"/>; das 1. Item gehört zu fullpath
       /// </summary>
       /// <param name="fullpath"></param>
+      /// <param name="onlyfolders"></param>
       /// <returns></returns>
-      override public List<StorageItem> StorageItemList(string fullpath) {
+      override public List<StorageItem> StorageItemList(string fullpath, bool onlyfolders) {
          List<StorageItem> lst = new List<StorageItem>();
          try {
             int v = vol.GetVolumeNo4Path(fullpath);
             if (useStd(v)) {
-            //if (true) { // IMMER für die Listenabfrage (ist auch deutlich schneller!!!)
+               //if (true) { // IMMER für die Listenabfrage (ist auch deutlich schneller!!!)
 
                if (exists(fullpath, true, 0)) { // ex. und ist Verzeichnis
                   if (Directory.Exists(fullpath))
@@ -220,12 +221,11 @@ namespace FSofTUtils.Android.DependencyTools {
                   else if (File.Exists(fullpath))
                      lst.Add(new StdStorageItem(new FileInfo(fullpath)));
 
-                  foreach (string item in Directory.GetDirectories(fullpath)) {
+                  foreach (string item in Directory.GetDirectories(fullpath))
                      lst.Add(new StdStorageItem(new DirectoryInfo(item)));
-                  }
-                  foreach (string item in Directory.GetFiles(fullpath)) {
-                     lst.Add(new StdStorageItem(new FileInfo(item)));
-                  }
+                  if (!onlyfolders)
+                     foreach (string item in Directory.GetFiles(fullpath))
+                        lst.Add(new StdStorageItem(new FileInfo(item)));
                }
 
             } else {

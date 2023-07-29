@@ -165,7 +165,7 @@
 
                                     <StackLayout 
                                         Orientation="Vertical"
-                                        HorizontalOptions="StartAndExpand"
+                                        HorizontalOptions="FillAndExpand"
                                         Padding="3,5,3,5">
                                         <Label Text="{Binding Text1}" FontSize="Medium" FontAttributes="Bold"/>
                                         <Label Text="{Binding Text2}" FontSize="Small" FontAttributes="None"/>
@@ -253,7 +253,7 @@
 
                                     <StackLayout 
                                         Orientation="Vertical"
-                                        HorizontalOptions="StartAndExpand"
+                                        HorizontalOptions="FillAndExpand"
                                         Padding="3,5,3,5">
                                         <Label Text="{Binding Text1}" FontSize="Medium" FontAttributes="Bold"/>
                                         <!--<Label Text="{Binding Text2}" FontSize="Small" FontAttributes="None"/>-->

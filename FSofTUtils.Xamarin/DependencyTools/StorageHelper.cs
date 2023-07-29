@@ -331,8 +331,9 @@ namespace FSofTUtils.Xamarin.DependencyTools {
       /// liefert eine Liste <see cref="StorageItem"/>; das 1. Item gehört zu fullpath
       /// </summary>
       /// <param name="fullpath"></param>
+      /// <param name="onlyfolders"></param>
       /// <returns></returns>
-      abstract public List<StorageItem> StorageItemList(string fullpath);
+      abstract public List<StorageItem> StorageItemList(string fullpath, bool onlyfolders);
 
       /// <summary>
       /// liefert einen Dateistream

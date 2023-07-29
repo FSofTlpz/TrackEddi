@@ -1,16 +1,17 @@
 ﻿using FSofTUtils.Geography.Garmin;
 using FSofTUtils.Geometry;
 using SpecialMapCtrl;
-using SpecialMapCtrl.EditHelper;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using TrackEddi.Common;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace TrackEddi {
-   [XamlCompilation(XamlCompilationOptions.Compile)]
+namespace TrackEddi
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
    public partial class GpxContentPage : ContentPage {
 
       /// <summary>
@@ -23,7 +24,7 @@ namespace TrackEddi {
       /// </summary>
       SpecialMapCtrl.SpecialMapCtrl map;
 
-      EditMarkerHelper editMarkerHelper;
+      GpxWorkbench gpxWorkbench;
 
       /// <summary>
       /// Garmin-Symbole
@@ -82,9 +83,9 @@ namespace TrackEddi {
                            (Track.StatLength.ToString("f0") + "m") :
                            ((Track.StatLength / 1000).ToString("f1") + "km"))
                         + (minDateTimeString != "" || maxDateTimeString != "" ? ", " : "")
-                        + minDateTimeString
+                        + minDateTimeString + (minDateTimeString != "" ? " UTC" : "")
                         + (minDateTimeString != "" || maxDateTimeString != "" ? " .. " : "")
-                        + maxDateTimeString :
+                        + maxDateTimeString + (maxDateTimeString != "" ? " UTC" : "") :
                         Marker.Symbolname;
             }
          }
@@ -123,7 +124,6 @@ namespace TrackEddi {
          /// akt. Bilddaten für <see cref="Picture"/>
          /// </summary>
          byte[] pictdata;
-
 
 
          public ListViewObjectItem(Track t) {
@@ -188,18 +188,17 @@ namespace TrackEddi {
       public Command<ListViewObjectItem> MarkerMoveUp { get; private set; }
 
 
-      public GpxContentPage(GpxAllExt gpx,
-                            SpecialMapCtrl.SpecialMapCtrl map,
-                            EditMarkerHelper editMarkerHelper,
+      public GpxContentPage(SpecialMapCtrl.SpecialMapCtrl map,
+                            GpxWorkbench gpxWorkbench,
                             List<GarminSymbol> garminMarkerSymbols,
                             AppData appdata) {
          InitializeComponent();
 
          BindingContext = this;
 
-         this.gpx = gpx;
          this.map = map;
-         this.editMarkerHelper = editMarkerHelper;
+         this.gpxWorkbench = gpxWorkbench;
+         this.gpx = gpxWorkbench.Gpx;
          this.garminMarkerSymbols = garminMarkerSymbols;
          appData = appdata;
 
@@ -226,14 +225,48 @@ namespace TrackEddi {
       }
 
       void init() {
-         for (int i = 0; i < gpx.TrackList.Count; i++)
-            tracklst.Add(new ListViewObjectItem(gpx.TrackList[i]));
+         for (int i = 0; i < gpx.TrackList.Count; i++) {
+            ListViewObjectItem item = new ListViewObjectItem(gpx.TrackList[i]);
+            item.PropertyChanged += Tracklist_PropertyChanged;
+            tracklst.Add(item);
+         }
 
-         for (int i = 0; i < gpx.MarkerList.Count; i++)
-            waypointlst.Add(new ListViewObjectItem(gpx.MarkerList[i]));
+         for (int i = 0; i < gpx.MarkerList.Count; i++) {
+            ListViewObjectItem item = new ListViewObjectItem(gpx.MarkerList[i]);
+            item.PropertyChanged += Marker_PropertyChanged;
+            waypointlst.Add(item);
+         }
 
          ListViewTracks.ItemsSource = tracklst;
          ListViewMarker.ItemsSource = waypointlst;
+      }
+
+      /// <summary>
+      /// spez. Behandlung von Track.IsVisible ist nötig
+      /// </summary>
+      /// <param name="sender"></param>
+      /// <param name="e"></param>
+      private void Tracklist_PropertyChanged(object sender, PropertyChangedEventArgs e) {
+         if (e.PropertyName == nameof(ListViewObjectItem.IsVisible)) {
+            Track track=(sender as ListViewObjectItem).Track;
+            map.SpecMapShowTrack(track,
+                                 track.IsVisible,
+                                 track.IsVisible ? track.GpxDataContainer?.NextVisibleTrack(track) : null);
+         }
+      }
+
+      /// <summary>
+      /// spez. Behandlung von Marker.IsVisible ist nötig
+      /// </summary>
+      /// <param name="sender"></param>
+      /// <param name="e"></param>
+      private void Marker_PropertyChanged(object sender, PropertyChangedEventArgs e) {
+         if (e.PropertyName == nameof(ListViewObjectItem.IsVisible)) {
+            Marker marker = (sender as ListViewObjectItem).Marker;
+            map.SpecMapShowMarker(marker,
+                                  marker.IsVisible,
+                                  marker.IsVisible ? marker.GpxDataContainer?.NextVisibleMarker(marker) : null);
+         }
       }
 
       #region Toolbaritems
@@ -256,12 +289,14 @@ namespace TrackEddi {
             foreach (var t in tracklst)
                if (t.IsVisible)
                   count++;
-            if (count > 0)
+            if (count > 0) {
                if (await FSofTUtils.Xamarin.Helper.MessageBox(this, "Achtung", "Sollen wirklich ALLE angezeigten Tracks (" + count + ") gelöscht werden?", "ja", "nein")) {
                   for (int i = tracklst.Count - 1; i >= 0; i--)
                      if (tracklst[i].IsVisible)
                         trackDelete(tracklst[i]);
                }
+               gpxWorkbench.Save();
+            }
          } catch (Exception ex) {
             await FSofTUtils.Xamarin.Helper.MessageBox(this, "Fehler", ex.Message);
          }
@@ -285,12 +320,14 @@ namespace TrackEddi {
             foreach (var td in waypointlst)
                if (td.IsVisible)
                   count++;
-            if (count > 0)
+            if (count > 0) {
                if (await FSofTUtils.Xamarin.Helper.MessageBox(this, "Achtung", "Sollen wirklich ALLE angezeigten Marker (" + count + ") gelöscht werden?", "ja", "nein")) {
                   for (int i = waypointlst.Count - 1; i >= 0; i--)
                      if (waypointlst[i].IsVisible)
                         markerDelete(waypointlst[i]);
                }
+               gpxWorkbench.Save();
+            }
          } catch (Exception ex) {
             await FSofTUtils.Xamarin.Helper.MessageBox(this, "Fehler", ex.Message);
          }
@@ -307,10 +344,12 @@ namespace TrackEddi {
             page.EndWithOk += (object sender2, EventArgs e2) => {
                td.Track.LineColor = trackcopy.LineColor;
                td.Track.GpxTrack.Name = trackcopy.GpxTrack.Name;
+               td.Track.VisualName = td.Track.GpxTrack.Name;
                td.Track.GpxTrack.Description = trackcopy.GpxTrack.Description;
                td.Track.GpxTrack.Comment = trackcopy.GpxTrack.Comment;
                td.Track.GpxTrack.Source = trackcopy.GpxTrack.Source;
                td.Notify4PropChanged(nameof(ListViewObjectItem.Text1));
+               gpxWorkbench.Save();
             };
             await Navigation.PushAsync(page);
          } catch (Exception ex) {
@@ -325,6 +364,7 @@ namespace TrackEddi {
             };
             page.EndWithOk += (object sender, EventArgs e) => {
                td.TrackColor = page.ActualColor;
+               gpxWorkbench.Save();
             };
             await Navigation.PushAsync(page);
          } catch (Exception ex) {
@@ -336,7 +376,7 @@ namespace TrackEddi {
          map.SpecMapZoomToRange(new PointD(td.Track.Bounds.MinLon, td.Track.Bounds.MaxLat),
                                 new PointD(td.Track.Bounds.MaxLon, td.Track.Bounds.MinLat),
                                 true);
-         appData.LastZoom = map.Map_Zoom;
+         appData.LastZoom = map.SpecMapZoom;
          appData.LastLongitude = map.SpecMapCenterLon;
          appData.LastLatitude = map.SpecMapCenterLat;
 
@@ -348,6 +388,7 @@ namespace TrackEddi {
             map.SpecMapShowTrack(td.Track, false, null);
             td.Track.ChangeDirection();
             map.SpecMapShowTrack(td.Track, true, null);
+            gpxWorkbench.Save();
          }
       }
 
@@ -366,6 +407,7 @@ namespace TrackEddi {
                   map.SpecMapShowTrack(newtrack, true, pos == 0 ? null : gpx.TrackList[pos - 1]);
 
                   tracklst.Insert(pos, new ListViewObjectItem(newtrack) { IsVisible = true });
+                  gpxWorkbench.Save();
                }
             };
             await Navigation.PushAsync(page);
@@ -375,8 +417,10 @@ namespace TrackEddi {
       }
 
       async void onTrackDelete(ListViewObjectItem td) {
-         if (await FSofTUtils.Xamarin.Helper.MessageBox(this, "Achtung", "Soll der Track '" + td.Text1 + "' wirklich gelöscht werden?", "ja", "nein"))
+         if (await FSofTUtils.Xamarin.Helper.MessageBox(this, "Achtung", "Soll der Track '" + td.Text1 + "' wirklich gelöscht werden?", "ja", "nein")) {
             trackDelete(td);
+            gpxWorkbench.Save();
+         }
       }
 
       void onTrackMoveUp(ListViewObjectItem td) {
@@ -387,6 +431,7 @@ namespace TrackEddi {
             tracklst.RemoveAt(idx);
             tracklst.Insert(idx - 1, td);
             ListViewTracks.ScrollTo(td, ScrollToPosition.MakeVisible, true);
+            gpxWorkbench.Save();
          }
       }
 
@@ -398,6 +443,7 @@ namespace TrackEddi {
             tracklst.RemoveAt(idx);
             tracklst.Insert(idx + 1, td);
             ListViewTracks.ScrollTo(td, ScrollToPosition.MakeVisible, true);
+            gpxWorkbench.Save();
          }
       }
 
@@ -414,9 +460,10 @@ namespace TrackEddi {
                if (idx >= 0) {
                   gpx.GpxDataChanged = true;
                   gpx.Waypoints[idx] = page.Marker.Waypoint;
-                  editMarkerHelper.RefreshOnMap(page.Marker);
+                  gpxWorkbench.RefreshOnMap(page.Marker);
                   td.Notify4PropChanged(nameof(ListViewObjectItem.Text1));
                   td.Notify4PropChanged(nameof(ListViewObjectItem.Picture));
+                  gpxWorkbench.Save();
                }
             };
             await Navigation.PushAsync(page);
@@ -436,7 +483,8 @@ namespace TrackEddi {
                if (idx >= 0) {
                   gpx.GpxDataChanged = true;
                   gpx.Waypoints[idx] = td.Marker.Waypoint;
-                  editMarkerHelper.RefreshOnMap(td.Marker);
+                  gpxWorkbench.RefreshOnMap(td.Marker);
+                  gpxWorkbench.Save();
                }
             };
             await Navigation.PushAsync(page);
@@ -455,8 +503,10 @@ namespace TrackEddi {
       }
 
       async void onMarkerDelete(ListViewObjectItem td) {
-         if (await FSofTUtils.Xamarin.Helper.MessageBox(this, "Achtung", "Soll der Marker '" + td.Text1 + "' wirklich gelöscht werden?", "ja", "nein"))
+         if (await FSofTUtils.Xamarin.Helper.MessageBox(this, "Achtung", "Soll der Marker '" + td.Text1 + "' wirklich gelöscht werden?", "ja", "nein")) {
             markerDelete(td);
+            gpxWorkbench.Save();
+         }
       }
 
       void onMarkerMoveUp(ListViewObjectItem td) {
@@ -467,6 +517,7 @@ namespace TrackEddi {
             waypointlst.RemoveAt(idx);
             waypointlst.Insert(idx - 1, td);
             ListViewMarker.ScrollTo(td, ScrollToPosition.MakeVisible, true);
+            gpxWorkbench.Save();
          }
       }
 
@@ -478,6 +529,7 @@ namespace TrackEddi {
             waypointlst.RemoveAt(idx);
             waypointlst.Insert(idx + 1, td);
             ListViewMarker.ScrollTo(td, ScrollToPosition.MakeVisible, true);
+            gpxWorkbench.Save();
          }
       }
 

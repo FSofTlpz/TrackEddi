@@ -34,6 +34,8 @@
     <None Remove="Images\Hand.png" />
     <None Remove="Images\Images.zip" />
     <None Remove="Images\list.png" />
+    <None Remove="Images\Location.png" />
+    <None Remove="Images\LocationStop.png" />
     <None Remove="Images\map.png" />
     <None Remove="Images\map_go.png" />
     <None Remove="Images\MarkersDelete.png" />
@@ -55,6 +57,8 @@
     <None Remove="Images\TargetPlus.png" />
     <None Remove="Images\TrackConcat.png" />
     <None Remove="Images\TrackDraw.png" />
+    <None Remove="Images\TrackingStart.png" />
+    <None Remove="Images\TrackingStop.png" />
     <None Remove="Images\TracksDelete.png" />
     <None Remove="Images\TrackSimpl.png" />
     <None Remove="Images\TrackSplit.png" />
@@ -81,6 +85,8 @@
     <EmbeddedResource Include="Images\goto2.png" />
     <EmbeddedResource Include="Images\Hand.png" />
     <EmbeddedResource Include="Images\list.png" />
+    <EmbeddedResource Include="Images\Location.png" />
+    <EmbeddedResource Include="Images\LocationStop.png" />
     <EmbeddedResource Include="Images\map.png" />
     <EmbeddedResource Include="Images\map_go.png" />
     <EmbeddedResource Include="Images\MarkersDelete.png" />
@@ -102,6 +108,8 @@
     <EmbeddedResource Include="Images\TargetPlus.png" />
     <EmbeddedResource Include="Images\TrackConcat.png" />
     <EmbeddedResource Include="Images\TrackDraw.png" />
+    <EmbeddedResource Include="Images\TrackingStart.png" />
+    <EmbeddedResource Include="Images\TrackingStop.png" />
     <EmbeddedResource Include="Images\TracksDelete.png" />
     <EmbeddedResource Include="Images\TrackSimpl.png" />
     <EmbeddedResource Include="Images\TrackSplit.png" />
@@ -111,8 +119,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.5" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2545" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.7" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2578" />
   </ItemGroup>
 
   <ItemGroup>
@@ -142,10 +150,16 @@
     <EmbeddedResource Update="ColorChoosingPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="ConfigfilePage.xaml">
+    <EmbeddedResource Update="ConfigEdit\ConfigfilePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="ConfigPage.xaml">
+    <EmbeddedResource Update="ConfigEdit\ConfigPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ConfigEdit\EditGroupnamePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ConfigEdit\EditMapDefPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="EditMarkerPage.xaml">
@@ -154,10 +168,19 @@
     <EmbeddedResource Update="EditTrackPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="GeoLocationPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="GoToPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="GpxContentPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="GPXSearchPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="HelpPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Properties\Resources.resx">

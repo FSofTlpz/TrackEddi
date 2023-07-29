@@ -22,24 +22,32 @@ https://github.com/judero01col/GMap.NET/blob/master/README.md#release-notes
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
     <NoWarn>1701;1702;IDE1006</NoWarn>
+    <DefineConstants>$(DefineConstants);OpenStreetMapSurfer</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <DefineConstants>$(DefineConstants);OpenStreetMapSurfer</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="CacheProviders\SQLitePureImageCache.cs_" />
+    <None Remove="CacheProviders\SQLitePureImageCache.org" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.3" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.9" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
     <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
   </ItemGroup>
 
+<!--
   <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="System.Security.Principal.Windows">
       <Version>5.0.0</Version>
     </PackageReference>
   </ItemGroup>
+-->
 
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">

@@ -1,0 +1,507 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TrackEddi;assembly=TrackEddi"
+             xmlns:fux="clr-namespace:FSofTUtils.Xamarin.Control;assembly=FSofTUtils.Xamarin" xmlns:behaviours="clr-namespace:TrackEddi.ConfigEdit"
+             x:Class="TrackEddi.ConfigEdit.ConfigPage"
+             Title="Konfiguration"
+             x:Name="mypage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="HLine" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="Black"/>
+                <Setter Property="HeightRequest" Value="1"/>
+                <Setter Property="Margin" Value="0,0,0,0"/>
+            </Style>
+            <Style x:Key="MyLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Grid.Column" Value="0"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+            <Style x:Key="MyEntryNumeric" TargetType="Entry">
+                <Setter Property="TextColor" Value="Blue"/>
+                <Setter Property="Keyboard" Value="Numeric"/>
+                <Setter Property="Grid.Column" Value="1"/>
+            </Style>
+            <Style x:Key="MyEntryLinewidth" TargetType="Entry">
+                <Setter Property="TextColor" Value="Blue"/>
+                <Setter Property="Keyboard" Value="Numeric"/>
+                <Setter Property="Grid.Column" Value="2"/>
+            </Style>
+            <Style x:Key="MyButton" TargetType="Frame">
+                <Setter Property="WidthRequest" Value="20"/>
+                <Setter Property="HeightRequest" Value="20"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="BorderColor" Value="DarkGray"/>
+                <Setter Property="BackgroundColor" Value="LightGray"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="Padding" Value="3"/>
+                <Setter Property="HasShadow" Value="True"/>
+            </Style>
+            <Style x:Key="MyMapButton" TargetType="Frame">
+                <Setter Property="WidthRequest" Value="-1"/>
+                <Setter Property="HeightRequest" Value="-1"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="BorderColor" Value="DarkGray"/>
+                <Setter Property="BackgroundColor" Value="LightGray"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="HasShadow" Value="True"/>
+            </Style>
+            <Style x:Key="MyButtonColor" TargetType="Frame">
+                <Setter Property="WidthRequest" Value="20"/>
+                <Setter Property="HeightRequest" Value="20"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="BorderColor" Value="DarkGray"/>
+                <Setter Property="BackgroundColor" Value="LightGray"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="Padding" Value="3"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="Grid.Column" Value="1"/>
+            </Style>
+            <Style x:Key="MyButtonImage" TargetType="Image">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="Aspect" Value="AspectFit"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView>
+                <StackLayout>
+
+                    <Label Text="Allgemeines" TextColor="Black" FontSize="Medium"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*" />
+                            <ColumnDefinition Width="50*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Style="{StaticResource MyLabel}"
+                                Text="max. Anzahl der zuletzt verwendeten Karten im Menü (0..20)"/>
+                        <Entry Grid.Row="0" Style="{StaticResource MyEntryNumeric}" Text="{Binding LastUsedMapsCount}">
+                            <Entry.Behaviors>
+                                <behaviours:IntMinMaxEntryBehavior MinimumValue="0" StandardValue="5" MaximumValue="20"/>
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Label Grid.Row="1" Style="{StaticResource MyLabel}"
+                                Text="prozentualer Bereich des Kartenfensters der für eine Suche nach Objekten verwendet wird (1..100)"/>
+                        <Entry Grid.Row="1" Style="{StaticResource MyEntryNumeric}" Text="{Binding DeltaPercent4Search}">
+                            <Entry.Behaviors>
+                                <behaviours:IntMinMaxEntryBehavior MinimumValue="1" StandardValue="30" MaximumValue="100"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Grid.Row="2" Style="{StaticResource MyLabel}"
+                                Text="Zoomfaktor für die Änderung der Symbolgröße (0,5..10)"/>
+                        <Entry Grid.Row="2" Style="{StaticResource MyEntryNumeric}" Text="{Binding SymbolZoomfactor}">
+                            <Entry.Behaviors>
+                                <behaviours:DoubleMinMaxEntryBehavior MinimumValue="0.5" StandardValue="1" MaximumValue="10"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Grid.Row="3" Style="{StaticResource MyLabel}"
+                                Text="erlaubte Entfernung eines Klicks zum Track in Pixel um als Klick auf den Track zu gelten (1..100)"/>
+                        <Entry Grid.Row="3" Style="{StaticResource MyEntryNumeric}" Text="{Binding ClickTolerance4Tracks}">
+                            <Entry.Behaviors>
+                                <behaviours:IntMinMaxEntryBehavior MinimumValue="1" StandardValue="10" MaximumValue="100"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Grid.Row="4" Style="{StaticResource MyLabel}"
+                                Text="min. waagerechter Abstand zweier Trackpunkte in Pixeln beim Zeichnen (1..100)"/>
+                        <Entry Grid.Row="4" Style="{StaticResource MyEntryNumeric}" Text="{Binding MinimalTrackpointDistanceX}">
+                            <Entry.Behaviors>
+                                <behaviours:IntMinMaxEntryBehavior MinimumValue="1" StandardValue="10" MaximumValue="100"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Grid.Row="5" Style="{StaticResource MyLabel}"
+                                Text="min. senkrechter Abstand zweier Trackpunkte in Pixeln beim Zeichnen (1..100)"/>
+                        <Entry Grid.Row="5" Style="{StaticResource MyEntryNumeric}" Text="{Binding MinimalTrackpointDistanceY}">
+                            <Entry.Behaviors>
+                                <behaviours:IntMinMaxEntryBehavior MinimumValue="1" StandardValue="10" MaximumValue="100"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Grid.Row="6" Style="{StaticResource MyLabel}"
+                                Text="Cache-Verzeichnis für Kartenteile"/>
+                        <StackLayout Orientation="Horizontal" Grid.Row="6" Grid.Column="1" >
+                            <Frame Style="{StaticResource MyButton}">
+                                <Image Style="{StaticResource MyButtonImage}"
+                                   Source="{local:ImageResource TrackEddi.Images.Open.png}"/>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="chooseCacheDir_Clicked"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                            <ScrollView Orientation="Horizontal">
+                                <Label Text="{Binding CacheLocation}" FontSize="Medium" TextColor="Blue" VerticalOptions="Center"/>
+                            </ScrollView>
+                        </StackLayout>
+
+                    </Grid>
+
+                    <BoxView Style="{StaticResource HLine}"/>
+
+                    <Label Text="DEM-Anzeige" TextColor="Black" FontSize="Medium"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*" />
+                            <ColumnDefinition Width="50*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Style="{StaticResource MyLabel}"
+                                Text="Verzeichnis der DEM-Daten (für Höhenangaben und Schattierungen)"/>
+                        <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="1" >
+                            <Frame Style="{StaticResource MyButton}">
+                                <Image Style="{StaticResource MyButtonImage}"
+                                   Source="{local:ImageResource TrackEddi.Images.Open.png}"/>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="chooseDemDir_Clicked"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                            <ScrollView Orientation="Horizontal">
+                                <Label Text="{Binding DemPath}" FontSize="Medium" TextColor="Blue" VerticalOptions="Center"/>
+                            </ScrollView>
+                        </StackLayout>
+
+                        <Label Grid.Row="1" Style="{StaticResource MyLabel}"
+                                Text="min. Zoomstufe bei der DEM-Daten verwendet werden (10..24)"/>
+                        <Entry Grid.Row="1" Style="{StaticResource MyEntryNumeric}" Text="{Binding MinZoom4DEM}">
+                            <Entry.Behaviors>
+                                <behaviours:IntMinMaxEntryBehavior MinimumValue="10" StandardValue="14" MaximumValue="24"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Grid.Row="2" Style="{StaticResource MyLabel}"
+                                Text="Richtung der 'Sonne' für die Schattierung (0°..360°)"/>
+                        <Entry Grid.Row="2" Style="{StaticResource MyEntryNumeric}" Text="{Binding DemHillshadingAzimut}">
+                            <Entry.Behaviors>
+                                <behaviours:DoubleMinMaxEntryBehavior MinimumValue="0" StandardValue="315" MaximumValue="360"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Grid.Row="3" Style="{StaticResource MyLabel}"
+                                Text="Höhe der 'Sonne' für die Schattierung (0°..90°)"/>
+                        <Entry Grid.Row="3" Style="{StaticResource MyEntryNumeric}" Text="{Binding DemHillshadingAltitude}">
+                            <Entry.Behaviors>
+                                <behaviours:DoubleMinMaxEntryBehavior MinimumValue="0" StandardValue="45" MaximumValue="90"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Grid.Row="4" Style="{StaticResource MyLabel}"
+                                Text="Verstärkungsfaktor für die Schattierung (1..50)"/>
+                        <Entry Grid.Row="4" Style="{StaticResource MyEntryNumeric}" Text="{Binding DemHillshadingScale}">
+                            <Entry.Behaviors>
+                                <behaviours:DoubleMinMaxEntryBehavior MinimumValue="1" StandardValue="10" MaximumValue="50"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                    </Grid>
+
+                    <BoxView Style="{StaticResource HLine}"/>
+
+                    <Label Text="Tracking" TextColor="Black" FontSize="Medium"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*" />
+                            <ColumnDefinition Width="50*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Style="{StaticResource MyLabel}"
+                                Text="Symbolgröße für die akt. Position (Pixel)"/>
+                        <Entry Grid.Row="0" Style="{StaticResource MyEntryNumeric}" MaxLength="3" Text="{Binding LocationSymbolsize}">
+                            <Entry.Behaviors>
+                                <behaviours:IntMinMaxEntryBehavior MinimumValue="10" StandardValue="50" MaximumValue="100"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Grid.Row="1" Style="{StaticResource MyLabel}"
+                                Text="min. Punktabstand (m)"/>
+                        <Entry Grid.Row="1" Style="{StaticResource MyEntryNumeric}" MaxLength="2" Text="{Binding TrackingMinimalPointdistance}">
+                            <Entry.Behaviors>
+                                <behaviours:DoubleMinMaxEntryBehavior MinimumValue="1" StandardValue="10" MaximumValue="500"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Grid.Row="2" Style="{StaticResource MyLabel}" 
+                                Text="min. Höhenabstand (m)"/>
+                        <Entry Grid.Row="2" Style="{StaticResource MyEntryNumeric}" Text="{Binding TrackingMinimalHeightdistance}">
+                            <Entry.Behaviors>
+                                <behaviours:DoubleMinMaxEntryBehavior MinimumValue="1" StandardValue="10" MaximumValue="500"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                    </Grid>
+
+                    <BoxView Style="{StaticResource HLine}"/>
+
+                    <Label Text="Linienfarben und -breiten" TextColor="Black" FontSize="Medium"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50*" />
+                            <ColumnDefinition Width="25*" />
+                            <ColumnDefinition Width="25*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Style="{StaticResource MyLabel}" Text="Standard 1"/>
+                        <Frame Grid.Row="0" Style="{StaticResource MyButtonColor}" BackgroundColor="{Binding Standard1Color}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizerStandard1_Tapped"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Entry Grid.Row="0" Style="{StaticResource MyEntryLinewidth}" Text="{Binding Standard1Width}">
+                            <Entry.Behaviors>
+                                <behaviours:DoubleMinMaxEntryBehavior MinimumValue="1" StandardValue="5" MaximumValue="50"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Grid.Row="1" Style="{StaticResource MyLabel}" Text="Standard 2"/>
+                        <Frame Grid.Row="1" Style="{StaticResource MyButtonColor}" BackgroundColor="{Binding Standard2Color}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizerStandard2_Tapped"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Entry Grid.Row="1" Style="{StaticResource MyEntryLinewidth}" Text="{Binding Standard2Width}">
+                            <Entry.Behaviors>
+                                <behaviours:DoubleMinMaxEntryBehavior MinimumValue="1" StandardValue="5" MaximumValue="50"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Grid.Row="2" Style="{StaticResource MyLabel}" Text="Standard 3"/>
+                        <Frame Grid.Row="2" Style="{StaticResource MyButtonColor}" BackgroundColor="{Binding Standard3Color}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizerStandard3_Tapped"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Entry Grid.Row="2" Style="{StaticResource MyEntryLinewidth}" Text="{Binding Standard3Width}">
+                            <Entry.Behaviors>
+                                <behaviours:DoubleMinMaxEntryBehavior MinimumValue="1" StandardValue="5" MaximumValue="50"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Grid.Row="3" Style="{StaticResource MyLabel}" Text="Standard 4"/>
+                        <Frame Grid.Row="3" Style="{StaticResource MyButtonColor}" BackgroundColor="{Binding Standard4Color}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizerStandard4_Tapped"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Entry Grid.Row="3" Style="{StaticResource MyEntryLinewidth}" Text="{Binding Standard4Width}">
+                            <Entry.Behaviors>
+                                <behaviours:DoubleMinMaxEntryBehavior MinimumValue="1" StandardValue="5" MaximumValue="50"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Grid.Row="4" Style="{StaticResource MyLabel}" Text="Standard 5"/>
+                        <Frame Grid.Row="4" Style="{StaticResource MyButtonColor}" BackgroundColor="{Binding Standard5Color}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizerStandard5_Tapped"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Entry Grid.Row="4" Style="{StaticResource MyEntryLinewidth}" Text="{Binding Standard5Width}">
+                            <Entry.Behaviors>
+                                <behaviours:DoubleMinMaxEntryBehavior MinimumValue="1" StandardValue="5" MaximumValue="50"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Grid.Row="5" Style="{StaticResource MyLabel}" Text="Tracking"/>
+                        <Frame Grid.Row="5" Style="{StaticResource MyButtonColor}" BackgroundColor="{Binding LiveTrackingColor}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizerLiveTracking_Tapped"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Entry Grid.Row="5" Style="{StaticResource MyEntryLinewidth}" Text="{Binding LiveTrackingWidth}">
+                            <Entry.Behaviors>
+                                <behaviours:DoubleMinMaxEntryBehavior MinimumValue="1" StandardValue="5" MaximumValue="50"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Grid.Row="6" Style="{StaticResource MyLabel}" Text="Markiert"/>
+                        <Frame Grid.Row="6" Style="{StaticResource MyButtonColor}" BackgroundColor="{Binding MarkedColor}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizerMarked_Tapped"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Entry Grid.Row="6" Style="{StaticResource MyEntryLinewidth}" Text="{Binding MarkedWidth}">
+                            <Entry.Behaviors>
+                                <behaviours:DoubleMinMaxEntryBehavior MinimumValue="1" StandardValue="5" MaximumValue="50"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Grid.Row="7" Style="{StaticResource MyLabel}" Text="Editierbar"/>
+                        <Frame Grid.Row="7" Style="{StaticResource MyButtonColor}" BackgroundColor="{Binding EditableColor}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizerEditable_Tapped"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Entry Grid.Row="7" Style="{StaticResource MyEntryLinewidth}" Text="{Binding EditableWidth}">
+                            <Entry.Behaviors>
+                                <behaviours:DoubleMinMaxEntryBehavior MinimumValue="1" StandardValue="5" MaximumValue="50"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Grid.Row="8" Style="{StaticResource MyLabel}" Text="in Bearbeitung"/>
+                        <Frame Grid.Row="8" Style="{StaticResource MyButtonColor}" BackgroundColor="{Binding InEditColor}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizerInEdit_Tapped"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Entry Grid.Row="8" Style="{StaticResource MyEntryLinewidth}" Text="{Binding InEditWidth}">
+                            <Entry.Behaviors>
+                                <behaviours:DoubleMinMaxEntryBehavior MinimumValue="1" StandardValue="5" MaximumValue="50"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Grid.Row="9" Style="{StaticResource MyLabel}" Text="ausgewählter Teil"/>
+                        <Frame Grid.Row="9" Style="{StaticResource MyButtonColor}" BackgroundColor="{Binding SelectedPartColor}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizerSelectedPart_Tapped"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Entry Grid.Row="9" Style="{StaticResource MyEntryLinewidth}" Text="{Binding SelectedPartWidth}">
+                            <Entry.Behaviors>
+                                <behaviours:DoubleMinMaxEntryBehavior MinimumValue="1" StandardValue="5" MaximumValue="50"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                        <Label Grid.Row="10" Style="{StaticResource MyLabel}" Text="Hilfslinie"/>
+                        <Frame Grid.Row="10" Style="{StaticResource MyButtonColor}" BackgroundColor="{Binding HelperLineColor}">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizerHelperLine_Tapped"/>
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                        <Entry Grid.Row="10" Style="{StaticResource MyEntryLinewidth}" Text="{Binding HelperLineWidth}">
+                            <Entry.Behaviors>
+                                <behaviours:DoubleMinMaxEntryBehavior MinimumValue="1" StandardValue="5" MaximumValue="50"/>
+                            </Entry.Behaviors>
+                        </Entry>
+
+                    </Grid>
+
+                    <BoxView Style="{StaticResource HLine}"/>
+
+                    <Label Text="Kartenmenü" TextColor="Black" FontSize="Medium"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="75*" />
+                            <ColumnDefinition Width="25*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <fux:TreeView x:Name="tvMaps"
+                                  Grid.Column="0"
+                                  Grid.Row="0"
+                                  BackgroundColor="Wheat"
+                                  Textcolor="Black"
+                                  BackcolorSelectedNode="DarkGreen" 
+                                  TextColorSelectedNode="White"/>
+
+                        <StackLayout Orientation="Vertical" Grid.Column="1" Grid.Row="0" Padding="0" Margin="0" >
+                            <Frame Style="{StaticResource MyMapButton}">
+                                <Label Text="⇑" HorizontalOptions="Center" VerticalOptions="Center" Margin="10,0,10,5" TextColor="Black" FontSize="Large"/>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizerMapMoveUp_Tapped"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Padding="0" Margin="0">
+                                <Frame Style="{StaticResource MyMapButton}" HorizontalOptions="Center">
+                                    <Label Text="⇐" HorizontalOptions="Center" VerticalOptions="Center" Margin="5,0,5,5" TextColor="Black" FontSize="Large"/>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizerMapMoveLeft_Tapped"/>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                                <Frame Style="{StaticResource MyMapButton}">
+                                    <Label Text="⇒" HorizontalOptions="Center" VerticalOptions="Center" Margin="5,0,5,5" TextColor="Black" FontSize="Large"/>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizerMapMoveRight_Tapped"/>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                            </StackLayout>
+                            <Frame Style="{StaticResource MyMapButton}">
+                                <Label Text="⇓" HorizontalOptions="Center" VerticalOptions="Center" Margin="10,0,10,5" TextColor="Black" FontSize="Large"/>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizerMapMoveDown_Tapped"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                            <Frame Style="{StaticResource MyButton}" 
+                               WidthRequest="-1" 
+                               HeightRequest="-1"
+                               HorizontalOptions="FillAndExpand"
+                               Margin="0,15,0,0">
+                                <Label Text="⚙" HorizontalOptions="Center" VerticalOptions="Center" Margin="5" TextColor="Black"/>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizerMapProps_Tapped"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                            <Frame Style="{StaticResource MyButton}" 
+                               WidthRequest="-1" 
+                               HeightRequest="-1" 
+                               HorizontalOptions="FillAndExpand">
+                                <Label Text="❏" HorizontalOptions="Center" VerticalOptions="Center" Margin="5" TextColor="Black"/>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizerMapNew_Tapped"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                            <Frame Style="{StaticResource MyButton}" 
+                               WidthRequest="-1" 
+                               HeightRequest="-1" 
+                               HorizontalOptions="FillAndExpand">
+                                <Label Text="▤" HorizontalOptions="Center" VerticalOptions="Center" Margin="5" TextColor="Black"/>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizerMapGroupNew_Tapped"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                            <Frame Style="{StaticResource MyButton}" 
+                               WidthRequest="-1" 
+                               HeightRequest="-1" 
+                               HorizontalOptions="FillAndExpand"
+                               BackgroundColor="#FFb0b0">
+                                <Label Text="🗑" HorizontalOptions="Center" VerticalOptions="Center" Margin="5" TextColor="Black"/>
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizerMapRemove_Tapped"/>
+                                </Frame.GestureRecognizers>
+                            </Frame>
+                        </StackLayout>
+
+                    </Grid>
+
+                </StackLayout>
+            </ScrollView>
+
+            <BoxView Style="{StaticResource HLine}"/>
+
+            <Button x:Name="btnSave"
+                        Text="Einstellungen speichern"
+                        IsEnabled="False"
+                        BackgroundColor="LightGreen"
+                        Clicked="btnSave_Clicked"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

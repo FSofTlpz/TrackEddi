@@ -1,30 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fux="clr-namespace:FSofTUtils.Xamarin.Control;assembly=FSofTUtils.Xamarin"
              x:Class="TrackEddi.MapChoosingPage"
-             Title="Kartenauswahl">
+             Title="Kartenauswahl"
+             BackgroundColor="LightGreen">
     <StackLayout>
-        <ListView 
-            x:Name="ListViewMaps"
-            ItemSelected="ListViewMaps_ItemSelected"
-            Margin="0"
-            SelectionMode="Single"
-            HasUnevenRows="True"
-            SeparatorVisibility="None"
-            BackgroundColor="LightGreen">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <Frame
-                            BorderColor="DarkGreen"
-                            BackgroundColor="Transparent"
-                            CornerRadius="5"
-                            Margin="5">
-                            <Label Text="{Binding Text}" FontSize="Medium" TextColor="Black"/>
-                        </Frame>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <StackLayout BackgroundColor="LightGreen"
+                     Margin="10">
+            <fux:TreeView x:Name="tv"
+                          BackgroundColor="LightGreen"
+                          Textcolor="Black"
+                          BackcolorSelectedNode="DarkGreen" 
+                          TextColorSelectedNode="White"/>
+        </StackLayout>
     </StackLayout>
 </ContentPage>

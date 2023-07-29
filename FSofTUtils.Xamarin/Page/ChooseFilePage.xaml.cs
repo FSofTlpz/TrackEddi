@@ -27,33 +27,28 @@ namespace FSofTUtils.Xamarin.Page {
       /// <summary>
       /// Startpfad für die Auswahl (und Endpfad falls <see cref="Result"/>==true)
       /// </summary>
-      public string Path {
-         get;
-         set;
-      } = "";
+      public string Path { get; set; } = "";
 
       /// <summary>
       /// Startdateiname für die Auswahl (und Enddateiname falls <see cref="Result"/>==true)
       /// </summary>
-      public string Filename {
-         get;
-         set;
-      } = "";
+      public string Filename { get; set; } = "";
 
       /// <summary>
       /// Können nur ex. Dateien ausgewählt werden?
       /// </summary>
-      public bool OnlyExistingFile {
-         get;
-         set;
-      } = true;
+      public bool OnlyExistingFile { get; set; } = true;
+
+      /// <summary>
+      /// Auswahl eines ex. Verzeichnisses
+      /// </summary>
+      public bool OnlyExistingDirectory { get; set; } = false;
 
       /// <summary>
       /// Ergebnis der Auswahl
       /// </summary>
       public bool Result {
-         get;
-         protected set;
+         get; protected set;
       }
 
       /// <summary>
@@ -103,7 +98,7 @@ namespace FSofTUtils.Xamarin.Page {
             storageHelper = DependencyTools.DepToolsWrapper.GetStorageHelper(androidactivity);
             chooseFile.Match4Filenames = Match4Filenames;
             chooseFile.Match4Dirnames = Match4Dirnames;
-            chooseFile.Activate(Path, Filename, OnlyExistingFile, storageHelper);
+            chooseFile.Activate(Path, Filename, OnlyExistingFile, OnlyExistingDirectory, storageHelper);
 
             VolumenPaths = storageHelper.VolumePaths;
 

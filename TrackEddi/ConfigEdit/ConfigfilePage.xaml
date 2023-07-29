@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrackEddi.ConfigEdit.ConfigfilePage"
+             Title="Konfigurationsdatei"
+              BackgroundColor="Red">
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView Orientation="Horizontal" HorizontalOptions="StartAndExpand" BackgroundColor="#FF8080" Margin="5">
+                <ScrollView Orientation="Vertical" Margin="0">
+                    <Editor x:Name="editorConfig"
+                            IsSpellCheckEnabled="False"
+                            IsReadOnly="False"
+                            IsTextPredictionEnabled="False"
+                            Keyboard="Default"
+                            TextColor="Black"
+                            FontSize="Medium"
+                            TextChanged="editorConfig_TextChanged"/>
+                </ScrollView>
+            </ScrollView>
+
+            <Button x:Name="btnSaveConfig"
+                    Text="Konfigurationsdatei speichern"
+                    IsEnabled="False"
+                    BackgroundColor="DarkRed"
+                    TextColor="White"
+                    Clicked="btnSaveConfig_Clicked"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

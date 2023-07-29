@@ -94,13 +94,15 @@ namespace FSofTUtils.Xamarin.DirectoryHelper {
       /// setzt <see cref="ActualContent"/> neu mit dem Inhalt des aktuellen Verzeichnis bzw. den Inhalt von path und liefert diese Liste
       /// </summary>
       /// <param name="path">wenn "", wird die Liste der Root-Pfade gebildet</param>
+      /// <param name="onlydirs">bei true nur Verzeichnisse und Volumes</param>
       /// <param name="withextdirinfo">bei true zusätzliche Infos für Volumes/Verzeichnisse (zusätzliche Zeit nötig!)</param>
       /// <param name="regexFileMatch">null oder nur Dateinamen passend zu dieser RegEx</param>
       /// <param name="regexDirMatch">null oder nur Verzeichnisnamen passend zu dieser RegEx</param>
       /// <returns></returns>
-      public List<DirItem> Content(string path = null, 
-                                   bool withextdirinfo = false, 
-                                   Regex regexFileMatch = null, 
+      public List<DirItem> Content(string path = null,
+                                   bool onlydirs = false,
+                                   bool withextdirinfo = false,
+                                   Regex regexFileMatch = null,
                                    Regex regexDirMatch = null) {
          if (path is null)
             path = ActualPath;
@@ -123,7 +125,20 @@ namespace FSofTUtils.Xamarin.DirectoryHelper {
             dttest.Add(DateTime.Now);
 
             // Liste der Objekte (Verzeichnisse, Dateien) des Pfades erzeugen
-            List<StorageHelper.StorageItem> lst = StorageHelper.StorageItemList(path);
+            List<StorageHelper.StorageItem> lst = StorageHelper.StorageItemList(path, onlydirs);
+
+
+
+            if (onlydirs) {
+               for (int i = lst.Count - 1; i >= 0; i--) {
+                  if (lst[i].IsFile)
+                     lst.RemoveAt(i);
+               }
+            }
+
+
+
+
             // alle nicht passenden Objekte entfernen
             removeUnmatchingItems(lst, regexFileMatch, regexDirMatch);
 
@@ -236,7 +251,7 @@ namespace FSofTUtils.Xamarin.DirectoryHelper {
          files = 0;
          DateTime dt = DateTime.MinValue;
          try {
-            List<StorageHelper.StorageItem> lst = StorageHelper.StorageItemList(dirpath);
+            List<StorageHelper.StorageItem> lst = StorageHelper.StorageItemList(dirpath, true);
             files = getFileCount(lst);
             subdirs = getDirCount(lst);
 

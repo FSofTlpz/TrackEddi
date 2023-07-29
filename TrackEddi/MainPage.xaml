@@ -38,22 +38,22 @@
             Order="Secondary"
             Priority="2"
             Clicked="ToolbarItem_ReloadMap_Clicked" />
-        
+
         <ToolbarItem 
-            Text="-----"
+            Text="⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯"
             Order="Secondary"
             Priority="3"/>
-        
-        <ToolbarItem 
-            Text="Datei öffnen"
-            Order="Secondary"
-            Priority="4"
-            Clicked="ToolbarItem_GPXOpen_Clicked" />
+
         <ToolbarItem 
             Text="Datei hinzufügen"
             Order="Secondary"
-            Priority="5"
+            Priority="4"
             Clicked="ToolbarItem_GPXAppendClicked" />
+        <ToolbarItem 
+            Text="Datei öffnen"
+            Order="Secondary"
+            Priority="5"
+            Clicked="ToolbarItem_GPXOpen_Clicked" />
         <ToolbarItem 
             Text="Daten speichern als ..."
             Order="Secondary"
@@ -66,10 +66,10 @@
             Clicked="ToolbarItem_SaveAsMultiClicked" />
 
         <ToolbarItem 
-            Text="-----"
+            Text="⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯"
             Order="Secondary"
             Priority="8"/>
-        
+
         <ToolbarItem 
             Text="OSM-Suche"
             Order="Secondary"
@@ -85,11 +85,54 @@
             Order="Secondary"
             Priority="11"
             Clicked="ToolbarItem_GpxContent_Clicked" />
+
+        <ToolbarItem 
+            Text="⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯"
+            Order="Secondary"
+            Priority="12"/>
+
+        <ToolbarItem 
+            Text="GPX-Dateien für Bildausschnitt suchen"
+            Order="Secondary"
+            Priority="13"
+            Clicked="ToolbarItem_GPXSearch" />
+
+        <ToolbarItem 
+            Text="⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯"
+            Order="Secondary"
+            Priority="14"/>
+
+        <ToolbarItem 
+            Text="aktuelle Position"
+            Order="Secondary"
+            Priority="15"
+            Clicked="ToolbarItem_LastLocation" />
         <ToolbarItem 
             Text="konfigurieren"
             Order="Secondary"
-            Priority="12"
+            Priority="16"
             Clicked="ToolbarItem_Config_Clicked" />
+        <ToolbarItem 
+            Text="akt. Kartencache löschen"
+            Order="Secondary"
+            Priority="17"
+            Clicked="ToolbarItem_DeleteCache_Clicked" />
+        <ToolbarItem 
+            Text="alle Kartencaches löschen"
+            Order="Secondary"
+            Priority="18"
+            Clicked="ToolbarItem_DeleteCacheAll_Clicked" />
+
+        <ToolbarItem 
+            Text="⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯"
+            Order="Secondary"
+            Priority="19"/>
+
+        <ToolbarItem 
+            Text="Hinweise"
+            Order="Secondary"
+            Priority="20"
+            Clicked="ToolbarItem_Help_Clicked" />
     </ContentPage.ToolbarItems>
 
     <StackLayout>
@@ -144,11 +187,20 @@
             Orientation="Vertical"
             VerticalOptions="FillAndExpand">
 
+            <Editor x:Name="StartInfoArea"
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"
+                    BackgroundColor="Black"
+                    TextColor="White"
+                    IsSpellCheckEnabled="False"
+                    IsReadOnly="True"/>
+
             <smap:SpecialMapCtrl
                  x:Name="map"
                  HorizontalOptions="FillAndExpand"
                  VerticalOptions="FillAndExpand"
-                 EnableTouchEvents="False" >
+                 EnableTouchEvents="False" 
+                 IsVisible="False">
                 <skia:SKCanvasView.Effects>
                     <tt:TouchEffect 
                         Capture="True"
@@ -158,8 +210,7 @@
 
             <ScrollView
                 x:Name="MainMenu" 
-                Orientation="Horizontal"
-                >
+                Orientation="Horizontal">
                 <StackLayout 
                     x:Name="MainMenuButtonContainer"
                     Orientation="Horizontal">
@@ -204,6 +255,58 @@
                         </Frame.GestureRecognizers>
                     </Frame>
 
+                    <Frame 
+                        x:Name="ButtonGeoLocationStart"
+                        IsVisible="true"
+                        Style="{StaticResource MyButton}">
+                        <Image 
+                            Style="{StaticResource MyButtonImage}"
+                            Source="{local:ImageResource TrackEddi.Images.Location.png}"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="GeoLocationStart_Clicked"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                    <Frame 
+                        x:Name="ButtonGeoLocationStop"
+                        IsVisible="false"
+                        Style="{StaticResource MyButton}">
+                        <Image 
+                            Style="{StaticResource MyButtonImage}"
+                            Source="{local:ImageResource TrackEddi.Images.LocationStop.png}"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="GeoLocationStop_Clicked"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                    <Frame 
+                        x:Name="ButtonTrackingStart"
+                        IsVisible="true"
+                        Style="{StaticResource MyButton}">
+                        <Image 
+                            Style="{StaticResource MyButtonImage}"
+                            Source="{local:ImageResource TrackEddi.Images.TrackingStart.png}"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TrackingStart_Clicked"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                    <Frame 
+                        x:Name="ButtonTrackingStop"
+                        IsVisible="false"
+                        Style="{StaticResource MyButton}">
+                        <Image 
+                            Style="{StaticResource MyButtonImage}"
+                            Source="{local:ImageResource TrackEddi.Images.TrackingStop.png}"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="TrackingStop_Clicked"/>
+                        </Frame.GestureRecognizers>
+                    </Frame>
+
+                    <StackLayout Orientation="Vertical">
+                        <Label x:Name="TilesInWork" Text="" TextColor="DarkRed" VerticalOptions="Center" IsVisible="False"/>
+                        <Label x:Name="GpxSearch" Text="" TextColor="DarkBlue" VerticalOptions="Center" IsVisible="False"/>
+                    </StackLayout>
 
                     <!-- Start Buttons Editiermodus -->
 

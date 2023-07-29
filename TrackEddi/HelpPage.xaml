@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrackEddi.HelpPage"
+             Title="Hinweise">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="MySection" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+            <Style x:Key="MyAction" TargetType="Label">
+                <Setter Property="TextColor" Value="DarkOrange"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Grid.Column" Value="0"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+            <Style x:Key="MyInfo" TargetType="Label">
+                <Setter Property="TextColor" Value="DarkGreen"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Grid.Column" Value="1"/>
+                <Setter Property="Margin" Value="5"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+
+                <Label Style="{StaticResource MySection}" Text="normaler Anzeigemodus"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40*" />
+                        <ColumnDefinition Width="60*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Style="{StaticResource MyAction}" Text="kurzer Tip auf Marker oder Track:"/>
+                    <Label Grid.Row="0" Style="{StaticResource MyInfo}" Text="einfache Anzeige der Eigenschaften"/>
+                    <Label Grid.Row="1" Style="{StaticResource MyAction}" Text="langer Tip auf Marker oder Track:"/>
+                    <Label Grid.Row="1" Style="{StaticResource MyInfo}" Text="ausführliche Anzeige der Eigenschaften"/>
+
+                    <Label Grid.Row="2" Style="{StaticResource MyAction}" Text="kurzer Tip in die Karte:"/>
+                    <Label Grid.Row="2" Style="{StaticResource MyInfo}" Text="-"/>
+                    <Label Grid.Row="3" Style="{StaticResource MyAction}" Text="langer Tip in die Karte:"/>
+                    <Label Grid.Row="3" Style="{StaticResource MyInfo}" Text="Info für diese Koordinaten (Garmin oder OSM)"/>
+
+                </Grid>
+
+                <Label Style="{StaticResource MySection}" Text="Bearbeitungsmodus für Marker"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40*" />
+                        <ColumnDefinition Width="60*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Style="{StaticResource MyAction}" Text="kurzer Tip auf Marker:"/>
+                    <Label Grid.Row="0" Style="{StaticResource MyInfo}" Text="Start des Verschiebens (nach Rückfrage) für diesen Marker"/>
+                    <Label Grid.Row="1" Style="{StaticResource MyAction}" Text="langer Tip auf Marker:"/>
+                    <Label Grid.Row="1" Style="{StaticResource MyInfo}" Text="diesen Marker (nach Rückfrage) löschen"/>
+
+                    <Label Grid.Row="2" Style="{StaticResource MyAction}" Text="kurzer Tip in die Karte:"/>
+                    <Label Grid.Row="2" Style="{StaticResource MyInfo}" Text="wenn kein Marker ausgewählt ist, (nach Rückfrage) neuen Marker setzen, sonst Zielposition für Verschiebung"/>
+                    <Label Grid.Row="3" Style="{StaticResource MyAction}" Text="langer Tip in die Karte:"/>
+                    <Label Grid.Row="3" Style="{StaticResource MyInfo}" Text="Info für diese Koordinaten (Garmin oder OSM)"/>
+
+                </Grid>
+
+                <Label Style="{StaticResource MySection}" Text="Zeichnenmodus für Tracks"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40*" />
+                        <ColumnDefinition Width="60*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Style="{StaticResource MyAction}" Text="kurzer Tip auf Marker, Track oder in die Karte"/>
+                    <Label Grid.Row="0" Style="{StaticResource MyInfo}" Text="Start eines neuen Tracks oder Anfügen eines Punktes an den aktuellen Track"/>
+                    <Label Grid.Row="1" Style="{StaticResource MyAction}" Text="langer Tip auf Marker oder in die Karte"/>
+                    <Label Grid.Row="1" Style="{StaticResource MyInfo}" Text="Info für diese Koordinaten (Garmin oder OSM)"/>
+                    <Label Grid.Row="2" Style="{StaticResource MyAction}" Text="langer Tip auf Track"/>
+                    <Label Grid.Row="2" Style="{StaticResource MyInfo}" Text="diesen Track (nach Rückfrage) löschen"/>
+
+                </Grid>
+
+                <Label Style="{StaticResource MySection}" Text="Trennmodus für Tracks"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40*" />
+                        <ColumnDefinition Width="60*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Style="{StaticResource MyAction}" Text="kurzer Tip auf Track"/>
+                    <Label Grid.Row="0" Style="{StaticResource MyInfo}" Text="falls noch kein Track zum Trennen ausgewählt ist, wird dieser Track gewählt"/>
+                    <Label Grid.Row="1" Style="{StaticResource MyAction}" Text="langer Tip auf Marker, Track oder in die Karte"/>
+                    <Label Grid.Row="1" Style="{StaticResource MyInfo}" Text="Info für diese Koordinaten (Garmin oder OSM)"/>
+
+                </Grid>
+
+                <Label Style="{StaticResource MySection}" Text="Anhängenmodus für Tracks"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40*" />
+                        <ColumnDefinition Width="60*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Style="{StaticResource MyAction}" Text="kurzer Tip auf Track"/>
+                    <Label Grid.Row="0" Style="{StaticResource MyInfo}" Text="falls noch kein Track zum Anhängen ausgewählt ist, wird dieser Track als 1. Track gewählt, sonst als 2. Track"/>
+                    <Label Grid.Row="1" Style="{StaticResource MyAction}" Text="langer Tip auf Marker, Track oder in die Karte"/>
+                    <Label Grid.Row="1" Style="{StaticResource MyInfo}" Text="Info für diese Koordinaten (Garmin oder OSM)"/>
+
+                </Grid>
+
+
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

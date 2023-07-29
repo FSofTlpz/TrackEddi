@@ -73,41 +73,53 @@
                         Grid.Row="1" 
                         Style="{StaticResource MyLabel}"
                         Text="Name:"/>
-                    <Entry 
+                    <ScrollView
                         Grid.Row="1" 
-                        Placeholder="Name"
-                        Style="{StaticResource MyEntry}"
-                        Text="{Binding Name}"/>
+                        Grid.Column="1">
+                        <Entry 
+                            Placeholder="Name"
+                            Style="{StaticResource MyEntry}"
+                            Text="{Binding Name}"/>
+                    </ScrollView>
 
                     <Label 
                         Grid.Row="2"
                         Style="{StaticResource MyLabel}"
                         Text="Beschreibung:"/>
-                    <Entry 
+                    <ScrollView 
                         Grid.Row="2" 
-                        Placeholder="Beschreibung"
-                        Style="{StaticResource MyEntry}"
-                        Text="{Binding Description}"/>
+                        Grid.Column="1">
+                        <Entry 
+                            Placeholder="Beschreibung"
+                            Style="{StaticResource MyEntry}"
+                            Text="{Binding Description}"/>
+                    </ScrollView>
 
                     <Label 
                         Grid.Row="3" 
                         Style="{StaticResource MyLabel}"
                         Text="Kommentar:"/>
-                    <Entry 
+                    <ScrollView
                         Grid.Row="3" 
-                        Placeholder="Kommentar"
-                        Style="{StaticResource MyEntry}"
-                        Text="{Binding Comment}"/>
+                        Grid.Column="1">
+                        <Entry 
+                            Placeholder="Kommentar"
+                            Style="{StaticResource MyEntry}"
+                            Text="{Binding Comment}"/>
+                    </ScrollView>
 
                     <Label 
                         Grid.Row="4" 
                         Style="{StaticResource MyLabel}"
                         Text="Quelle:"/>
-                    <Entry 
+                    <ScrollView
                         Grid.Row="4" 
-                        Placeholder="Quelle"
-                        Style="{StaticResource MyEntry}"
-                        Text="{Binding Source}"/>
+                        Grid.Column="1">
+                        <Entry 
+                            Placeholder="Quelle"
+                            Style="{StaticResource MyEntry}"
+                            Text="{Binding Source}"/>
+                    </ScrollView>
 
                     <Label 
                         Grid.Row="5" 

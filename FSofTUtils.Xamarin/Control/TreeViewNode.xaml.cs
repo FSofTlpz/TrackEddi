@@ -448,6 +448,18 @@ namespace FSofTUtils.Xamarin.Control {
          changeImage();
       }
 
+      /// <summary>
+      /// Expand oder Collapse für den <see cref="TreeViewNode"/> und alle Sub-<see cref="TreeViewNode"/>
+      /// </summary>
+      /// <param name="expand"></param>
+      public void ExpandOrCollapseAll(bool expand) {
+         if (HasChildNodes) {
+            Expanded = expand;
+            foreach (TreeViewNode node in GetChildNodes())
+               node.ExpandOrCollapseAll(expand);
+         }
+      }
+
       protected void changeImage() {
          ImageSource imageSource = HasChildNodes ?
                                        (Expanded ?

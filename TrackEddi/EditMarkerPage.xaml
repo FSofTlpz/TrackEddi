@@ -78,15 +78,18 @@
                         Orientation="Horizontal"
                         Grid.Row="1" 
                         Grid.Column="1">
-                        <Entry 
-                            x:Name="EntryName"
-                            Placeholder="Name"
-                            Style="{StaticResource MyEntry}"
-                            Text="{Binding Name}"
-                            IsSpellCheckEnabled="False"
-                            IsTextPredictionEnabled="False"/>
+                        <ScrollView>
+                            <Entry 
+                                x:Name="EntryName"
+                                Placeholder="Name"
+                                Style="{StaticResource MyEntry}"
+                                Text="{Binding Name}"
+                                IsSpellCheckEnabled="False"
+                                IsTextPredictionEnabled="False"/>
+                        </ScrollView>
                         <Picker x:Name="PickerProposals" 
                                 Title="abc"
+                                TitleColor="Black"
                                 BackgroundColor="LightGray"
                                 SelectedIndexChanged="PickerProposals_SelectedIndexChanged"/>
                     </StackLayout>
@@ -95,21 +98,27 @@
                         Grid.Row="2"
                         Style="{StaticResource MyLabel}"
                         Text="Beschreibung:"/>
-                    <Entry 
-                        Grid.Row="2" 
-                        Placeholder="Beschreibung"
-                        Style="{StaticResource MyEntry}"
-                        Text="{Binding Description}"/>
+                    <ScrollView
+                        Grid.Row="2"
+                        Grid.Column="1">
+                        <Entry 
+                            Placeholder="Beschreibung"
+                            Style="{StaticResource MyEntry}"
+                            Text="{Binding Description}"/>
 
+                    </ScrollView>
                     <Label 
                         Grid.Row="3" 
                         Style="{StaticResource MyLabel}"
                         Text="Kommentar:"/>
-                    <Entry 
+                    <ScrollView
                         Grid.Row="3" 
-                        Placeholder="Kommentar"
-                        Style="{StaticResource MyEntry}"
-                        Text="{Binding Comment}"/>
+                        Grid.Column="1">
+                        <Entry 
+                            Placeholder="Kommentar"
+                            Style="{StaticResource MyEntry}"
+                            Text="{Binding Comment}"/>
+                    </ScrollView>
 
                     <Label 
                         Grid.Row="4" 

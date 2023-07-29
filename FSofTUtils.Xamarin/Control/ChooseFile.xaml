@@ -142,6 +142,11 @@
                     Clicked="buttonOK_Clicked"
                     WidthRequest="50"/>
             </StackLayout>
+            <Button 
+                x:Name="buttonFolderOK" 
+                Text="Verzeichnis verwenden" 
+                IsEnabled="True"
+                Clicked="buttonFolderOK_Clicked"/>
 
         </StackLayout>
     </ContentView.Content>

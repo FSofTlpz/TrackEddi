@@ -20,7 +20,7 @@ namespace TrackEddi {
 
       public App(object androidactivity) : this() {
 #if DEBUG
-         string starttime= DateTime.Now.ToString("G");
+         string starttime = DateTime.Now.ToString("G");
 #endif
          mainPage = new MainPage(androidactivity);
 #if DEBUG
@@ -47,6 +47,16 @@ namespace TrackEddi {
 
       protected override void OnResume() {
          mainPage.AppEvent(AppEvent.OnResume);
+      }
+
+      protected override void OnAppLinkRequestReceived(Uri uri) {
+         //base.OnAppLinkRequestReceived(uri);
+         if (mainPage != null) {
+            Device.BeginInvokeOnMainThread(async () => {
+               await mainPage.ReceiveAppLink(uri);
+            });
+         }
+         base.OnAppLinkRequestReceived(uri);
       }
    }
 }

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TrackEddi.GeoLocationPage"
+             Title="aktuelle Position"
+             x:Name="mypage">
+    <ContentPage.Content>
+        <StackLayout Margin="10">
+            <ScrollView Orientation="Vertical">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="45*" />
+                        <ColumnDefinition Width="55*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Text="Zeitpunkt:" FontSize="Medium" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding GeoLocationTime}" FontSize="Medium" TextColor="Blue" HorizontalOptions="StartAndExpand"/>
+
+                    <Label Grid.Row="1" Grid.Column="0" Text="Quelle:" FontSize="Medium" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding GeoProviderName}" FontSize="Medium" TextColor="Blue" HorizontalOptions="StartAndExpand"/>
+
+                    <Label Grid.Row="2" Grid.Column="0" Text="Breite:" FontSize="Medium" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                    <Label Grid.Row="2" Grid.Column="1" Text="{Binding GeoLatitude}" FontSize="Medium" TextColor="Blue" HorizontalOptions="StartAndExpand"/>
+
+                    <Label Grid.Row="3" Grid.Column="0" Text="Länge:" FontSize="Medium" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                    <Label Grid.Row="3" Grid.Column="1" Text="{Binding GeoLongitude}" FontSize="Medium" TextColor="Blue" HorizontalOptions="StartAndExpand"/>
+
+                    <Label Grid.Row="4" Grid.Column="0" Text="Höhe:" FontSize="Medium" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                    <Label Grid.Row="4" Grid.Column="1" Text="{Binding GeoElevation}" FontSize="Medium" TextColor="Blue" HorizontalOptions="StartAndExpand"/>
+
+                    <Label Grid.Row="5" Grid.Column="0" Text="Höhenreferenz- system:" FontSize="Medium" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                    <Label Grid.Row="5" Grid.Column="1" Text="{Binding GeoAltitudeReferenceSystem}" FontSize="Medium" TextColor="Blue" HorizontalOptions="StartAndExpand"/>
+
+                    <Label Grid.Row="6" Grid.Column="0" Text="Richtung:" FontSize="Medium" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                    <Label Grid.Row="6" Grid.Column="1" Text="{Binding GeoCourse}" FontSize="Medium" TextColor="Blue" HorizontalOptions="StartAndExpand"/>
+
+                    <Label Grid.Row="7" Grid.Column="0" Text="Geschwindigkeit:" FontSize="Medium" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                    <Label Grid.Row="7" Grid.Column="1" Text="{Binding GeoSpeed}" FontSize="Medium" TextColor="Blue" HorizontalOptions="StartAndExpand"/>
+
+                    <Label Grid.Row="8" Grid.Column="0" Text="Genauigkeit:" FontSize="Medium" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                    <Label Grid.Row="8" Grid.Column="1" Text="{Binding GeoAccuracy}" FontSize="Medium" TextColor="Blue" HorizontalOptions="StartAndExpand"/>
+
+                </Grid>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

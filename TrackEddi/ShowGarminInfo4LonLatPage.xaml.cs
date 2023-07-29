@@ -44,13 +44,15 @@ namespace TrackEddi {
       }
 
 
-      public ShowGarminInfo4LonLat(IList<GarminImageCreator.SearchObject> infos) {
+      public ShowGarminInfo4LonLat(IList<GarminImageCreator.SearchObject> infos, string pretext) {
          InitializeComponent();
 
          ListOfResultsLists = new List<ListViewObjectItem>();
          foreach (GarminImageCreator.SearchObject so in infos)
             ListOfResultsLists.Add(new ListViewObjectItem(so));
          ListViewResults.ItemsSource = ListOfResultsLists;
+
+         LabelPreText.Text = pretext.Trim();
       }
    }
 }

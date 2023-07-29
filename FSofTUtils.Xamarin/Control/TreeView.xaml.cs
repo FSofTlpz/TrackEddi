@@ -394,8 +394,13 @@ namespace FSofTUtils.Xamarin.Control {
       /// <param name="xamlChildContainer"></param>
       /// <param name="pos"></param>
       public static void RemoveChildNode(StackLayout xamlChildContainer, int pos) {
-         if (isChildIdxValid(xamlChildContainer, pos))
-            xamlChildContainer.Children.RemoveAt(pos);
+         if (isChildIdxValid(xamlChildContainer, pos)) {
+            TreeViewNode node = GetChildNode(xamlChildContainer, pos);
+            if (node != null) {
+               node.TreeView?.unregisterTreeViewNodeEvents(node);
+               xamlChildContainer.Children.RemoveAt(pos);
+            }
+         }
       }
 
       /// <summary>
@@ -413,6 +418,7 @@ namespace FSofTUtils.Xamarin.Control {
       /// <param name="node"></param>
       /// <returns></returns>
       public static bool RemoveChildNode(StackLayout xamlChildContainer, TreeViewNode node) {
+         node.TreeView?.unregisterTreeViewNodeEvents(node);
          return xamlChildContainer.Children.Remove(node);
       }
 
@@ -429,7 +435,9 @@ namespace FSofTUtils.Xamarin.Control {
       /// Alle <see cref="TreeViewNode"/> werden entfernt.
       /// </summary>
       public static void RemoveChildNodes(StackLayout xamlChildContainer) {
-         xamlChildContainer.Children.Clear();
+         for (int i = 0; i < xamlChildContainer.Children.Count; i++)
+            RemoveChildNode(xamlChildContainer, i);
+         //xamlChildContainer.Children.Clear();
       }
 
       /// <summary>
@@ -471,6 +479,19 @@ namespace FSofTUtils.Xamarin.Control {
 
          node.OnBeforeCheckedChanged += Node_OnBeforeCheckedChanged;
          node.OnCheckedChanged += Node_OnCheckedChanged;
+      }
+
+      void unregisterTreeViewNodeEvents(TreeViewNode node) {
+         node.OnTapped -= Node_OnTapped;
+         node.OnDoubleTapped -= Node_OnDoubleTapped;
+
+         node.OnSwipe -= Node_OnSwipe;
+
+         node.OnBeforeExpandedChanged -= Node_OnBeforeExpandedChanged;
+         node.OnExpandedChanged -= Node_OnExpandedChanged;
+
+         node.OnBeforeCheckedChanged -= Node_OnBeforeCheckedChanged;
+         node.OnCheckedChanged -= Node_OnCheckedChanged;
       }
 
       private void Node_OnBeforeCheckedChanged(object sender, TreeViewNode.BoolResultEventArgs e) {
@@ -577,6 +598,17 @@ namespace FSofTUtils.Xamarin.Control {
             // bei Bedarf erstmal "ausklappen"
             ExpandToNode(tn);
             srollToCenter(tn.XamlChildContainer);
+         }
+      }
+
+      /// <summary>
+      /// Expand oder Collapse für alle <see cref="TreeViewNode"/> und alle Sub-<see cref="TreeViewNode"/>
+      /// </summary>
+      /// <param name="expand"></param>
+      public void ExpandOrCollapseAll(bool expand) {
+         foreach (View item in XamlChildContainer.Children) {
+            if (item is TreeViewNode) 
+               (item as TreeViewNode).ExpandOrCollapseAll(expand);
          }
       }
 

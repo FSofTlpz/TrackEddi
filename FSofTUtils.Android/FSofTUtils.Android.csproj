@@ -67,10 +67,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Xamarin.Essentials">
-      <Version>1.7.5</Version>
+      <Version>1.7.7</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>5.0.0.2545</Version>
+      <Version>5.0.0.2578</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
@@ -78,6 +78,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\drawable\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="notes.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FSofTUtils.Xamarin\FSofTUtils.Xamarin.csproj">

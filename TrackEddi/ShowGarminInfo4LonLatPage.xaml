@@ -29,6 +29,10 @@
 
     <ContentPage.Content>
         <StackLayout>
+            <Label 
+                x:Name="LabelPreText"
+                TextColor="Black"
+                FontSize="Medium"/>
             <ListView 
                 x:Name="ListViewResults"
                 Margin="0"

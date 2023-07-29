@@ -1,12 +1,13 @@
 ﻿using FSofTUtils.Geometry;
 using System;
 using System.Collections.ObjectModel;
-
+using TrackEddi.Common;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace TrackEddi {
-   [XamlCompilation(XamlCompilationOptions.Compile)]
+namespace TrackEddi
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
    public partial class GoToPage : ContentPage {
 
       /// <summary>
@@ -153,7 +154,7 @@ namespace TrackEddi {
       async void onPosCmd(PlaceItem item) {
          try {
             map.SpecMapSetLocationAndZoom(item.Zoom, item.Longitude, item.Latitude);
-            appData.LastZoom = map.Map_Zoom;
+            appData.LastZoom = map.SpecMapZoom;
             appData.LastLongitude = map.SpecMapCenterLon;
             appData.LastLatitude = map.SpecMapCenterLat;
 
@@ -392,7 +393,7 @@ namespace TrackEddi {
             map.SpecMapZoomToRange(new PointD(getDecLon(), getDecLat()),
                                    new PointD(getDecLon(), getDecLat()),
                                    true);
-            appData.LastZoom = map.Map_Zoom;
+            appData.LastZoom = map.SpecMapZoom;
             appData.LastLongitude = map.SpecMapCenterLon;
             appData.LastLatitude = map.SpecMapCenterLat;
 

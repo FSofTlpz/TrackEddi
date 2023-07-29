@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TrackEddi;assembly=TrackEddi" xmlns:behaviours="clr-namespace:TrackEddi.ConfigEdit"
+             x:Class="TrackEddi.ConfigEdit.EditMapDefPage"
+             Title="Kartendefinition">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="HLine" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="Black"/>
+                <Setter Property="HeightRequest" Value="1"/>
+                <Setter Property="Margin" Value="0,0,0,0"/>
+            </Style>
+            <Style x:Key="MyLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="BackgroundColor" Value="LightGray"/>
+            </Style>
+            <Style x:Key="MyEntryNumeric" TargetType="Entry">
+                <Setter Property="TextColor" Value="Blue"/>
+                <Setter Property="WidthRequest" Value="50"/>
+                <Setter Property="Keyboard" Value="Numeric"/>
+            </Style>
+            <Style x:Key="MyButton" TargetType="Frame">
+                <Setter Property="WidthRequest" Value="25"/>
+                <Setter Property="HeightRequest" Value="25"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="BorderColor" Value="DarkGray"/>
+                <Setter Property="BackgroundColor" Value="LightGray"/>
+                <Setter Property="CornerRadius" Value="5"/>
+                <Setter Property="Padding" Value="4"/>
+                <Setter Property="HasShadow" Value="True"/>
+            </Style>
+            <Style x:Key="MyButtonImage" TargetType="Image">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="Aspect" Value="AspectFit"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView Orientation="Vertical">
+                <StackLayout>
+                    <Label Text="Kartentyp:" Style="{StaticResource MyLabel}"/>
+                    <Picker x:Name="pickerProvider" 
+                        Title="Kartentyp"
+                        TextColor="Blue"
+                        SelectedIndexChanged="pickerProvider_SelectedIndexChanged"/>
+
+                    <Label Text="Kartenname:" Style="{StaticResource MyLabel}"/>
+                    <Entry x:Name="entryMapname" HorizontalOptions="FillAndExpand" TextColor="Blue" Keyboard="Plain"/>
+
+                    <Label Text="Zoom von .. bis ..:" Style="{StaticResource MyLabel}"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Entry x:Name="entryZoomFrom" Style="{StaticResource MyEntryNumeric}">
+                            <Entry.Behaviors>
+                                <behaviours:IntMinMaxEntryBehavior MinimumValue="0" StandardValue="0" MaximumValue="24"/>
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Label Text=" .. " FontSize="Medium" TextColor="Black" VerticalOptions="Center"/>
+                        <Entry x:Name="entryZoomTo" Style="{StaticResource MyEntryNumeric}">
+                            <Entry.Behaviors>
+                                <behaviours:IntMinMaxEntryBehavior MinimumValue="0" StandardValue="24" MaximumValue="24"/>
+                            </Entry.Behaviors>
+                        </Entry>
+                    </StackLayout>
+
+                    <Label Text="Zoom für Display:" Style="{StaticResource MyLabel}"/>
+                    <Entry x:Name="entryDisplayzoom" Style="{StaticResource MyEntryNumeric}">
+                        <Entry.Behaviors>
+                            <behaviours:DoubleMinMaxEntryBehavior MinimumValue="0.5" StandardValue="1" MaximumValue="10"/>
+                        </Entry.Behaviors>
+                    </Entry>
+
+                    <Frame x:Name="frameHillshading" BorderColor="Black" CornerRadius="5" Margin="5,0,5,0">
+                        <StackLayout>
+                            <Label Text="Hillshading:" Style="{StaticResource MyLabel}"/>
+                            <CheckBox x:Name="cbHillshading" Color="Blue"/>
+
+                            <Label Text="Hillshadingalpha (0..255):" Style="{StaticResource MyLabel}"/>
+                            <Entry x:Name="entryHillshadingalpha" Style="{StaticResource MyEntryNumeric}">
+                                <Entry.Behaviors>
+                                    <behaviours:IntMinMaxEntryBehavior MinimumValue="0" StandardValue="128" MaximumValue="255"/>
+                                </Entry.Behaviors>
+                            </Entry>
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame x:Name="frameGarminKmz" BorderColor="Black" CornerRadius="5" Margin="5,0,5,0">
+                        <StackLayout Margin="0" Padding="0">
+                            <Label Text="Garmin-KMZ" Padding="0" Margin="0" />
+
+                            <Label Text="KMZ-Datei:" Style="{StaticResource MyLabel}"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Frame Style="{StaticResource MyButton}">
+                                    <Image Style="{StaticResource MyButtonImage}"
+                                       Source="{local:ImageResource TrackEddi.Images.Open.png}"/>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ChooseKmzFile_Clicked"/>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                                <ScrollView Orientation="Horizontal">
+                                    <Label x:Name="lblKmzFile" FontSize="Medium" TextColor="Blue" VerticalOptions="Center"/>
+                                </ScrollView>
+                            </StackLayout>
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame x:Name="frameGarmin" BorderColor="Black" CornerRadius="5" Margin="5,0,5,0">
+                        <StackLayout Margin="0" Padding="0">
+                            <Label Text="Garmin" Padding="0" Margin="0" />
+
+                            <Label Text="TDB-Datei:" Style="{StaticResource MyLabel}"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Frame Style="{StaticResource MyButton}">
+                                    <Image Style="{StaticResource MyButtonImage}"
+                                       Source="{local:ImageResource TrackEddi.Images.Open.png}"/>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ChooseTdbFile_Clicked"/>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                                <ScrollView Orientation="Horizontal">
+                                    <Label x:Name="lblTdbFile" FontSize="Medium" TextColor="Blue" VerticalOptions="Center"/>
+                                </ScrollView>
+                            </StackLayout>
+
+                            <Label Text="TYP-Datei:" Style="{StaticResource MyLabel}"/>
+                            <StackLayout Orientation="Horizontal">
+                                <Frame Style="{StaticResource MyButton}">
+                                    <Image Style="{StaticResource MyButtonImage}"
+                                       Source="{local:ImageResource TrackEddi.Images.Open.png}"/>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ChooseTypFile_Clicked"/>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                                <ScrollView Orientation="Horizontal">
+                                    <Label x:Name="lblTypFile" FontSize="Medium" TextColor="Blue" VerticalOptions="Center"/>
+                                </ScrollView>
+                            </StackLayout>
+
+                            <Label Text="Faktor für Textgröße (0,01 .. 10,00):" Style="{StaticResource MyLabel}"/>
+                            <Entry x:Name="entryTextFactor" Style="{StaticResource MyEntryNumeric}">
+                                <Entry.Behaviors>
+                                    <behaviours:DoubleMinMaxEntryBehavior MinimumValue="0.01" StandardValue="1.0" MaximumValue="10"/>
+                                </Entry.Behaviors>
+                            </Entry>
+
+                            <Label Text="Faktor für Markergröße (0,01 .. 10,00):" Style="{StaticResource MyLabel}"/>
+                            <Entry x:Name="entrySymbolFactor" Style="{StaticResource MyEntryNumeric}">
+                                <Entry.Behaviors>
+                                    <behaviours:DoubleMinMaxEntryBehavior MinimumValue="0.01" StandardValue="1.0" MaximumValue="10"/>
+                                </Entry.Behaviors>
+                            </Entry>
+
+                            <Label Text="Faktor für Linienbreite (0,01 .. 10,00):" Style="{StaticResource MyLabel}"/>
+                            <Entry x:Name="entryLineFactor" Style="{StaticResource MyEntryNumeric}">
+                                <Entry.Behaviors>
+                                    <behaviours:DoubleMinMaxEntryBehavior MinimumValue="0.01" StandardValue="1.0" MaximumValue="10"/>
+                                </Entry.Behaviors>
+                            </Entry>
+
+                        </StackLayout>
+                    </Frame>
+
+                    <Frame x:Name="frameWms" BorderColor="Black" CornerRadius="5" Margin="0">
+                        <StackLayout Margin="0" Padding="0">
+                            <Label Text="WMS" Padding="0" Margin="0" />
+
+                            <Label Text="URL:" Style="{StaticResource MyLabel}"/>
+                            <Entry x:Name="entryUrl" TextColor="Blue" Keyboard="Url"/>
+
+                            <Label Text="Version:" Style="{StaticResource MyLabel}"/>
+                            <Entry x:Name="entryVersion" TextColor="Blue" Keyboard="Plain"/>
+
+                            <Label Text="SRS:" Style="{StaticResource MyLabel}"/>
+                            <Entry x:Name="entrySrs" TextColor="Blue" Keyboard="Plain"/>
+
+                            <Label Text="Bildformat:" Style="{StaticResource MyLabel}"/>
+                            <Picker x:Name="pickerWmsPictFormat" Title="Bildformat" TextColor="Blue">
+                                <Picker.ItemsSource>
+                                    <x:Array Type="{x:Type x:String}">
+                                        <x:String>PNG</x:String>
+                                        <x:String>JPG</x:String>
+                                    </x:Array>
+                                </Picker.ItemsSource>
+                            </Picker>
+
+                            <Label Text="Layer:" Style="{StaticResource MyLabel}"/>
+                            <Entry x:Name="entryLayer" TextColor="Blue" Keyboard="Plain"/>
+
+                            <Label Text="weitere Parameter:" Style="{StaticResource MyLabel}"/>
+                            <Entry x:Name="entryExtParams" TextColor="Blue" Keyboard="Plain"/>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>
+
+            <BoxView Style="{StaticResource HLine}"/>
+
+            <Button x:Name="btnSave"
+                    Text="speichern"
+                    IsEnabled="True"
+                    BackgroundColor="LightGreen"
+                    Clicked="btnSave_Clicked"
+                    Margin="10"
+                    VerticalOptions="StartAndExpand"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -6,11 +6,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
+using TrackEddi.Common;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace TrackEddi {
-   [XamlCompilation(XamlCompilationOptions.Compile)]
+namespace TrackEddi
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
    public partial class SimplifyTrackPage : ContentPage {
 
       /// <summary>

@@ -19,8 +19,6 @@ namespace System.Drawing {
       public InterpolationMode InterpolationMode { get; set; }
       public TextRenderingHint TextRenderingHint { get; set; }
 
-      public int DpiY { get; protected set; }
-
 
       public Matrix Transform {
          get {
@@ -406,7 +404,10 @@ namespace System.Drawing {
          }
       }
 
-      public void DrawString(string text, Font font, Brush brush, PointF pt) {
+      public void DrawString(string text, Font font, Brush brush, int x, int y, StringFormat sf) =>
+         DrawString(text, font, brush, new PointF(x, y), sf);
+
+      public void DrawString(string text, Font font, Brush brush, PointF pt) =>
          DrawString(text,
                     font,
                     brush,
@@ -415,9 +416,8 @@ namespace System.Drawing {
                        Alignment = StringAlignment.Near,
                        LineAlignment = StringAlignment.Near
                     });
-      }
 
-      public void DrawString(string text, Font font, Brush brush, float x, float y) {
+      public void DrawString(string text, Font font, Brush brush, float x, float y) =>
          DrawString(text,
                     font,
                     brush,
@@ -426,7 +426,6 @@ namespace System.Drawing {
                        Alignment = StringAlignment.Near,
                        LineAlignment = StringAlignment.Near
                     });
-      }
 
       /// <summary>
       /// Zeichnet die angegebene Textzeichenfolge in dem angegebenen Rechteck mit dem angegebenen Brush-Objekt und dem angegebenen Font-Objekt.
@@ -435,7 +434,7 @@ namespace System.Drawing {
       /// <param name="font"></param>
       /// <param name="brush"></param>
       /// <param name="rect">Skia-Koordinaten</param>
-      public void DrawString(string text, Font font, SolidBrush brush, RectangleF rect) {
+      public void DrawString(string text, Font font, SolidBrush brush, RectangleF rect) =>
          DrawString(text,
                     font,
                     brush,
@@ -444,7 +443,6 @@ namespace System.Drawing {
                        Alignment = StringAlignment.Near,
                        LineAlignment = StringAlignment.Near,
                     });
-      }
 
       /// <summary>
       /// 

@@ -309,6 +309,11 @@ namespace FSofTUtils.Xamarin.Control {
       public bool OnlyExistingFiles { get; private set; } = true;
 
       /// <summary>
+      /// Dateiauswahl nur für bestehende Verzeichnisse
+      /// </summary>
+      public bool OnlyExistingDirectory { get; private set; } = false;
+
+      /// <summary>
       /// bei true zusätzliche Infos für Volumes/Verzeichnisse (zusätzliche Zeit nötig!)
       /// </summary>
       public bool WithExtDirInfo { get; set; } = false;
@@ -370,9 +375,11 @@ namespace FSofTUtils.Xamarin.Control {
       /// </summary>
       /// <param name="fullfilename"></param>
       /// <param name="onlyexistingfiles"></param>
+      /// <param name="onlyexistingfolders"></param>
       /// <param name="storageHelper"></param>
       public void Activate(string fullfilename = "",
                            bool onlyexistingfiles = true,
+                           bool onlyexistingfolders = true,
                            StorageHelper storageHelper = null) {
          string initpath = "";
          string filename = "";
@@ -384,6 +391,7 @@ namespace FSofTUtils.Xamarin.Control {
          Activate(initpath,
                   filename,
                   onlyexistingfiles,
+                  onlyexistingfolders,
                   storageHelper);
       }
 
@@ -393,23 +401,29 @@ namespace FSofTUtils.Xamarin.Control {
       /// <param name="initpath"></param>
       /// <param name="filename"></param>
       /// <param name="onlyexistingfiles"></param>
+      /// <param name="onlyexistingfolders"></param>
       /// <param name="storageHelper"></param>
       public void Activate(string initpath = "",
                            string filename = "",
                            bool onlyexistingfiles = true,
+                           bool onlyexistingfolders = true,
                            StorageHelper storageHelper = null) {
-         string path = !string.IsNullOrEmpty(initpath) ? initpath : "";
-         entryDestinationStack.IsVisible = !onlyexistingfiles;
-         entryDestinationfile.Text = !string.IsNullOrEmpty(filename) ? filename.Trim() : "";
-
          if (this.storageHelper == null && storageHelper == null)
-            throw new ArgumentException("The parameter sh must not be null");
+            throw new ArgumentException("The parameter storageHelper must not be null");
          if (storageHelper != null)
             this.storageHelper = storageHelper;
 
-         OnlyExistingFiles = onlyexistingfiles;
+         string path = !string.IsNullOrEmpty(initpath) ? initpath : "";
 
-         showContent(listViewDir, null, path);
+         entryDestinationStack.IsVisible = !onlyexistingfiles && !onlyexistingfolders;
+         entryDestinationfile.Text = !string.IsNullOrEmpty(filename) ? filename.Trim() : "";
+         buttonFolderOK.IsVisible = onlyexistingfolders;
+
+         OnlyExistingFiles = onlyexistingfiles;
+         OnlyExistingDirectory = onlyexistingfolders;
+
+         showContent(OnlyExistingDirectory, listViewDir, null, path);
+
 
          // Anzeige eines selektierten Items mit der Wunschfarbe fkt. hier nicht. Man müßte ein "Tapped" simulieren, aber dazu benötigt man die korrekte ViewCell.
          // Verbindung zwischen DirItem und ViewCell ex. nicht.
@@ -498,10 +512,12 @@ namespace FSofTUtils.Xamarin.Control {
       /// <summary>
       /// stellt den Inhalt des Pfades im <see cref="ListView"/> dar und erzeugt bei Bedarf den <see cref="DirectoryLister"/>
       /// </summary>
+      /// <param name="onlyfolders"></param>
       /// <param name="lvdir"></param>
       /// <param name="dl"></param>
       /// <param name="initpath"></param>
-      async void showContent(ListView lvdir,
+      async void showContent(bool onlyfolders,
+                             ListView lvdir,
                              DirectoryLister dl = null,
                              string initpath = null) {
          try {
@@ -510,7 +526,7 @@ namespace FSofTUtils.Xamarin.Control {
             lastSelectedCell = null;
 
             // Verzeichnisinhalt holen
-            List<DirItem> newlst = dl.Content(initpath, WithExtDirInfo, Match4Filenames, Match4Dirnames);
+            List<DirItem> newlst = dl.Content(initpath, onlyfolders, WithExtDirInfo, Match4Filenames, Match4Dirnames);
             if (newlst.Count > 0 &&
                 newlst[0].Name == "..")
                newlst.RemoveAt(0);
@@ -613,6 +629,10 @@ namespace FSofTUtils.Xamarin.Control {
          endFilenameEdit();
       }
 
+      private void buttonFolderOK_Clicked(object sender, EventArgs e) {
+         ChooseFileReadyEvent?.Invoke(this, new ChoosePathAndFileEventArgs(true, dl.ActualPath, ""));
+      }
+
       private void entryDestinationfile_Completed(object sender, EventArgs e) {
          endFilenameEdit();
       }
@@ -679,10 +699,9 @@ namespace FSofTUtils.Xamarin.Control {
 
       void setDirectory(string path) {
          if (!dl.Move(path))  // Wechsel nicht möglich (interner Fehler?)
-            showContent(listViewDir);
+            showContent(OnlyExistingDirectory, listViewDir);
          else
-            showContent(listViewDir, dl);
+            showContent(OnlyExistingDirectory, listViewDir, dl);
       }
-
    }
 }

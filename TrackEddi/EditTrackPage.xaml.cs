@@ -58,7 +58,7 @@ namespace TrackEddi {
 
       public ImageSource ElevationProfile {
          get {
-            System.Drawing.Bitmap bm = WinHelper.BuildImage4Track(1200, 900, Track, new List<int>());
+            System.Drawing.Bitmap bm = Common.TrackHeightProfile.BuildImage4Track(1200, 900, Track, new List<int>());
             pictdata = WinHelper.GetImageSource4WindowsBitmap(bm, out ImageSource ims);
             return ims;
          }
